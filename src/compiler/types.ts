@@ -1197,10 +1197,10 @@ module ts {
         Success = 0,
 
         // Diagnostics were produced and because of them no code was generated.
-            DiagnosticsPresent_OutputsSkipped = 1,
+                DiagnosticsPresent_OutputsSkipped = 1,
 
         // Diagnostics were produced and outputs were generated in spite of them.
-            DiagnosticsPresent_OutputsGenerated = 2,
+                DiagnosticsPresent_OutputsGenerated = 2,
     }
 
     export interface EmitResult {
@@ -1305,13 +1305,13 @@ module ts {
         UseTypeOfFunction = 0x00000002,         // Write typeof instead of function type literal
         NoTruncation = 0x00000004,              // Don't truncate typeToString result
         WriteArrowStyleSignature = 0x00000008,  // Write arrow style signature
-        WriteOwnNameForAnyLike =
-            0x00000010,  // Write symbol's own name instead of 'any' for any like types (eg. unknown, __resolving__ etc)
+        WriteOwnNameForAnyLike = 0x00000010,    // Write symbol's own name instead of 'any' for any like types (eg.
+                                                // unknown, __resolving__ etc)
         WriteTypeArgumentsOfSignature =
-            0x00000020,              // Write the type arguments instead of type parameters of the signature
+                0x00000020,          // Write the type arguments instead of type parameters of the signature
         InElementType = 0x00000040,  // Writing an array or union element type
         UseFullyQualifiedType =
-            0x00000080,  // Write out the fully qualified type name (eg. Module.Type, instead of Type)
+                0x00000080,  // Write out the fully qualified type name (eg. Module.Type, instead of Type)
     }
 
     export const enum SymbolFormatFlags {
@@ -1425,9 +1425,9 @@ module ts {
         FunctionExcludes = Value & ~(Function | ValueModule),
         ClassExcludes = (Value | Type) & ~ValueModule,
         InterfaceExcludes = Type & ~Interface,
-        RegularEnumExcludes =
-            (Value | Type) & ~(RegularEnum | ValueModule),  // regular enums merge only with regular enums and modules
-        ConstEnumExcludes = (Value | Type) & ~ConstEnum,    // const enums merge only with const enums
+        RegularEnumExcludes = (Value | Type) &
+                              ~(RegularEnum | ValueModule),  // regular enums merge only with regular enums and modules
+        ConstEnumExcludes = (Value | Type) & ~ConstEnum,     // const enums merge only with const enums
         ValueModuleExcludes = Value & ~(Function | Class | RegularEnum | ValueModule),
         NamespaceModuleExcludes = 0,
         MethodExcludes = Value & ~Method,
@@ -1462,8 +1462,10 @@ module ts {
         members ?: SymbolTable;         // Class, interface or literal instance members
         exports ?: SymbolTable;         // Module exports
         exportSymbol ?: Symbol;         // Exported symbol associated with this symbol
-        valueDeclaration?: Declaration // First value declaration of the symbol
-        constEnumOnlyModule?: boolean  // True if module contains only const enums or other modules with only const enums
+        valueDeclaration ?: Declaration  // First value declaration of the symbol
+                                    constEnumOnlyModule
+                                    ?: boolean  // True if module contains only const enums or other modules with only
+        // const enums
     }
 
     export interface SymbolLinks {
@@ -1502,7 +1504,7 @@ module ts {
         flags ?: NodeCheckFlags;         // Set of flags specific to Node
         enumMemberValue ?: number;       // Constant value of enum member
         isIllegalTypeReferenceInConstraint ?:
-            boolean;              // Is type reference in constraint refers to the type parameter from the same list
+                boolean;          // Is type reference in constraint refers to the type parameter from the same list
         isVisible ?: boolean;     // Is this node visible
         generatedName ?: string;  // Generated name for module, enum, or import declaration
         generatedNames ?: Map<string>;                    // Generated names table for source file
@@ -1655,13 +1657,13 @@ module ts {
     hasRestParameter:
         boolean;  // True if last parameter is rest parameter
     hasStringLiterals:
-        boolean;                            // True if specialized
-        target ?: Signature;                // Instantiation target
-        mapper ?: TypeMapper;               // Instantiation mapper
-        unionSignatures ?: Signature[];     // Underlying signatures of a union signature
-        erasedSignatureCache ?: Signature;  // Erased version of signature (deferred)
-        isolatedSignatureType ?:
-            ObjectType;  // A manufactured type that just contains the signature for purposes of signature comparison
+        boolean;                              // True if specialized
+        target ?: Signature;                  // Instantiation target
+        mapper ?: TypeMapper;                 // Instantiation mapper
+        unionSignatures ?: Signature[];       // Underlying signatures of a union signature
+        erasedSignatureCache ?: Signature;    // Erased version of signature (deferred)
+        isolatedSignatureType ?: ObjectType;  // A manufactured type that just contains the signature for purposes of
+                                              // signature comparison
     }
 
     export const enum IndexKind {
@@ -1803,8 +1805,8 @@ module ts {
     name:
         string;
     type:
-        string |
-            Map<number>;  // "string", "number", "boolean", or an object literal mapping named values to actual values
+        string | Map<number>;   // "string", "number", "boolean", or an object literal mapping named values to actual
+                                // values
         isFilePath ?: boolean;  // True if option value is a path or fileName
         shortName ?: string;    // A short mnemonic for convenience - for instance, 'h' can be used in place of 'help'
         description ?: DiagnosticMessage;  // The message describing what the command line switch does

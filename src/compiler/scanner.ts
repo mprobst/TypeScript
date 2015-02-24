@@ -3479,7 +3479,7 @@ module ts {
                     tokenIsUnterminated = true;
                     error(Diagnostics.Unterminated_template_literal);
                     resultingToken =
-                        startedWithBacktick ? SyntaxKind.NoSubstitutionTemplateLiteral : SyntaxKind.TemplateTail;
+                            startedWithBacktick ? SyntaxKind.NoSubstitutionTemplateLiteral : SyntaxKind.TemplateTail;
                     break;
                 }
 
@@ -3490,7 +3490,7 @@ module ts {
                     contents += text.substring(start, pos);
                     pos++;
                     resultingToken =
-                        startedWithBacktick ? SyntaxKind.NoSubstitutionTemplateLiteral : SyntaxKind.TemplateTail;
+                            startedWithBacktick ? SyntaxKind.NoSubstitutionTemplateLiteral : SyntaxKind.TemplateTail;
                     break;
                 }
 
@@ -3714,7 +3714,7 @@ module ts {
                         return token = SyntaxKind.StringLiteral;
                     case CharacterCodes.backtick:
                         return token = scanTemplateAndSetTokenValue() case CharacterCodes
-                                           .percent: if (text.charCodeAt(pos + 1) === CharacterCodes.equals) {
+                                               .percent: if (text.charCodeAt(pos + 1) === CharacterCodes.equals) {
                             return pos += 2, token = SyntaxKind.PercentEqualsToken;
                         }
                         return pos++, token = SyntaxKind.PercentToken;
@@ -4104,7 +4104,6 @@ module ts {
         }
 
         setText(text);
-
 
         return {
             getStartPos: () => startPos,

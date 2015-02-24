@@ -133,12 +133,12 @@ module ts {
                     // Report errors every position with duplicate declaration
                     // Report errors on previous encountered declarations
                     var message = symbol.flags & SymbolFlags.BlockScopedVariable ?
-                                      Diagnostics.Cannot_redeclare_block_scoped_variable_0 :
-                                      Diagnostics.Duplicate_identifier_0;
+                                          Diagnostics.Cannot_redeclare_block_scoped_variable_0 :
+                                          Diagnostics.Duplicate_identifier_0;
 
                     forEach(symbol.declarations, declaration => {
                         file.bindDiagnostics.push(
-                            createDiagnosticForNode(declaration.name, message, getDisplayName(declaration)));
+                                createDiagnosticForNode(declaration.name, message, getDisplayName(declaration)));
                     });
                     file.bindDiagnostics.push(createDiagnosticForNode(node.name, message, getDisplayName(node)));
 
@@ -162,8 +162,8 @@ module ts {
                         node.name.parent = node;
                     }
                     file.bindDiagnostics.push(
-                        createDiagnosticForNode(symbol.exports[prototypeSymbol.name].declarations[0],
-                                                Diagnostics.Duplicate_identifier_0, prototypeSymbol.name));
+                            createDiagnosticForNode(symbol.exports[prototypeSymbol.name].declarations[0],
+                                                    Diagnostics.Duplicate_identifier_0, prototypeSymbol.name));
                 }
                 symbol.exports[prototypeSymbol.name] = prototypeSymbol;
                 prototypeSymbol.parent = symbol;
@@ -208,7 +208,7 @@ module ts {
                                      (symbolKind & SymbolFlags.Namespace ? SymbolFlags.ExportNamespace : 0);
                     var local = declareSymbol(container.locals, undefined, node, exportKind, symbolExcludes);
                     local.exportSymbol =
-                        declareSymbol(container.symbol.exports, container.symbol, node, symbolKind, symbolExcludes);
+                            declareSymbol(container.symbol.exports, container.symbol, node, symbolKind, symbolExcludes);
                     node.localSymbol = local;
                 } else {
                     declareSymbol(container.locals, undefined, node, symbolKind, symbolExcludes);
@@ -317,7 +317,7 @@ module ts {
         function bindExportDeclaration(node: ExportDeclaration) {
             if (!node.exportClause) {
                 ((<ExportContainer> container).exportStars || ((<ExportContainer> container).exportStars = []))
-                    .push(node);
+                        .push(node);
             }
             bindChildren(node, 0, /*isBlockScopeContainer*/ false);
         }
@@ -407,9 +407,10 @@ module ts {
                 case SyntaxKind.PropertyDeclaration:
                 case SyntaxKind.PropertySignature:
                     bindPropertyOrMethodOrAccessor(
-                        <Declaration> node,
-                        SymbolFlags.Property | ((<PropertyDeclaration> node).questionToken ? SymbolFlags.Optional : 0),
-                        SymbolFlags.PropertyExcludes, /*isBlockScopeContainer*/ false);
+                            <Declaration> node,
+                            SymbolFlags.Property |
+                                    ((<PropertyDeclaration> node).questionToken ? SymbolFlags.Optional : 0),
+                            SymbolFlags.PropertyExcludes, /*isBlockScopeContainer*/ false);
                     break;
                 case SyntaxKind.PropertyAssignment:
                 case SyntaxKind.ShorthandPropertyAssignment:
@@ -432,10 +433,10 @@ module ts {
                     // so that it will conflict with any other object literal members with the same
                     // name.
                     bindPropertyOrMethodOrAccessor(
-                        <Declaration> node,
-                        SymbolFlags.Method | ((<MethodDeclaration> node).questionToken ? SymbolFlags.Optional : 0),
-                        isObjectLiteralMethod(node) ? SymbolFlags.PropertyExcludes : SymbolFlags.MethodExcludes,
-                        /*isBlockScopeContainer*/ true);
+                            <Declaration> node,
+                            SymbolFlags.Method | ((<MethodDeclaration> node).questionToken ? SymbolFlags.Optional : 0),
+                            isObjectLiteralMethod(node) ? SymbolFlags.PropertyExcludes : SymbolFlags.MethodExcludes,
+                            /*isBlockScopeContainer*/ true);
                     break;
                 case SyntaxKind.FunctionDeclaration:
                     bindDeclaration(<Declaration> node, SymbolFlags.Function, SymbolFlags.FunctionExcludes,

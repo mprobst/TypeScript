@@ -25,8 +25,8 @@ module ts {
             } catch (e) {
                 if (onError) {
                     onError(e.number === unsupportedFileEncodingErrorCode ?
-                                createCompilerDiagnostic(Diagnostics.Unsupported_file_encoding).messageText :
-                                e.message);
+                                    createCompilerDiagnostic(Diagnostics.Unsupported_file_encoding).messageText :
+                                    e.message);
                 }
                 text = "";
             }
@@ -78,8 +78,8 @@ module ts {
 
     export function getPreEmitDiagnostics(program: Program): Diagnostic[] {
         var diagnostics = program.getSyntacticDiagnostics()
-                              .concat(program.getGlobalDiagnostics())
-                              .concat(program.getSemanticDiagnostics());
+                                  .concat(program.getGlobalDiagnostics())
+                                  .concat(program.getSemanticDiagnostics());
         return sortAndDeduplicateDiagnostics(diagnostics);
     }
 
@@ -302,16 +302,16 @@ module ts {
 
                 // We haven't looked for this file, do so now and cache result
                 var file = filesByName[canonicalName] =
-                    host.getSourceFile(fileName, options.target, hostErrorMessage => {
-                        if (refFile) {
-                            diagnostics.add(createFileDiagnostic(refFile, refStart, refLength,
-                                                                 Diagnostics.Cannot_read_file_0_Colon_1, fileName,
-                                                                 hostErrorMessage));
-                        } else {
-                            diagnostics.add(createCompilerDiagnostic(Diagnostics.Cannot_read_file_0_Colon_1, fileName,
+                        host.getSourceFile(fileName, options.target, hostErrorMessage => {
+                            if (refFile) {
+                                diagnostics.add(createFileDiagnostic(refFile, refStart, refLength,
+                                                                     Diagnostics.Cannot_read_file_0_Colon_1, fileName,
                                                                      hostErrorMessage));
-                        }
-                    });
+                            } else {
+                                diagnostics.add(createCompilerDiagnostic(Diagnostics.Cannot_read_file_0_Colon_1,
+                                                                         fileName, hostErrorMessage));
+                            }
+                        });
                 if (file) {
                     seenNoDefaultLib = seenNoDefaultLib || file.hasNoDefaultLib;
 
@@ -337,13 +337,13 @@ module ts {
                 var file = filesByName[canonicalName];
                 if (file && host.useCaseSensitiveFileNames()) {
                     var sourceFileName = useAbsolutePath ?
-                                             getNormalizedAbsolutePath(file.fileName, host.getCurrentDirectory()) :
-                                             file.fileName;
+                                                 getNormalizedAbsolutePath(file.fileName, host.getCurrentDirectory()) :
+                                                 file.fileName;
                     if (canonicalName !== sourceFileName) {
                         diagnostics.add(createFileDiagnostic(
-                            refFile, refStart, refLength,
-                            Diagnostics.File_name_0_differs_from_already_included_file_name_1_only_in_casing, fileName,
-                            sourceFileName));
+                                refFile, refStart, refLength,
+                                Diagnostics.File_name_0_differs_from_already_included_file_name_1_only_in_casing,
+                                fileName, sourceFileName));
                     }
                 }
                 return file;
@@ -353,7 +353,7 @@ module ts {
         function processReferencedFiles(file: SourceFile, basePath: string) {
             forEach(file.referencedFiles, ref => {
                 var referencedFileName =
-                    isRootedDiskPath(ref.fileName) ? ref.fileName : combinePaths(basePath, ref.fileName);
+                        isRootedDiskPath(ref.fileName) ? ref.fileName : combinePaths(basePath, ref.fileName);
                 processSourceFile(normalizePath(referencedFileName), /* isDefaultLib */ false, file, ref.pos, ref.end);
             });
         }
@@ -392,9 +392,9 @@ module ts {
                     forEachChild((<ModuleDeclaration> node).body, node => {
                         if (isExternalModuleImportEqualsDeclaration(node) &&
                             getExternalModuleImportEqualsDeclarationExpression(node).kind ===
-                                SyntaxKind.StringLiteral) {
+                                    SyntaxKind.StringLiteral) {
                             var nameLiteral =
-                                <LiteralExpression> getExternalModuleImportEqualsDeclarationExpression(node);
+                                    <LiteralExpression> getExternalModuleImportEqualsDeclarationExpression(node);
                             var moduleName = nameLiteral.text;
                             if (moduleName) {
                                 // TypeScript 1.0 spec (April 2014): 12.1.6
@@ -424,11 +424,11 @@ module ts {
                 // Error to specify --mapRoot or --sourceRoot without mapSourceFiles
                 if (options.mapRoot) {
                     diagnostics.add(createCompilerDiagnostic(
-                        Diagnostics.Option_mapRoot_cannot_be_specified_without_specifying_sourcemap_option));
+                            Diagnostics.Option_mapRoot_cannot_be_specified_without_specifying_sourcemap_option));
                 }
                 if (options.sourceRoot) {
                     diagnostics.add(createCompilerDiagnostic(
-                        Diagnostics.Option_sourceRoot_cannot_be_specified_without_specifying_sourcemap_option));
+                            Diagnostics.Option_sourceRoot_cannot_be_specified_without_specifying_sourcemap_option));
                 }
                 return;
             }
@@ -440,8 +440,8 @@ module ts {
                 var errorStart = skipTrivia(firstExternalModule.text, externalModuleErrorSpan.pos);
                 var errorLength = externalModuleErrorSpan.end - errorStart;
                 diagnostics.add(createFileDiagnostic(
-                    firstExternalModule, errorStart, errorLength,
-                    Diagnostics.Cannot_compile_external_modules_unless_the_module_flag_is_provided));
+                        firstExternalModule, errorStart, errorLength,
+                        Diagnostics.Cannot_compile_external_modules_unless_the_module_flag_is_provided));
             }
 
             // there has to be common source directory if user specified --outdir || --sourcRoot
@@ -457,7 +457,7 @@ module ts {
                     if (!(sourceFile.flags & NodeFlags.DeclarationFile) &&
                         !fileExtensionIs(sourceFile.fileName, ".js")) {
                         var sourcePathComponents =
-                            getNormalizedPathComponents(sourceFile.fileName, host.getCurrentDirectory());
+                                getNormalizedPathComponents(sourceFile.fileName, host.getCurrentDirectory());
                         sourcePathComponents.pop();  // FileName is not part of directory
                         if (commonPathComponents) {
                             for (var i = 0; i < Math.min(commonPathComponents.length, sourcePathComponents.length);
@@ -465,7 +465,8 @@ module ts {
                                 if (commonPathComponents[i] !== sourcePathComponents[i]) {
                                     if (i === 0) {
                                         diagnostics.add(createCompilerDiagnostic(
-                                            Diagnostics.Cannot_find_the_common_subdirectory_path_for_the_input_files));
+                                                Diagnostics
+                                                        .Cannot_find_the_common_subdirectory_path_for_the_input_files));
                                         return;
                                     }
 
@@ -499,12 +500,12 @@ module ts {
             if (options.noEmit) {
                 if (options.out || options.outDir) {
                     diagnostics.add(createCompilerDiagnostic(
-                        Diagnostics.Option_noEmit_cannot_be_specified_with_option_out_or_outDir));
+                            Diagnostics.Option_noEmit_cannot_be_specified_with_option_out_or_outDir));
                 }
 
                 if (options.declaration) {
                     diagnostics.add(createCompilerDiagnostic(
-                        Diagnostics.Option_noEmit_cannot_be_specified_with_option_declaration));
+                            Diagnostics.Option_noEmit_cannot_be_specified_with_option_declaration));
                 }
             }
         }

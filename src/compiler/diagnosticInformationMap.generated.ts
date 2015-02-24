@@ -3,13 +3,13 @@
 module ts {
     export var Diagnostics = {
         Unterminated_string_literal:
-            {code: 1002, category: DiagnosticCategory.Error, key: "Unterminated string literal."},
+                {code: 1002, category: DiagnosticCategory.Error, key: "Unterminated string literal."},
         Identifier_expected: {code: 1003, category: DiagnosticCategory.Error, key: "Identifier expected."},
         _0_expected: {code: 1005, category: DiagnosticCategory.Error, key: "'{0}' expected."},
         A_file_cannot_have_a_reference_to_itself:
-            {code: 1006, category: DiagnosticCategory.Error, key: "A file cannot have a reference to itself."},
+                {code: 1006, category: DiagnosticCategory.Error, key: "A file cannot have a reference to itself."},
         Trailing_comma_not_allowed:
-            {code: 1009, category: DiagnosticCategory.Error, key: "Trailing comma not allowed."},
+                {code: 1009, category: DiagnosticCategory.Error, key: "Trailing comma not allowed."},
         Asterisk_Slash_expected: {code: 1010, category: DiagnosticCategory.Error, key: "'*/' expected."},
         Unexpected_token: {code: 1012, category: DiagnosticCategory.Error, key: "Unexpected token."},
         Catch_clause_parameter_cannot_have_a_type_annotation: {
@@ -32,8 +32,11 @@ module ts {
             category: DiagnosticCategory.Error,
             key: "A required parameter cannot follow an optional parameter."
         },
-        An_index_signature_cannot_have_a_rest_parameter:
-            {code: 1017, category: DiagnosticCategory.Error, key: "An index signature cannot have a rest parameter."},
+        An_index_signature_cannot_have_a_rest_parameter: {
+            code: 1017,
+            category: DiagnosticCategory.Error,
+            key: "An index signature cannot have a rest parameter."
+        },
         An_index_signature_parameter_cannot_have_an_accessibility_modifier: {
             code: 1018,
             category: DiagnosticCategory.Error,
@@ -49,8 +52,11 @@ module ts {
             category: DiagnosticCategory.Error,
             key: "An index signature parameter cannot have an initializer."
         },
-        An_index_signature_must_have_a_type_annotation:
-            {code: 1021, category: DiagnosticCategory.Error, key: "An index signature must have a type annotation."},
+        An_index_signature_must_have_a_type_annotation: {
+            code: 1021,
+            category: DiagnosticCategory.Error,
+            key: "An index signature must have a type annotation."
+        },
         An_index_signature_parameter_must_have_a_type_annotation: {
             code: 1022,
             category: DiagnosticCategory.Error,
@@ -72,20 +78,23 @@ module ts {
             key: "An 'extends' clause must precede an 'implements' clause."
         },
         A_class_can_only_extend_a_single_class:
-            {code: 1026, category: DiagnosticCategory.Error, key: "A class can only extend a single class."},
+                {code: 1026, category: DiagnosticCategory.Error, key: "A class can only extend a single class."},
         A_class_declaration_can_only_have_one_implements_clause: {
             code: 1027,
             category: DiagnosticCategory.Error,
             key: "A class declaration can only have one 'implements' clause."
         },
         Accessibility_modifier_already_seen:
-            {code: 1028, category: DiagnosticCategory.Error, key: "Accessibility modifier already seen."},
+                {code: 1028, category: DiagnosticCategory.Error, key: "Accessibility modifier already seen."},
         _0_modifier_must_precede_1_modifier:
-            {code: 1029, category: DiagnosticCategory.Error, key: "'{0}' modifier must precede '{1}' modifier."},
+                {code: 1029, category: DiagnosticCategory.Error, key: "'{0}' modifier must precede '{1}' modifier."},
         _0_modifier_already_seen:
-            {code: 1030, category: DiagnosticCategory.Error, key: "'{0}' modifier already seen."},
-        _0_modifier_cannot_appear_on_a_class_element:
-            {code: 1031, category: DiagnosticCategory.Error, key: "'{0}' modifier cannot appear on a class element."},
+                {code: 1030, category: DiagnosticCategory.Error, key: "'{0}' modifier already seen."},
+        _0_modifier_cannot_appear_on_a_class_element: {
+            code: 1031,
+            category: DiagnosticCategory.Error,
+            key: "'{0}' modifier cannot appear on a class element."
+        },
         An_interface_declaration_cannot_have_an_implements_clause: {
             code: 1032,
             category: DiagnosticCategory.Error,
@@ -97,18 +106,27 @@ module ts {
             key: "'super' must be followed by an argument list or member access."
         },
         Only_ambient_modules_can_use_quoted_names:
-            {code: 1035, category: DiagnosticCategory.Error, key: "Only ambient modules can use quoted names."},
-        Statements_are_not_allowed_in_ambient_contexts:
-            {code: 1036, category: DiagnosticCategory.Error, key: "Statements are not allowed in ambient contexts."},
+                {code: 1035, category: DiagnosticCategory.Error, key: "Only ambient modules can use quoted names."},
+        Statements_are_not_allowed_in_ambient_contexts: {
+            code: 1036,
+            category: DiagnosticCategory.Error,
+            key: "Statements are not allowed in ambient contexts."
+        },
         A_declare_modifier_cannot_be_used_in_an_already_ambient_context: {
             code: 1038,
             category: DiagnosticCategory.Error,
             key: "A 'declare' modifier cannot be used in an already ambient context."
         },
-        Initializers_are_not_allowed_in_ambient_contexts:
-            {code: 1039, category: DiagnosticCategory.Error, key: "Initializers are not allowed in ambient contexts."},
-        _0_modifier_cannot_appear_on_a_module_element:
-            {code: 1044, category: DiagnosticCategory.Error, key: "'{0}' modifier cannot appear on a module element."},
+        Initializers_are_not_allowed_in_ambient_contexts: {
+            code: 1039,
+            category: DiagnosticCategory.Error,
+            key: "Initializers are not allowed in ambient contexts."
+        },
+        _0_modifier_cannot_appear_on_a_module_element: {
+            code: 1044,
+            category: DiagnosticCategory.Error,
+            key: "'{0}' modifier cannot appear on a module element."
+        },
         A_declare_modifier_cannot_be_used_with_an_interface_declaration: {
             code: 1045,
             category: DiagnosticCategory.Error,
@@ -120,11 +138,14 @@ module ts {
             key: "A 'declare' modifier is required for a top level declaration in a .d.ts file."
         },
         A_rest_parameter_cannot_be_optional:
-            {code: 1047, category: DiagnosticCategory.Error, key: "A rest parameter cannot be optional."},
+                {code: 1047, category: DiagnosticCategory.Error, key: "A rest parameter cannot be optional."},
         A_rest_parameter_cannot_have_an_initializer:
-            {code: 1048, category: DiagnosticCategory.Error, key: "A rest parameter cannot have an initializer."},
-        A_set_accessor_must_have_exactly_one_parameter:
-            {code: 1049, category: DiagnosticCategory.Error, key: "A 'set' accessor must have exactly one parameter."},
+                {code: 1048, category: DiagnosticCategory.Error, key: "A rest parameter cannot have an initializer."},
+        A_set_accessor_must_have_exactly_one_parameter: {
+            code: 1049,
+            category: DiagnosticCategory.Error,
+            key: "A 'set' accessor must have exactly one parameter."
+        },
         A_set_accessor_cannot_have_an_optional_parameter: {
             code: 1051,
             category: DiagnosticCategory.Error,
@@ -136,16 +157,16 @@ module ts {
             key: "A 'set' accessor parameter cannot have an initializer."
         },
         A_set_accessor_cannot_have_rest_parameter:
-            {code: 1053, category: DiagnosticCategory.Error, key: "A 'set' accessor cannot have rest parameter."},
+                {code: 1053, category: DiagnosticCategory.Error, key: "A 'set' accessor cannot have rest parameter."},
         A_get_accessor_cannot_have_parameters:
-            {code: 1054, category: DiagnosticCategory.Error, key: "A 'get' accessor cannot have parameters."},
+                {code: 1054, category: DiagnosticCategory.Error, key: "A 'get' accessor cannot have parameters."},
         Accessors_are_only_available_when_targeting_ECMAScript_5_and_higher: {
             code: 1056,
             category: DiagnosticCategory.Error,
             key: "Accessors are only available when targeting ECMAScript 5 and higher."
         },
         Enum_member_must_have_initializer:
-            {code: 1061, category: DiagnosticCategory.Error, key: "Enum member must have initializer."},
+                {code: 1061, category: DiagnosticCategory.Error, key: "Enum member must have initializer."},
         An_export_assignment_cannot_be_used_in_an_internal_module: {
             code: 1063,
             category: DiagnosticCategory.Error,
@@ -167,7 +188,7 @@ module ts {
             key: "A 'declare' modifier cannot be used with an import declaration."
         },
         Invalid_reference_directive_syntax:
-            {code: 1084, category: DiagnosticCategory.Error, key: "Invalid 'reference' directive syntax."},
+                {code: 1084, category: DiagnosticCategory.Error, key: "Invalid 'reference' directive syntax."},
         Octal_literals_are_not_available_when_targeting_ECMAScript_5_and_higher: {
             code: 1085,
             category: DiagnosticCategory.Error,
@@ -184,7 +205,7 @@ module ts {
             key: "'{0}' modifier cannot appear on a constructor declaration."
         },
         _0_modifier_cannot_appear_on_a_parameter:
-            {code: 1090, category: DiagnosticCategory.Error, key: "'{0}' modifier cannot appear on a parameter."},
+                {code: 1090, category: DiagnosticCategory.Error, key: "'{0}' modifier cannot appear on a parameter."},
         Only_a_single_variable_declaration_is_allowed_in_a_for_in_statement: {
             code: 1091,
             category: DiagnosticCategory.Error,
@@ -201,7 +222,7 @@ module ts {
             key: "Type annotation cannot appear on a constructor declaration."
         },
         An_accessor_cannot_have_type_parameters:
-            {code: 1094, category: DiagnosticCategory.Error, key: "An accessor cannot have type parameters."},
+                {code: 1094, category: DiagnosticCategory.Error, key: "An accessor cannot have type parameters."},
         A_set_accessor_cannot_have_a_return_type_annotation: {
             code: 1095,
             category: DiagnosticCategory.Error,
@@ -214,13 +235,16 @@ module ts {
         },
         _0_list_cannot_be_empty: {code: 1097, category: DiagnosticCategory.Error, key: "'{0}' list cannot be empty."},
         Type_parameter_list_cannot_be_empty:
-            {code: 1098, category: DiagnosticCategory.Error, key: "Type parameter list cannot be empty."},
+                {code: 1098, category: DiagnosticCategory.Error, key: "Type parameter list cannot be empty."},
         Type_argument_list_cannot_be_empty:
-            {code: 1099, category: DiagnosticCategory.Error, key: "Type argument list cannot be empty."},
+                {code: 1099, category: DiagnosticCategory.Error, key: "Type argument list cannot be empty."},
         Invalid_use_of_0_in_strict_mode:
-            {code: 1100, category: DiagnosticCategory.Error, key: "Invalid use of '{0}' in strict mode."},
-        with_statements_are_not_allowed_in_strict_mode:
-            {code: 1101, category: DiagnosticCategory.Error, key: "'with' statements are not allowed in strict mode."},
+                {code: 1100, category: DiagnosticCategory.Error, key: "Invalid use of '{0}' in strict mode."},
+        with_statements_are_not_allowed_in_strict_mode: {
+            code: 1101,
+            category: DiagnosticCategory.Error,
+            key: "'with' statements are not allowed in strict mode."
+        },
         delete_cannot_be_called_on_an_identifier_in_strict_mode: {
             code: 1102,
             category: DiagnosticCategory.Error,
@@ -237,7 +261,7 @@ module ts {
             key: "A 'break' statement can only be used within an enclosing iteration or switch statement."
         },
         Jump_target_cannot_cross_function_boundary:
-            {code: 1107, category: DiagnosticCategory.Error, key: "Jump target cannot cross function boundary."},
+                {code: 1107, category: DiagnosticCategory.Error, key: "Jump target cannot cross function boundary."},
         A_return_statement_can_only_be_used_within_a_function_body: {
             code: 1108,
             category: DiagnosticCategory.Error,
@@ -246,7 +270,7 @@ module ts {
         Expression_expected: {code: 1109, category: DiagnosticCategory.Error, key: "Expression expected."},
         Type_expected: {code: 1110, category: DiagnosticCategory.Error, key: "Type expected."},
         A_class_member_cannot_be_declared_optional:
-            {code: 1112, category: DiagnosticCategory.Error, key: "A class member cannot be declared optional."},
+                {code: 1112, category: DiagnosticCategory.Error, key: "A class member cannot be declared optional."},
         A_default_clause_cannot_appear_more_than_once_in_a_switch_statement: {
             code: 1113,
             category: DiagnosticCategory.Error,
@@ -279,43 +303,46 @@ module ts {
             key: "An object literal cannot have property and accessor with the same name."
         },
         An_export_assignment_cannot_have_modifiers:
-            {code: 1120, category: DiagnosticCategory.Error, key: "An export assignment cannot have modifiers."},
-        Octal_literals_are_not_allowed_in_strict_mode:
-            {code: 1121, category: DiagnosticCategory.Error, key: "Octal literals are not allowed in strict mode."},
+                {code: 1120, category: DiagnosticCategory.Error, key: "An export assignment cannot have modifiers."},
+        Octal_literals_are_not_allowed_in_strict_mode: {
+            code: 1121,
+            category: DiagnosticCategory.Error,
+            key: "Octal literals are not allowed in strict mode."
+        },
         A_tuple_type_element_list_cannot_be_empty:
-            {code: 1122, category: DiagnosticCategory.Error, key: "A tuple type element list cannot be empty."},
+                {code: 1122, category: DiagnosticCategory.Error, key: "A tuple type element list cannot be empty."},
         Variable_declaration_list_cannot_be_empty:
-            {code: 1123, category: DiagnosticCategory.Error, key: "Variable declaration list cannot be empty."},
+                {code: 1123, category: DiagnosticCategory.Error, key: "Variable declaration list cannot be empty."},
         Digit_expected: {code: 1124, category: DiagnosticCategory.Error, key: "Digit expected."},
         Hexadecimal_digit_expected:
-            {code: 1125, category: DiagnosticCategory.Error, key: "Hexadecimal digit expected."},
+                {code: 1125, category: DiagnosticCategory.Error, key: "Hexadecimal digit expected."},
         Unexpected_end_of_text: {code: 1126, category: DiagnosticCategory.Error, key: "Unexpected end of text."},
         Invalid_character: {code: 1127, category: DiagnosticCategory.Error, key: "Invalid character."},
         Declaration_or_statement_expected:
-            {code: 1128, category: DiagnosticCategory.Error, key: "Declaration or statement expected."},
+                {code: 1128, category: DiagnosticCategory.Error, key: "Declaration or statement expected."},
         Statement_expected: {code: 1129, category: DiagnosticCategory.Error, key: "Statement expected."},
         case_or_default_expected:
-            {code: 1130, category: DiagnosticCategory.Error, key: "'case' or 'default' expected."},
+                {code: 1130, category: DiagnosticCategory.Error, key: "'case' or 'default' expected."},
         Property_or_signature_expected:
-            {code: 1131, category: DiagnosticCategory.Error, key: "Property or signature expected."},
+                {code: 1131, category: DiagnosticCategory.Error, key: "Property or signature expected."},
         Enum_member_expected: {code: 1132, category: DiagnosticCategory.Error, key: "Enum member expected."},
         Type_reference_expected: {code: 1133, category: DiagnosticCategory.Error, key: "Type reference expected."},
         Variable_declaration_expected:
-            {code: 1134, category: DiagnosticCategory.Error, key: "Variable declaration expected."},
+                {code: 1134, category: DiagnosticCategory.Error, key: "Variable declaration expected."},
         Argument_expression_expected:
-            {code: 1135, category: DiagnosticCategory.Error, key: "Argument expression expected."},
+                {code: 1135, category: DiagnosticCategory.Error, key: "Argument expression expected."},
         Property_assignment_expected:
-            {code: 1136, category: DiagnosticCategory.Error, key: "Property assignment expected."},
+                {code: 1136, category: DiagnosticCategory.Error, key: "Property assignment expected."},
         Expression_or_comma_expected:
-            {code: 1137, category: DiagnosticCategory.Error, key: "Expression or comma expected."},
+                {code: 1137, category: DiagnosticCategory.Error, key: "Expression or comma expected."},
         Parameter_declaration_expected:
-            {code: 1138, category: DiagnosticCategory.Error, key: "Parameter declaration expected."},
+                {code: 1138, category: DiagnosticCategory.Error, key: "Parameter declaration expected."},
         Type_parameter_declaration_expected:
-            {code: 1139, category: DiagnosticCategory.Error, key: "Type parameter declaration expected."},
+                {code: 1139, category: DiagnosticCategory.Error, key: "Type parameter declaration expected."},
         Type_argument_expected: {code: 1140, category: DiagnosticCategory.Error, key: "Type argument expected."},
         String_literal_expected: {code: 1141, category: DiagnosticCategory.Error, key: "String literal expected."},
         Line_break_not_permitted_here:
-            {code: 1142, category: DiagnosticCategory.Error, key: "Line break not permitted here."},
+                {code: 1142, category: DiagnosticCategory.Error, key: "Line break not permitted here."},
         or_expected: {code: 1144, category: DiagnosticCategory.Error, key: "'{' or ';' expected."},
         Modifiers_not_permitted_on_index_signature_members: {
             code: 1145,
@@ -344,7 +371,7 @@ module ts {
             key: "'new T[]' cannot be used to create an array. Use 'new Array<T>()' instead."
         },
         var_let_or_const_expected:
-            {code: 1152, category: DiagnosticCategory.Error, key: "'var', 'let' or 'const' expected."},
+                {code: 1152, category: DiagnosticCategory.Error, key: "'var', 'let' or 'const' expected."},
         let_declarations_are_only_available_when_targeting_ECMAScript_6_and_higher: {
             code: 1153,
             category: DiagnosticCategory.Error,
@@ -356,7 +383,7 @@ module ts {
             key: "'const' declarations are only available when targeting ECMAScript 6 and higher."
         },
         const_declarations_must_be_initialized:
-            {code: 1155, category: DiagnosticCategory.Error, key: "'const' declarations must be initialized"},
+                {code: 1155, category: DiagnosticCategory.Error, key: "'const' declarations must be initialized"},
         const_declarations_can_only_be_declared_inside_a_block: {
             code: 1156,
             category: DiagnosticCategory.Error,
@@ -373,18 +400,21 @@ module ts {
             key: "Tagged templates are only available when targeting ECMAScript 6 and higher."
         },
         Unterminated_template_literal:
-            {code: 1160, category: DiagnosticCategory.Error, key: "Unterminated template literal."},
+                {code: 1160, category: DiagnosticCategory.Error, key: "Unterminated template literal."},
         Unterminated_regular_expression_literal:
-            {code: 1161, category: DiagnosticCategory.Error, key: "Unterminated regular expression literal."},
+                {code: 1161, category: DiagnosticCategory.Error, key: "Unterminated regular expression literal."},
         An_object_member_cannot_be_declared_optional:
-            {code: 1162, category: DiagnosticCategory.Error, key: "An object member cannot be declared optional."},
+                {code: 1162, category: DiagnosticCategory.Error, key: "An object member cannot be declared optional."},
         yield_expression_must_be_contained_within_a_generator_declaration: {
             code: 1163,
             category: DiagnosticCategory.Error,
             key: "'yield' expression must be contained_within a generator declaration."
         },
-        Computed_property_names_are_not_allowed_in_enums:
-            {code: 1164, category: DiagnosticCategory.Error, key: "Computed property names are not allowed in enums."},
+        Computed_property_names_are_not_allowed_in_enums: {
+            code: 1164,
+            category: DiagnosticCategory.Error,
+            key: "Computed property names are not allowed in enums."
+        },
         A_computed_property_name_in_an_ambient_context_must_directly_refer_to_a_built_in_symbol: {
             code: 1165,
             category: DiagnosticCategory.Error,
@@ -421,16 +451,16 @@ module ts {
             key: "A comma expression is not allowed in a computed property name."
         },
         extends_clause_already_seen:
-            {code: 1172, category: DiagnosticCategory.Error, key: "'extends' clause already seen."},
+                {code: 1172, category: DiagnosticCategory.Error, key: "'extends' clause already seen."},
         extends_clause_must_precede_implements_clause: {
             code: 1173,
             category: DiagnosticCategory.Error,
             key: "'extends' clause must precede 'implements' clause."
         },
         Classes_can_only_extend_a_single_class:
-            {code: 1174, category: DiagnosticCategory.Error, key: "Classes can only extend a single class."},
+                {code: 1174, category: DiagnosticCategory.Error, key: "Classes can only extend a single class."},
         implements_clause_already_seen:
-            {code: 1175, category: DiagnosticCategory.Error, key: "'implements' clause already seen."},
+                {code: 1175, category: DiagnosticCategory.Error, key: "'implements' clause already seen."},
         Interface_declaration_cannot_have_implements_clause: {
             code: 1176,
             category: DiagnosticCategory.Error,
@@ -439,11 +469,11 @@ module ts {
         Binary_digit_expected: {code: 1177, category: DiagnosticCategory.Error, key: "Binary digit expected."},
         Octal_digit_expected: {code: 1178, category: DiagnosticCategory.Error, key: "Octal digit expected."},
         Unexpected_token_expected:
-            {code: 1179, category: DiagnosticCategory.Error, key: "Unexpected token. '{' expected."},
+                {code: 1179, category: DiagnosticCategory.Error, key: "Unexpected token. '{' expected."},
         Property_destructuring_pattern_expected:
-            {code: 1180, category: DiagnosticCategory.Error, key: "Property destructuring pattern expected."},
+                {code: 1180, category: DiagnosticCategory.Error, key: "Property destructuring pattern expected."},
         Array_element_destructuring_pattern_expected:
-            {code: 1181, category: DiagnosticCategory.Error, key: "Array element destructuring pattern expected."},
+                {code: 1181, category: DiagnosticCategory.Error, key: "Array element destructuring pattern expected."},
         A_destructuring_declaration_must_have_an_initializer: {
             code: 1182,
             category: DiagnosticCategory.Error,
@@ -460,11 +490,11 @@ module ts {
             key: "An implementation cannot be declared in ambient contexts."
         },
         Modifiers_cannot_appear_here:
-            {code: 1184, category: DiagnosticCategory.Error, key: "Modifiers cannot appear here."},
+                {code: 1184, category: DiagnosticCategory.Error, key: "Modifiers cannot appear here."},
         Merge_conflict_marker_encountered:
-            {code: 1185, category: DiagnosticCategory.Error, key: "Merge conflict marker encountered."},
+                {code: 1185, category: DiagnosticCategory.Error, key: "Merge conflict marker encountered."},
         A_rest_element_cannot_have_an_initializer:
-            {code: 1186, category: DiagnosticCategory.Error, key: "A rest element cannot have an initializer."},
+                {code: 1186, category: DiagnosticCategory.Error, key: "A rest element cannot have an initializer."},
         A_parameter_property_may_not_be_a_binding_pattern: {
             code: 1187,
             category: DiagnosticCategory.Error,
@@ -486,14 +516,14 @@ module ts {
             key: "The variable declaration of a 'for...of' statement cannot have an initializer."
         },
         An_import_declaration_cannot_have_modifiers:
-            {code: 1191, category: DiagnosticCategory.Error, key: "An import declaration cannot have modifiers."},
+                {code: 1191, category: DiagnosticCategory.Error, key: "An import declaration cannot have modifiers."},
         External_module_0_has_no_default_export_or_export_assignment: {
             code: 1192,
             category: DiagnosticCategory.Error,
             key: "External module '{0}' has no default export or export assignment."
         },
         An_export_declaration_cannot_have_modifiers:
-            {code: 1193, category: DiagnosticCategory.Error, key: "An export declaration cannot have modifiers."},
+                {code: 1193, category: DiagnosticCategory.Error, key: "An export declaration cannot have modifiers."},
         Export_declarations_are_not_permitted_in_an_internal_module: {
             code: 1194,
             category: DiagnosticCategory.Error,
@@ -503,8 +533,7 @@ module ts {
         Initializer_of_instance_member_variable_0_cannot_reference_identifier_1_declared_in_the_constructor: {
             code: 2301,
             category: DiagnosticCategory.Error,
-            key:
-                "Initializer of instance member variable '{0}' cannot reference identifier '{1}' declared in the constructor."
+            key: "Initializer of instance member variable '{0}' cannot reference identifier '{1}' declared in the constructor."
         },
         Static_members_cannot_reference_class_type_parameters: {
             code: 2302,
@@ -512,14 +541,14 @@ module ts {
             key: "Static members cannot reference class type parameters."
         },
         Circular_definition_of_import_alias_0:
-            {code: 2303, category: DiagnosticCategory.Error, key: "Circular definition of import alias '{0}'."},
+                {code: 2303, category: DiagnosticCategory.Error, key: "Circular definition of import alias '{0}'."},
         Cannot_find_name_0: {code: 2304, category: DiagnosticCategory.Error, key: "Cannot find name '{0}'."},
         Module_0_has_no_exported_member_1:
-            {code: 2305, category: DiagnosticCategory.Error, key: "Module '{0}' has no exported member '{1}'."},
+                {code: 2305, category: DiagnosticCategory.Error, key: "Module '{0}' has no exported member '{1}'."},
         File_0_is_not_an_external_module:
-            {code: 2306, category: DiagnosticCategory.Error, key: "File '{0}' is not an external module."},
+                {code: 2306, category: DiagnosticCategory.Error, key: "File '{0}' is not an external module."},
         Cannot_find_external_module_0:
-            {code: 2307, category: DiagnosticCategory.Error, key: "Cannot find external module '{0}'."},
+                {code: 2307, category: DiagnosticCategory.Error, key: "Cannot find external module '{0}'."},
         A_module_cannot_have_more_than_one_export_assignment: {
             code: 2308,
             category: DiagnosticCategory.Error,
@@ -536,7 +565,7 @@ module ts {
             key: "Type '{0}' recursively references itself as a base type."
         },
         A_class_may_only_extend_another_class:
-            {code: 2311, category: DiagnosticCategory.Error, key: "A class may only extend another class."},
+                {code: 2311, category: DiagnosticCategory.Error, key: "A class may only extend another class."},
         An_interface_may_only_extend_a_class_or_another_interface: {
             code: 2312,
             category: DiagnosticCategory.Error,
@@ -547,8 +576,11 @@ module ts {
             category: DiagnosticCategory.Error,
             key: "Constraint of a type parameter cannot reference any type parameter from the same type parameter list."
         },
-        Generic_type_0_requires_1_type_argument_s:
-            {code: 2314, category: DiagnosticCategory.Error, key: "Generic type '{0}' requires {1} type argument(s)."},
+        Generic_type_0_requires_1_type_argument_s: {
+            code: 2314,
+            category: DiagnosticCategory.Error,
+            key: "Generic type '{0}' requires {1} type argument(s)."
+        },
         Type_0_is_not_generic: {code: 2315, category: DiagnosticCategory.Error, key: "Type '{0}' is not generic."},
         Global_type_0_must_be_a_class_or_interface_type: {
             code: 2316,
@@ -561,7 +593,7 @@ module ts {
             key: "Global type '{0}' must have {1} type parameter(s)."
         },
         Cannot_find_global_type_0:
-            {code: 2318, category: DiagnosticCategory.Error, key: "Cannot find global type '{0}'."},
+                {code: 2318, category: DiagnosticCategory.Error, key: "Cannot find global type '{0}'."},
         Named_property_0_of_types_1_and_2_are_not_identical: {
             code: 2319,
             category: DiagnosticCategory.Error,
@@ -578,16 +610,16 @@ module ts {
             key: "Excessive stack depth comparing types '{0}' and '{1}'."
         },
         Type_0_is_not_assignable_to_type_1:
-            {code: 2322, category: DiagnosticCategory.Error, key: "Type '{0}' is not assignable to type '{1}'."},
+                {code: 2322, category: DiagnosticCategory.Error, key: "Type '{0}' is not assignable to type '{1}'."},
         Property_0_is_missing_in_type_1:
-            {code: 2324, category: DiagnosticCategory.Error, key: "Property '{0}' is missing in type '{1}'."},
+                {code: 2324, category: DiagnosticCategory.Error, key: "Property '{0}' is missing in type '{1}'."},
         Property_0_is_private_in_type_1_but_not_in_type_2: {
             code: 2325,
             category: DiagnosticCategory.Error,
             key: "Property '{0}' is private in type '{1}' but not in type '{2}'."
         },
         Types_of_property_0_are_incompatible:
-            {code: 2326, category: DiagnosticCategory.Error, key: "Types of property '{0}' are incompatible."},
+                {code: 2326, category: DiagnosticCategory.Error, key: "Types of property '{0}' are incompatible."},
         Property_0_is_optional_in_type_1_but_required_in_type_2: {
             code: 2327,
             category: DiagnosticCategory.Error,
@@ -599,13 +631,16 @@ module ts {
             key: "Types of parameters '{0}' and '{1}' are incompatible."
         },
         Index_signature_is_missing_in_type_0:
-            {code: 2329, category: DiagnosticCategory.Error, key: "Index signature is missing in type '{0}'."},
+                {code: 2329, category: DiagnosticCategory.Error, key: "Index signature is missing in type '{0}'."},
         Index_signatures_are_incompatible:
-            {code: 2330, category: DiagnosticCategory.Error, key: "Index signatures are incompatible."},
+                {code: 2330, category: DiagnosticCategory.Error, key: "Index signatures are incompatible."},
         this_cannot_be_referenced_in_a_module_body:
-            {code: 2331, category: DiagnosticCategory.Error, key: "'this' cannot be referenced in a module body."},
-        this_cannot_be_referenced_in_current_location:
-            {code: 2332, category: DiagnosticCategory.Error, key: "'this' cannot be referenced in current location."},
+                {code: 2331, category: DiagnosticCategory.Error, key: "'this' cannot be referenced in a module body."},
+        this_cannot_be_referenced_in_current_location: {
+            code: 2332,
+            category: DiagnosticCategory.Error,
+            key: "'this' cannot be referenced in current location."
+        },
         this_cannot_be_referenced_in_constructor_arguments: {
             code: 2333,
             category: DiagnosticCategory.Error,
@@ -632,14 +667,12 @@ module ts {
             key: "Super calls are not permitted outside constructors or in nested functions inside constructors"
         },
         super_property_access_is_permitted_only_in_a_constructor_member_function_or_member_accessor_of_a_derived_class: {
-            code:
-                2338,
+            code: 2338,
             category: DiagnosticCategory.Error,
-            key:
-                "'super' property access is permitted only in a constructor, member function, or member accessor of a derived class"
+            key: "'super' property access is permitted only in a constructor, member function, or member accessor of a derived class"
         },
         Property_0_does_not_exist_on_type_1:
-            {code: 2339, category: DiagnosticCategory.Error, key: "Property '{0}' does not exist on type '{1}'."},
+                {code: 2339, category: DiagnosticCategory.Error, key: "Property '{0}' does not exist on type '{1}'."},
         Only_public_and_protected_methods_of_the_base_class_are_accessible_via_the_super_keyword: {
             code: 2340,
             category: DiagnosticCategory.Error,
@@ -655,8 +688,11 @@ module ts {
             category: DiagnosticCategory.Error,
             key: "An index expression argument must be of type 'string', 'number', 'symbol, or 'any'."
         },
-        Type_0_does_not_satisfy_the_constraint_1:
-            {code: 2344, category: DiagnosticCategory.Error, key: "Type '{0}' does not satisfy the constraint '{1}'."},
+        Type_0_does_not_satisfy_the_constraint_1: {
+            code: 2344,
+            category: DiagnosticCategory.Error,
+            key: "Type '{0}' does not satisfy the constraint '{1}'."
+        },
         Argument_of_type_0_is_not_assignable_to_parameter_of_type_1: {
             code: 2345,
             category: DiagnosticCategory.Error,
@@ -702,13 +738,11 @@ module ts {
             category: DiagnosticCategory.Error,
             key: "No best common type exists among return expressions."
         },
-        A_function_whose_declared_type_is_neither_void_nor_any_must_return_a_value_or_consist_of_a_single_throw_statement:
-            {
-              code: 2355,
-              category: DiagnosticCategory.Error,
-              key:
-                  "A function whose declared type is neither 'void' nor 'any' must return a value or consist of a single 'throw' statement."
-            },
+        A_function_whose_declared_type_is_neither_void_nor_any_must_return_a_value_or_consist_of_a_single_throw_statement: {
+            code: 2355,
+            category: DiagnosticCategory.Error,
+            key: "A function whose declared type is neither 'void' nor 'any' must return a value or consist of a single 'throw' statement."
+        },
         An_arithmetic_operand_must_be_of_type_any_number_or_an_enum_type: {
             code: 2356,
             category: DiagnosticCategory.Error,
@@ -722,16 +756,14 @@ module ts {
         The_left_hand_side_of_an_instanceof_expression_must_be_of_type_any_an_object_type_or_a_type_parameter: {
             code: 2358,
             category: DiagnosticCategory.Error,
-            key:
-                "The left-hand side of an 'instanceof' expression must be of type 'any', an object type or a type parameter."
+            key: "The left-hand side of an 'instanceof' expression must be of type 'any', an object type or a type parameter."
         },
         The_right_hand_side_of_an_instanceof_expression_must_be_of_type_any_or_of_a_type_assignable_to_the_Function_interface_type:
-            {
-              code: 2359,
-              category: DiagnosticCategory.Error,
-              key:
-                  "The right-hand side of an 'instanceof' expression must be of type 'any' or of a type assignable to the 'Function' interface type."
-            },
+                {
+                  code: 2359,
+                  category: DiagnosticCategory.Error,
+                  key: "The right-hand side of an 'instanceof' expression must be of type 'any' or of a type assignable to the 'Function' interface type."
+                },
         The_left_hand_side_of_an_in_expression_must_be_of_type_any_string_number_or_symbol: {
             code: 2360,
             category: DiagnosticCategory.Error,
@@ -752,22 +784,25 @@ module ts {
             category: DiagnosticCategory.Error,
             key: "The right-hand side of an arithmetic operation must be of type 'any', 'number' or an enum type."
         },
-        Invalid_left_hand_side_of_assignment_expression:
-            {code: 2364, category: DiagnosticCategory.Error, key: "Invalid left-hand side of assignment expression."},
+        Invalid_left_hand_side_of_assignment_expression: {
+            code: 2364,
+            category: DiagnosticCategory.Error,
+            key: "Invalid left-hand side of assignment expression."
+        },
         Operator_0_cannot_be_applied_to_types_1_and_2: {
             code: 2365,
             category: DiagnosticCategory.Error,
             key: "Operator '{0}' cannot be applied to types '{1}' and '{2}'."
         },
         Type_parameter_name_cannot_be_0:
-            {code: 2368, category: DiagnosticCategory.Error, key: "Type parameter name cannot be '{0}'"},
+                {code: 2368, category: DiagnosticCategory.Error, key: "Type parameter name cannot be '{0}'"},
         A_parameter_property_is_only_allowed_in_a_constructor_implementation: {
             code: 2369,
             category: DiagnosticCategory.Error,
             key: "A parameter property is only allowed in a constructor implementation."
         },
         A_rest_parameter_must_be_of_an_array_type:
-            {code: 2370, category: DiagnosticCategory.Error, key: "A rest parameter must be of an array type."},
+                {code: 2370, category: DiagnosticCategory.Error, key: "A rest parameter must be of an array type."},
         A_parameter_initializer_is_only_allowed_in_a_function_or_constructor_implementation: {
             code: 2371,
             category: DiagnosticCategory.Error,
@@ -784,16 +819,15 @@ module ts {
             key: "Initializer of parameter '{0}' cannot reference identifier '{1}' declared after it."
         },
         Duplicate_string_index_signature:
-            {code: 2374, category: DiagnosticCategory.Error, key: "Duplicate string index signature."},
+                {code: 2374, category: DiagnosticCategory.Error, key: "Duplicate string index signature."},
         Duplicate_number_index_signature:
-            {code: 2375, category: DiagnosticCategory.Error, key: "Duplicate number index signature."},
+                {code: 2375, category: DiagnosticCategory.Error, key: "Duplicate number index signature."},
         A_super_call_must_be_the_first_statement_in_the_constructor_when_a_class_contains_initialized_properties_or_has_parameter_properties:
-            {
-              code: 2376,
-              category: DiagnosticCategory.Error,
-              key:
-                  "A 'super' call must be the first statement in the constructor when a class contains initialized properties or has parameter properties."
-            },
+                {
+                  code: 2376,
+                  category: DiagnosticCategory.Error,
+                  key: "A 'super' call must be the first statement in the constructor when a class contains initialized properties or has parameter properties."
+                },
         Constructors_for_derived_classes_must_contain_a_super_call: {
             code: 2377,
             category: DiagnosticCategory.Error,
@@ -809,8 +843,11 @@ module ts {
             category: DiagnosticCategory.Error,
             key: "Getter and setter accessors do not agree in visibility."
         },
-        get_and_set_accessor_must_have_the_same_type:
-            {code: 2380, category: DiagnosticCategory.Error, key: "'get' and 'set' accessor must have the same type."},
+        get_and_set_accessor_must_have_the_same_type: {
+            code: 2380,
+            category: DiagnosticCategory.Error,
+            key: "'get' and 'set' accessor must have the same type."
+        },
         A_signature_with_an_implementation_cannot_use_a_string_literal_type: {
             code: 2381,
             category: DiagnosticCategory.Error,
@@ -842,13 +879,13 @@ module ts {
             key: "Overload signatures must all be optional or required."
         },
         Function_overload_must_be_static:
-            {code: 2387, category: DiagnosticCategory.Error, key: "Function overload must be static."},
+                {code: 2387, category: DiagnosticCategory.Error, key: "Function overload must be static."},
         Function_overload_must_not_be_static:
-            {code: 2388, category: DiagnosticCategory.Error, key: "Function overload must not be static."},
+                {code: 2388, category: DiagnosticCategory.Error, key: "Function overload must not be static."},
         Function_implementation_name_must_be_0:
-            {code: 2389, category: DiagnosticCategory.Error, key: "Function implementation name must be '{0}'."},
+                {code: 2389, category: DiagnosticCategory.Error, key: "Function implementation name must be '{0}'."},
         Constructor_implementation_is_missing:
-            {code: 2390, category: DiagnosticCategory.Error, key: "Constructor implementation is missing."},
+                {code: 2390, category: DiagnosticCategory.Error, key: "Constructor implementation is missing."},
         Function_implementation_is_missing_or_not_immediately_following_the_declaration: {
             code: 2391,
             category: DiagnosticCategory.Error,
@@ -860,7 +897,7 @@ module ts {
             key: "Multiple constructor implementations are not allowed."
         },
         Duplicate_function_implementation:
-            {code: 2393, category: DiagnosticCategory.Error, key: "Duplicate function implementation."},
+                {code: 2393, category: DiagnosticCategory.Error, key: "Duplicate function implementation."},
         Overload_signature_is_not_compatible_with_function_implementation: {
             code: 2394,
             category: DiagnosticCategory.Error,
@@ -899,8 +936,7 @@ module ts {
         Subsequent_variable_declarations_must_have_the_same_type_Variable_0_must_be_of_type_1_but_here_has_type_2: {
             code: 2403,
             category: DiagnosticCategory.Error,
-            key:
-                "Subsequent variable declarations must have the same type.  Variable '{0}' must be of type '{1}', but here has type '{2}'."
+            key: "Subsequent variable declarations must have the same type.  Variable '{0}' must be of type '{1}', but here has type '{2}'."
         },
         The_left_hand_side_of_a_for_in_statement_cannot_use_a_type_annotation: {
             code: 2404,
@@ -912,16 +948,18 @@ module ts {
             category: DiagnosticCategory.Error,
             key: "The left-hand side of a 'for...in' statement must be of type 'string' or 'any'."
         },
-        Invalid_left_hand_side_in_for_in_statement:
-            {code: 2406, category: DiagnosticCategory.Error, key: "Invalid left-hand side in 'for...in' statement."},
+        Invalid_left_hand_side_in_for_in_statement: {
+            code: 2406,
+            category: DiagnosticCategory.Error,
+            key: "Invalid left-hand side in 'for...in' statement."
+        },
         The_right_hand_side_of_a_for_in_statement_must_be_of_type_any_an_object_type_or_a_type_parameter: {
             code: 2407,
             category: DiagnosticCategory.Error,
-            key:
-                "The right-hand side of a 'for...in' statement must be of type 'any', an object type or a type parameter."
+            key: "The right-hand side of a 'for...in' statement must be of type 'any', an object type or a type parameter."
         },
         Setters_cannot_return_a_value:
-            {code: 2408, category: DiagnosticCategory.Error, key: "Setters cannot return a value."},
+                {code: 2408, category: DiagnosticCategory.Error, key: "Setters cannot return a value."},
         Return_type_of_constructor_signature_must_be_assignable_to_the_instance_type_of_the_class: {
             code: 2409,
             category: DiagnosticCategory.Error,
@@ -948,8 +986,11 @@ module ts {
             key: "Numeric index type '{0}' is not assignable to string index type '{1}'."
         },
         Class_name_cannot_be_0: {code: 2414, category: DiagnosticCategory.Error, key: "Class name cannot be '{0}'"},
-        Class_0_incorrectly_extends_base_class_1:
-            {code: 2415, category: DiagnosticCategory.Error, key: "Class '{0}' incorrectly extends base class '{1}'."},
+        Class_0_incorrectly_extends_base_class_1: {
+            code: 2415,
+            category: DiagnosticCategory.Error,
+            key: "Class '{0}' incorrectly extends base class '{1}'."
+        },
         Class_static_side_0_incorrectly_extends_base_class_static_side_1: {
             code: 2417,
             category: DiagnosticCategory.Error,
@@ -973,29 +1014,25 @@ module ts {
         Class_0_defines_instance_member_function_1_but_extended_class_2_defines_it_as_instance_member_accessor: {
             code: 2423,
             category: DiagnosticCategory.Error,
-            key:
-                "Class '{0}' defines instance member function '{1}', but extended class '{2}' defines it as instance member accessor."
+            key: "Class '{0}' defines instance member function '{1}', but extended class '{2}' defines it as instance member accessor."
         },
         Class_0_defines_instance_member_function_1_but_extended_class_2_defines_it_as_instance_member_property: {
             code: 2424,
             category: DiagnosticCategory.Error,
-            key:
-                "Class '{0}' defines instance member function '{1}', but extended class '{2}' defines it as instance member property."
+            key: "Class '{0}' defines instance member function '{1}', but extended class '{2}' defines it as instance member property."
         },
         Class_0_defines_instance_member_property_1_but_extended_class_2_defines_it_as_instance_member_function: {
             code: 2425,
             category: DiagnosticCategory.Error,
-            key:
-                "Class '{0}' defines instance member property '{1}', but extended class '{2}' defines it as instance member function."
+            key: "Class '{0}' defines instance member property '{1}', but extended class '{2}' defines it as instance member function."
         },
         Class_0_defines_instance_member_accessor_1_but_extended_class_2_defines_it_as_instance_member_function: {
             code: 2426,
             category: DiagnosticCategory.Error,
-            key:
-                "Class '{0}' defines instance member accessor '{1}', but extended class '{2}' defines it as instance member function."
+            key: "Class '{0}' defines instance member accessor '{1}', but extended class '{2}' defines it as instance member function."
         },
         Interface_name_cannot_be_0:
-            {code: 2427, category: DiagnosticCategory.Error, key: "Interface name cannot be '{0}'"},
+                {code: 2427, category: DiagnosticCategory.Error, key: "Interface name cannot be '{0}'"},
         All_declarations_of_an_interface_must_have_identical_type_parameters: {
             code: 2428,
             category: DiagnosticCategory.Error,
@@ -1010,8 +1047,7 @@ module ts {
         In_an_enum_with_multiple_declarations_only_one_declaration_can_omit_an_initializer_for_its_first_enum_element: {
             code: 2432,
             category: DiagnosticCategory.Error,
-            key:
-                "In an enum with multiple declarations, only one declaration can omit an initializer for its first enum element."
+            key: "In an enum with multiple declarations, only one declaration can omit an initializer for its first enum element."
         },
         A_module_declaration_cannot_be_in_a_different_file_from_a_class_or_function_with_which_it_is_merged: {
             code: 2433,
@@ -1040,12 +1076,11 @@ module ts {
         },
         Import_name_cannot_be_0: {code: 2438, category: DiagnosticCategory.Error, key: "Import name cannot be '{0}'"},
         Import_or_export_declaration_in_an_ambient_external_module_declaration_cannot_reference_external_module_through_relative_external_module_name:
-            {
-              code: 2439,
-              category: DiagnosticCategory.Error,
-              key:
-                  "Import or export declaration in an ambient external module declaration cannot reference external module through relative external module name."
-            },
+                {
+                  code: 2439,
+                  category: DiagnosticCategory.Error,
+                  key: "Import or export declaration in an ambient external module declaration cannot reference external module through relative external module name."
+                },
         Import_declaration_conflicts_with_local_declaration_of_0: {
             code: 2440,
             category: DiagnosticCategory.Error,
@@ -1102,26 +1137,27 @@ module ts {
             key: "Left-hand side of assignment expression cannot be a constant."
         },
         Cannot_redeclare_block_scoped_variable_0:
-            {code: 2451, category: DiagnosticCategory.Error, key: "Cannot redeclare block-scoped variable '{0}'."},
+                {code: 2451, category: DiagnosticCategory.Error, key: "Cannot redeclare block-scoped variable '{0}'."},
         An_enum_member_cannot_have_a_numeric_name:
-            {code: 2452, category: DiagnosticCategory.Error, key: "An enum member cannot have a numeric name."},
+                {code: 2452, category: DiagnosticCategory.Error, key: "An enum member cannot have a numeric name."},
         The_type_argument_for_type_parameter_0_cannot_be_inferred_from_the_usage_Consider_specifying_the_type_arguments_explicitly:
-            {
-              code: 2453,
-              category: DiagnosticCategory.Error,
-              key:
-                  "The type argument for type parameter '{0}' cannot be inferred from the usage. Consider specifying the type arguments explicitly."
-            },
+                {
+                  code: 2453,
+                  category: DiagnosticCategory.Error,
+                  key: "The type argument for type parameter '{0}' cannot be inferred from the usage. Consider specifying the type arguments explicitly."
+                },
         Type_argument_candidate_1_is_not_a_valid_type_argument_because_it_is_not_a_supertype_of_candidate_0: {
             code: 2455,
             category: DiagnosticCategory.Error,
-            key:
-                "Type argument candidate '{1}' is not a valid type argument because it is not a supertype of candidate '{0}'."
+            key: "Type argument candidate '{1}' is not a valid type argument because it is not a supertype of candidate '{0}'."
         },
-        Type_alias_0_circularly_references_itself:
-            {code: 2456, category: DiagnosticCategory.Error, key: "Type alias '{0}' circularly references itself."},
+        Type_alias_0_circularly_references_itself: {
+            code: 2456,
+            category: DiagnosticCategory.Error,
+            key: "Type alias '{0}' circularly references itself."
+        },
         Type_alias_name_cannot_be_0:
-            {code: 2457, category: DiagnosticCategory.Error, key: "Type alias name cannot be '{0}'"},
+                {code: 2457, category: DiagnosticCategory.Error, key: "Type alias name cannot be '{0}'"},
         An_AMD_module_cannot_have_multiple_name_assignments: {
             code: 2458,
             category: DiagnosticCategory.Error,
@@ -1133,9 +1169,9 @@ module ts {
             key: "Type '{0}' has no property '{1}' and no string index signature."
         },
         Type_0_has_no_property_1:
-            {code: 2460, category: DiagnosticCategory.Error, key: "Type '{0}' has no property '{1}'."},
+                {code: 2460, category: DiagnosticCategory.Error, key: "Type '{0}' has no property '{1}'."},
         Type_0_is_not_an_array_type:
-            {code: 2461, category: DiagnosticCategory.Error, key: "Type '{0}' is not an array type."},
+                {code: 2461, category: DiagnosticCategory.Error, key: "Type '{0}' is not an array type."},
         A_rest_element_must_be_last_in_an_array_destructuring_pattern: {
             code: 2462,
             category: DiagnosticCategory.Error,
@@ -1167,7 +1203,7 @@ module ts {
             key: "A computed property name cannot reference a type parameter from its containing type."
         },
         Cannot_find_global_value_0:
-            {code: 2468, category: DiagnosticCategory.Error, key: "Cannot find global value '{0}'."},
+                {code: 2468, category: DiagnosticCategory.Error, key: "Cannot find global value '{0}'."},
         The_0_operator_cannot_be_applied_to_type_symbol: {
             code: 2469,
             category: DiagnosticCategory.Error,
@@ -1188,20 +1224,22 @@ module ts {
             category: DiagnosticCategory.Error,
             key: "Spread operator in 'new' expressions is only available when targeting ECMAScript 6 and higher."
         },
-        Enum_declarations_must_all_be_const_or_non_const:
-            {code: 2473, category: DiagnosticCategory.Error, key: "Enum declarations must all be const or non-const."},
+        Enum_declarations_must_all_be_const_or_non_const: {
+            code: 2473,
+            category: DiagnosticCategory.Error,
+            key: "Enum declarations must all be const or non-const."
+        },
         In_const_enum_declarations_member_initializer_must_be_constant_expression: {
             code: 2474,
             category: DiagnosticCategory.Error,
             key: "In 'const' enum declarations member initializer must be constant expression."
         },
         const_enums_can_only_be_used_in_property_or_index_access_expressions_or_the_right_hand_side_of_an_import_declaration_or_export_assignment:
-            {
-              code: 2475,
-              category: DiagnosticCategory.Error,
-              key:
-                  "'const' enums can only be used in property or index access expressions or the right hand side of an import declaration or export assignment."
-            },
+                {
+                  code: 2475,
+                  category: DiagnosticCategory.Error,
+                  key: "'const' enums can only be used in property or index access expressions or the right hand side of an import declaration or export assignment."
+                },
         A_const_enum_member_can_only_be_accessed_using_a_string_literal: {
             code: 2476,
             category: DiagnosticCategory.Error,
@@ -1265,8 +1303,7 @@ module ts {
         Type_parameter_0_of_constructor_signature_from_exported_interface_has_or_is_using_private_name_1: {
             code: 4006,
             category: DiagnosticCategory.Error,
-            key:
-                "Type parameter '{0}' of constructor signature from exported interface has or is using private name '{1}'."
+            key: "Type parameter '{0}' of constructor signature from exported interface has or is using private name '{1}'."
         },
         Type_parameter_0_of_call_signature_from_exported_interface_has_or_is_using_private_name_1: {
             code: 4008,
@@ -1326,8 +1363,7 @@ module ts {
         Public_static_property_0_of_exported_class_has_or_is_using_name_1_from_external_module_2_but_cannot_be_named: {
             code: 4026,
             category: DiagnosticCategory.Error,
-            key:
-                "Public static property '{0}' of exported class has or is using name '{1}' from external module {2} but cannot be named."
+            key: "Public static property '{0}' of exported class has or is using name '{1}' from external module {2} but cannot be named."
         },
         Public_static_property_0_of_exported_class_has_or_is_using_name_1_from_private_module_2: {
             code: 4027,
@@ -1342,8 +1378,7 @@ module ts {
         Public_property_0_of_exported_class_has_or_is_using_name_1_from_external_module_2_but_cannot_be_named: {
             code: 4029,
             category: DiagnosticCategory.Error,
-            key:
-                "Public property '{0}' of exported class has or is using name '{1}' from external module {2} but cannot be named."
+            key: "Public property '{0}' of exported class has or is using name '{1}' from external module {2} but cannot be named."
         },
         Public_property_0_of_exported_class_has_or_is_using_name_1_from_private_module_2: {
             code: 4030,
@@ -1368,20 +1403,17 @@ module ts {
         Parameter_0_of_public_static_property_setter_from_exported_class_has_or_is_using_name_1_from_private_module_2: {
             code: 4034,
             category: DiagnosticCategory.Error,
-            key:
-                "Parameter '{0}' of public static property setter from exported class has or is using name '{1}' from private module '{2}'."
+            key: "Parameter '{0}' of public static property setter from exported class has or is using name '{1}' from private module '{2}'."
         },
         Parameter_0_of_public_static_property_setter_from_exported_class_has_or_is_using_private_name_1: {
             code: 4035,
             category: DiagnosticCategory.Error,
-            key:
-                "Parameter '{0}' of public static property setter from exported class has or is using private name '{1}'."
+            key: "Parameter '{0}' of public static property setter from exported class has or is using private name '{1}'."
         },
         Parameter_0_of_public_property_setter_from_exported_class_has_or_is_using_name_1_from_private_module_2: {
             code: 4036,
             category: DiagnosticCategory.Error,
-            key:
-                "Parameter '{0}' of public property setter from exported class has or is using name '{1}' from private module '{2}'."
+            key: "Parameter '{0}' of public property setter from exported class has or is using name '{1}' from private module '{2}'."
         },
         Parameter_0_of_public_property_setter_from_exported_class_has_or_is_using_private_name_1: {
             code: 4037,
@@ -1389,17 +1421,15 @@ module ts {
             key: "Parameter '{0}' of public property setter from exported class has or is using private name '{1}'."
         },
         Return_type_of_public_static_property_getter_from_exported_class_has_or_is_using_name_0_from_external_module_1_but_cannot_be_named:
-            {
-              code: 4038,
-              category: DiagnosticCategory.Error,
-              key:
-                  "Return type of public static property getter from exported class has or is using name '{0}' from external module {1} but cannot be named."
-            },
+                {
+                  code: 4038,
+                  category: DiagnosticCategory.Error,
+                  key: "Return type of public static property getter from exported class has or is using name '{0}' from external module {1} but cannot be named."
+                },
         Return_type_of_public_static_property_getter_from_exported_class_has_or_is_using_name_0_from_private_module_1: {
             code: 4039,
             category: DiagnosticCategory.Error,
-            key:
-                "Return type of public static property getter from exported class has or is using name '{0}' from private module '{1}'."
+            key: "Return type of public static property getter from exported class has or is using name '{0}' from private module '{1}'."
         },
         Return_type_of_public_static_property_getter_from_exported_class_has_or_is_using_private_name_0: {
             code: 4040,
@@ -1407,17 +1437,15 @@ module ts {
             key: "Return type of public static property getter from exported class has or is using private name '{0}'."
         },
         Return_type_of_public_property_getter_from_exported_class_has_or_is_using_name_0_from_external_module_1_but_cannot_be_named:
-            {
-              code: 4041,
-              category: DiagnosticCategory.Error,
-              key:
-                  "Return type of public property getter from exported class has or is using name '{0}' from external module {1} but cannot be named."
-            },
+                {
+                  code: 4041,
+                  category: DiagnosticCategory.Error,
+                  key: "Return type of public property getter from exported class has or is using name '{0}' from external module {1} but cannot be named."
+                },
         Return_type_of_public_property_getter_from_exported_class_has_or_is_using_name_0_from_private_module_1: {
             code: 4042,
             category: DiagnosticCategory.Error,
-            key:
-                "Return type of public property getter from exported class has or is using name '{0}' from private module '{1}'."
+            key: "Return type of public property getter from exported class has or is using name '{0}' from private module '{1}'."
         },
         Return_type_of_public_property_getter_from_exported_class_has_or_is_using_private_name_0: {
             code: 4043,
@@ -1427,8 +1455,7 @@ module ts {
         Return_type_of_constructor_signature_from_exported_interface_has_or_is_using_name_0_from_private_module_1: {
             code: 4044,
             category: DiagnosticCategory.Error,
-            key:
-                "Return type of constructor signature from exported interface has or is using name '{0}' from private module '{1}'."
+            key: "Return type of constructor signature from exported interface has or is using name '{0}' from private module '{1}'."
         },
         Return_type_of_constructor_signature_from_exported_interface_has_or_is_using_private_name_0: {
             code: 4045,
@@ -1438,8 +1465,7 @@ module ts {
         Return_type_of_call_signature_from_exported_interface_has_or_is_using_name_0_from_private_module_1: {
             code: 4046,
             category: DiagnosticCategory.Error,
-            key:
-                "Return type of call signature from exported interface has or is using name '{0}' from private module '{1}'."
+            key: "Return type of call signature from exported interface has or is using name '{0}' from private module '{1}'."
         },
         Return_type_of_call_signature_from_exported_interface_has_or_is_using_private_name_0: {
             code: 4047,
@@ -1449,8 +1475,7 @@ module ts {
         Return_type_of_index_signature_from_exported_interface_has_or_is_using_name_0_from_private_module_1: {
             code: 4048,
             category: DiagnosticCategory.Error,
-            key:
-                "Return type of index signature from exported interface has or is using name '{0}' from private module '{1}'."
+            key: "Return type of index signature from exported interface has or is using name '{0}' from private module '{1}'."
         },
         Return_type_of_index_signature_from_exported_interface_has_or_is_using_private_name_0: {
             code: 4049,
@@ -1458,35 +1483,30 @@ module ts {
             key: "Return type of index signature from exported interface has or is using private name '{0}'."
         },
         Return_type_of_public_static_method_from_exported_class_has_or_is_using_name_0_from_external_module_1_but_cannot_be_named:
-            {
-              code: 4050,
-              category: DiagnosticCategory.Error,
-              key:
-                  "Return type of public static method from exported class has or is using name '{0}' from external module {1} but cannot be named."
-            },
+                {
+                  code: 4050,
+                  category: DiagnosticCategory.Error,
+                  key: "Return type of public static method from exported class has or is using name '{0}' from external module {1} but cannot be named."
+                },
         Return_type_of_public_static_method_from_exported_class_has_or_is_using_name_0_from_private_module_1: {
             code: 4051,
             category: DiagnosticCategory.Error,
-            key:
-                "Return type of public static method from exported class has or is using name '{0}' from private module '{1}'."
+            key: "Return type of public static method from exported class has or is using name '{0}' from private module '{1}'."
         },
         Return_type_of_public_static_method_from_exported_class_has_or_is_using_private_name_0: {
             code: 4052,
             category: DiagnosticCategory.Error,
             key: "Return type of public static method from exported class has or is using private name '{0}'."
         },
-        Return_type_of_public_method_from_exported_class_has_or_is_using_name_0_from_external_module_1_but_cannot_be_named:
-            {
-              code: 4053,
-              category: DiagnosticCategory.Error,
-              key:
-                  "Return type of public method from exported class has or is using name '{0}' from external module {1} but cannot be named."
-            },
+        Return_type_of_public_method_from_exported_class_has_or_is_using_name_0_from_external_module_1_but_cannot_be_named: {
+            code: 4053,
+            category: DiagnosticCategory.Error,
+            key: "Return type of public method from exported class has or is using name '{0}' from external module {1} but cannot be named."
+        },
         Return_type_of_public_method_from_exported_class_has_or_is_using_name_0_from_private_module_1: {
             code: 4054,
             category: DiagnosticCategory.Error,
-            key:
-                "Return type of public method from exported class has or is using name '{0}' from private module '{1}'."
+            key: "Return type of public method from exported class has or is using name '{0}' from private module '{1}'."
         },
         Return_type_of_public_method_from_exported_class_has_or_is_using_private_name_0: {
             code: 4055,
@@ -1506,8 +1526,7 @@ module ts {
         Return_type_of_exported_function_has_or_is_using_name_0_from_external_module_1_but_cannot_be_named: {
             code: 4058,
             category: DiagnosticCategory.Error,
-            key:
-                "Return type of exported function has or is using name '{0}' from external module {1} but cannot be named."
+            key: "Return type of exported function has or is using name '{0}' from external module {1} but cannot be named."
         },
         Return_type_of_exported_function_has_or_is_using_name_0_from_private_module_1: {
             code: 4059,
@@ -1519,18 +1538,15 @@ module ts {
             category: DiagnosticCategory.Error,
             key: "Return type of exported function has or is using private name '{0}'."
         },
-        Parameter_0_of_constructor_from_exported_class_has_or_is_using_name_1_from_external_module_2_but_cannot_be_named:
-            {
-              code: 4061,
-              category: DiagnosticCategory.Error,
-              key:
-                  "Parameter '{0}' of constructor from exported class has or is using name '{1}' from external module {2} but cannot be named."
-            },
+        Parameter_0_of_constructor_from_exported_class_has_or_is_using_name_1_from_external_module_2_but_cannot_be_named: {
+            code: 4061,
+            category: DiagnosticCategory.Error,
+            key: "Parameter '{0}' of constructor from exported class has or is using name '{1}' from external module {2} but cannot be named."
+        },
         Parameter_0_of_constructor_from_exported_class_has_or_is_using_name_1_from_private_module_2: {
             code: 4062,
             category: DiagnosticCategory.Error,
-            key:
-                "Parameter '{0}' of constructor from exported class has or is using name '{1}' from private module '{2}'."
+            key: "Parameter '{0}' of constructor from exported class has or is using name '{1}' from private module '{2}'."
         },
         Parameter_0_of_constructor_from_exported_class_has_or_is_using_private_name_1: {
             code: 4063,
@@ -1540,8 +1556,7 @@ module ts {
         Parameter_0_of_constructor_signature_from_exported_interface_has_or_is_using_name_1_from_private_module_2: {
             code: 4064,
             category: DiagnosticCategory.Error,
-            key:
-                "Parameter '{0}' of constructor signature from exported interface has or is using name '{1}' from private module '{2}'."
+            key: "Parameter '{0}' of constructor signature from exported interface has or is using name '{1}' from private module '{2}'."
         },
         Parameter_0_of_constructor_signature_from_exported_interface_has_or_is_using_private_name_1: {
             code: 4065,
@@ -1551,8 +1566,7 @@ module ts {
         Parameter_0_of_call_signature_from_exported_interface_has_or_is_using_name_1_from_private_module_2: {
             code: 4066,
             category: DiagnosticCategory.Error,
-            key:
-                "Parameter '{0}' of call signature from exported interface has or is using name '{1}' from private module '{2}'."
+            key: "Parameter '{0}' of call signature from exported interface has or is using name '{1}' from private module '{2}'."
         },
         Parameter_0_of_call_signature_from_exported_interface_has_or_is_using_private_name_1: {
             code: 4067,
@@ -1560,35 +1574,30 @@ module ts {
             key: "Parameter '{0}' of call signature from exported interface has or is using private name '{1}'."
         },
         Parameter_0_of_public_static_method_from_exported_class_has_or_is_using_name_1_from_external_module_2_but_cannot_be_named:
-            {
-              code: 4068,
-              category: DiagnosticCategory.Error,
-              key:
-                  "Parameter '{0}' of public static method from exported class has or is using name '{1}' from external module {2} but cannot be named."
-            },
+                {
+                  code: 4068,
+                  category: DiagnosticCategory.Error,
+                  key: "Parameter '{0}' of public static method from exported class has or is using name '{1}' from external module {2} but cannot be named."
+                },
         Parameter_0_of_public_static_method_from_exported_class_has_or_is_using_name_1_from_private_module_2: {
             code: 4069,
             category: DiagnosticCategory.Error,
-            key:
-                "Parameter '{0}' of public static method from exported class has or is using name '{1}' from private module '{2}'."
+            key: "Parameter '{0}' of public static method from exported class has or is using name '{1}' from private module '{2}'."
         },
         Parameter_0_of_public_static_method_from_exported_class_has_or_is_using_private_name_1: {
             code: 4070,
             category: DiagnosticCategory.Error,
             key: "Parameter '{0}' of public static method from exported class has or is using private name '{1}'."
         },
-        Parameter_0_of_public_method_from_exported_class_has_or_is_using_name_1_from_external_module_2_but_cannot_be_named:
-            {
-              code: 4071,
-              category: DiagnosticCategory.Error,
-              key:
-                  "Parameter '{0}' of public method from exported class has or is using name '{1}' from external module {2} but cannot be named."
-            },
+        Parameter_0_of_public_method_from_exported_class_has_or_is_using_name_1_from_external_module_2_but_cannot_be_named: {
+            code: 4071,
+            category: DiagnosticCategory.Error,
+            key: "Parameter '{0}' of public method from exported class has or is using name '{1}' from external module {2} but cannot be named."
+        },
         Parameter_0_of_public_method_from_exported_class_has_or_is_using_name_1_from_private_module_2: {
             code: 4072,
             category: DiagnosticCategory.Error,
-            key:
-                "Parameter '{0}' of public method from exported class has or is using name '{1}' from private module '{2}'."
+            key: "Parameter '{0}' of public method from exported class has or is using name '{1}' from private module '{2}'."
         },
         Parameter_0_of_public_method_from_exported_class_has_or_is_using_private_name_1: {
             code: 4073,
@@ -1598,8 +1607,7 @@ module ts {
         Parameter_0_of_method_from_exported_interface_has_or_is_using_name_1_from_private_module_2: {
             code: 4074,
             category: DiagnosticCategory.Error,
-            key:
-                "Parameter '{0}' of method from exported interface has or is using name '{1}' from private module '{2}'."
+            key: "Parameter '{0}' of method from exported interface has or is using name '{1}' from private module '{2}'."
         },
         Parameter_0_of_method_from_exported_interface_has_or_is_using_private_name_1: {
             code: 4075,
@@ -1609,8 +1617,7 @@ module ts {
         Parameter_0_of_exported_function_has_or_is_using_name_1_from_external_module_2_but_cannot_be_named: {
             code: 4076,
             category: DiagnosticCategory.Error,
-            key:
-                "Parameter '{0}' of exported function has or is using name '{1}' from external module {2} but cannot be named."
+            key: "Parameter '{0}' of exported function has or is using name '{1}' from external module {2} but cannot be named."
         },
         Parameter_0_of_exported_function_has_or_is_using_name_1_from_private_module_2: {
             code: 4077,
@@ -1638,17 +1645,17 @@ module ts {
             key: "Cannot find the common subdirectory path for the input files."
         },
         Cannot_read_file_0_Colon_1:
-            {code: 5012, category: DiagnosticCategory.Error, key: "Cannot read file '{0}': {1}"},
+                {code: 5012, category: DiagnosticCategory.Error, key: "Cannot read file '{0}': {1}"},
         Unsupported_file_encoding: {code: 5013, category: DiagnosticCategory.Error, key: "Unsupported file encoding."},
         Unknown_compiler_option_0:
-            {code: 5023, category: DiagnosticCategory.Error, key: "Unknown compiler option '{0}'."},
+                {code: 5023, category: DiagnosticCategory.Error, key: "Unknown compiler option '{0}'."},
         Compiler_option_0_requires_a_value_of_type_1: {
             code: 5024,
             category: DiagnosticCategory.Error,
             key: "Compiler option '{0}' requires a value of type {1}."
         },
         Could_not_write_file_0_Colon_1:
-            {code: 5033, category: DiagnosticCategory.Error, key: "Could not write file '{0}': {1}"},
+                {code: 5033, category: DiagnosticCategory.Error, key: "Could not write file '{0}': {1}"},
         Option_mapRoot_cannot_be_specified_without_specifying_sourcemap_option: {
             code: 5038,
             category: DiagnosticCategory.Error,
@@ -1675,9 +1682,9 @@ module ts {
             key: "Option 'project' cannot be mixed with source files on a command line."
         },
         Concatenate_and_emit_output_to_single_file:
-            {code: 6001, category: DiagnosticCategory.Message, key: "Concatenate and emit output to single file."},
+                {code: 6001, category: DiagnosticCategory.Message, key: "Concatenate and emit output to single file."},
         Generates_corresponding_d_ts_file:
-            {code: 6002, category: DiagnosticCategory.Message, key: "Generates corresponding '.d.ts' file."},
+                {code: 6002, category: DiagnosticCategory.Message, key: "Generates corresponding '.d.ts' file."},
         Specifies_the_location_where_debugger_should_locate_map_files_instead_of_generated_locations: {
             code: 6003,
             category: DiagnosticCategory.Message,
@@ -1690,7 +1697,7 @@ module ts {
         },
         Watch_input_files: {code: 6005, category: DiagnosticCategory.Message, key: "Watch input files."},
         Redirect_output_structure_to_the_directory:
-            {code: 6006, category: DiagnosticCategory.Message, key: "Redirect output structure to the directory."},
+                {code: 6006, category: DiagnosticCategory.Message, key: "Redirect output structure to the directory."},
         Do_not_erase_const_enum_declarations_in_generated_code: {
             code: 6007,
             category: DiagnosticCategory.Message,
@@ -1702,7 +1709,7 @@ module ts {
             key: "Do not emit outputs if any type checking errors were reported."
         },
         Do_not_emit_comments_to_output:
-            {code: 6009, category: DiagnosticCategory.Message, key: "Do not emit comments to output."},
+                {code: 6009, category: DiagnosticCategory.Message, key: "Do not emit comments to output."},
         Do_not_emit_outputs: {code: 6010, category: DiagnosticCategory.Message, key: "Do not emit outputs."},
         Specify_ECMAScript_target_version_Colon_ES3_default_ES5_or_ES6_experimental: {
             code: 6015,
@@ -1716,9 +1723,9 @@ module ts {
         },
         Print_this_message: {code: 6017, category: DiagnosticCategory.Message, key: "Print this message."},
         Print_the_compiler_s_version:
-            {code: 6019, category: DiagnosticCategory.Message, key: "Print the compiler's version."},
+                {code: 6019, category: DiagnosticCategory.Message, key: "Print the compiler's version."},
         Compile_the_project_in_the_given_directory:
-            {code: 6020, category: DiagnosticCategory.Message, key: "Compile the project in the given directory."},
+                {code: 6020, category: DiagnosticCategory.Message, key: "Compile the project in the given directory."},
         Syntax_Colon_0: {code: 6023, category: DiagnosticCategory.Message, key: "Syntax: {0}"},
         options: {code: 6024, category: DiagnosticCategory.Message, key: "options"},
         file: {code: 6025, category: DiagnosticCategory.Message, key: "file"},
@@ -1746,9 +1753,9 @@ module ts {
             key: "Compilation complete. Watching for file changes."
         },
         Generates_corresponding_map_file:
-            {code: 6043, category: DiagnosticCategory.Message, key: "Generates corresponding '.map' file."},
+                {code: 6043, category: DiagnosticCategory.Message, key: "Generates corresponding '.map' file."},
         Compiler_option_0_expects_an_argument:
-            {code: 6044, category: DiagnosticCategory.Error, key: "Compiler option '{0}' expects an argument."},
+                {code: 6044, category: DiagnosticCategory.Error, key: "Compiler option '{0}' expects an argument."},
         Unterminated_quoted_string_in_response_file_0: {
             code: 6045,
             category: DiagnosticCategory.Error,
@@ -1778,8 +1785,11 @@ module ts {
             key: "Raise error on expressions and declarations with an implied 'any' type."
         },
         File_0_not_found: {code: 6053, category: DiagnosticCategory.Error, key: "File '{0}' not found."},
-        File_0_must_have_extension_ts_or_d_ts:
-            {code: 6054, category: DiagnosticCategory.Error, key: "File '{0}' must have extension '.ts' or '.d.ts'."},
+        File_0_must_have_extension_ts_or_d_ts: {
+            code: 6054,
+            category: DiagnosticCategory.Error,
+            key: "File '{0}' must have extension '.ts' or '.d.ts'."
+        },
         Suppress_noImplicitAny_errors_for_indexing_objects_lacking_index_signatures: {
             code: 6055,
             category: DiagnosticCategory.Message,
@@ -1791,11 +1801,11 @@ module ts {
             key: "Do not emit declarations for code that has an '@internal' annotation."
         },
         Variable_0_implicitly_has_an_1_type:
-            {code: 7005, category: DiagnosticCategory.Error, key: "Variable '{0}' implicitly has an '{1}' type."},
+                {code: 7005, category: DiagnosticCategory.Error, key: "Variable '{0}' implicitly has an '{1}' type."},
         Parameter_0_implicitly_has_an_1_type:
-            {code: 7006, category: DiagnosticCategory.Error, key: "Parameter '{0}' implicitly has an '{1}' type."},
+                {code: 7006, category: DiagnosticCategory.Error, key: "Parameter '{0}' implicitly has an '{1}' type."},
         Member_0_implicitly_has_an_1_type:
-            {code: 7008, category: DiagnosticCategory.Error, key: "Member '{0}' implicitly has an '{1}' type."},
+                {code: 7008, category: DiagnosticCategory.Error, key: "Member '{0}' implicitly has an '{1}' type."},
         new_expression_whose_target_lacks_a_construct_signature_implicitly_has_an_any_type: {
             code: 7009,
             category: DiagnosticCategory.Error,
@@ -1844,46 +1854,44 @@ module ts {
         _0_implicitly_has_type_any_because_it_is_referenced_directly_or_indirectly_in_its_own_type_annotation: {
             code: 7021,
             category: DiagnosticCategory.Error,
-            key:
-                "'{0}' implicitly has type 'any' because it is referenced directly or indirectly in its own type annotation."
+            key: "'{0}' implicitly has type 'any' because it is referenced directly or indirectly in its own type annotation."
         },
         _0_implicitly_has_type_any_because_it_is_does_not_have_a_type_annotation_and_is_referenced_directly_or_indirectly_in_its_own_initializer:
-            {
-              code: 7022,
-              category: DiagnosticCategory.Error,
-              key:
-                  "'{0}' implicitly has type 'any' because it is does not have a type annotation and is referenced directly or indirectly in its own initializer."
-            },
+                {
+                  code: 7022,
+                  category: DiagnosticCategory.Error,
+                  key: "'{0}' implicitly has type 'any' because it is does not have a type annotation and is referenced directly or indirectly in its own initializer."
+                },
         _0_implicitly_has_return_type_any_because_it_does_not_have_a_return_type_annotation_and_is_referenced_directly_or_indirectly_in_one_of_its_return_expressions:
-            {
-              code: 7023,
-              category: DiagnosticCategory.Error,
-              key:
-                  "'{0}' implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions."
-            },
+                {
+                  code: 7023,
+                  category: DiagnosticCategory.Error,
+                  key: "'{0}' implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions."
+                },
         Function_implicitly_has_return_type_any_because_it_does_not_have_a_return_type_annotation_and_is_referenced_directly_or_indirectly_in_one_of_its_return_expressions:
-            {
-              code: 7024,
-              category: DiagnosticCategory.Error,
-              key:
-                  "Function implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions."
-            },
+                {
+                  code: 7024,
+                  category: DiagnosticCategory.Error,
+                  key: "Function implicitly has return type 'any' because it does not have a return type annotation and is referenced directly or indirectly in one of its return expressions."
+                },
         You_cannot_rename_this_element:
-            {code: 8000, category: DiagnosticCategory.Error, key: "You cannot rename this element."},
+                {code: 8000, category: DiagnosticCategory.Error, key: "You cannot rename this element."},
         You_cannot_rename_elements_that_are_defined_in_the_standard_TypeScript_library: {
             code: 8001,
             category: DiagnosticCategory.Error,
             key: "You cannot rename elements that are defined in the standard TypeScript library."
         },
-        yield_expressions_are_not_currently_supported:
-            {code: 9000, category: DiagnosticCategory.Error, key: "'yield' expressions are not currently supported."},
+        yield_expressions_are_not_currently_supported: {
+            code: 9000,
+            category: DiagnosticCategory.Error,
+            key: "'yield' expressions are not currently supported."
+        },
         Generators_are_not_currently_supported:
-            {code: 9001, category: DiagnosticCategory.Error, key: "Generators are not currently supported."},
+                {code: 9001, category: DiagnosticCategory.Error, key: "Generators are not currently supported."},
         The_arguments_object_cannot_be_referenced_in_an_arrow_function_Consider_using_a_standard_function_expression: {
             code: 9002,
             category: DiagnosticCategory.Error,
-            key:
-                "The 'arguments' object cannot be referenced in an arrow function. Consider using a standard function expression."
+            key: "The 'arguments' object cannot be referenced in an arrow function. Consider using a standard function expression."
         },
         for_of_statements_are_not_currently_supported: {
             code: 9003,

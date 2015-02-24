@@ -76,8 +76,8 @@ module ts {
             //  a) the parser explicitly marked that it had an error
             //  b) any of it's children reported that it had an error.
             var thisNodeOrAnySubNodesHasError =
-                ((node.parserContextFlags & ParserContextFlags.ThisNodeHasError) !== 0) ||
-                forEachChild(node, containsParseError);
+                    ((node.parserContextFlags & ParserContextFlags.ThisNodeHasError) !== 0) ||
+                    forEachChild(node, containsParseError);
 
             // If so, mark ourselves accordingly.
             if (thisNodeOrAnySubNodesHasError) {
@@ -169,17 +169,18 @@ module ts {
     // '__proto__'
     export function escapeIdentifier(identifier: string): string {
         return identifier.length >= 2 && identifier.charCodeAt(0) === CharacterCodes._ &&
-                       identifier.charCodeAt(1) === CharacterCodes._ ?
-                   "_" + identifier :
-                   identifier;
+                               identifier.charCodeAt(1) === CharacterCodes._ ?
+                       "_" + identifier :
+                       identifier;
     }
 
     // Remove extra underscore from escaped identifier
     export function unescapeIdentifier(identifier: string): string {
         return identifier.length >= 3 && identifier.charCodeAt(0) === CharacterCodes._ &&
-                       identifier.charCodeAt(1) === CharacterCodes._ && identifier.charCodeAt(2) === CharacterCodes._ ?
-                   identifier.substr(1) :
-                   identifier;
+                               identifier.charCodeAt(1) === CharacterCodes._ &&
+                               identifier.charCodeAt(2) === CharacterCodes._ ?
+                       identifier.substr(1) :
+                       identifier;
     }
 
     // Make an identifier from an external module name by extracting the string after the last "/" and replacing
@@ -783,8 +784,8 @@ module ts {
                                               reference: FileReference) {
         if (!host.getCompilerOptions().noResolve) {
             var referenceFileName = isRootedDiskPath(reference.fileName) ?
-                                        reference.fileName :
-                                        combinePaths(getDirectoryPath(sourceFile.fileName), reference.fileName);
+                                            reference.fileName :
+                                            combinePaths(getDirectoryPath(sourceFile.fileName), reference.fileName);
             referenceFileName = getNormalizedAbsolutePath(referenceFileName, host.getCurrentDirectory());
             return host.getSourceFile(referenceFileName);
         }

@@ -254,8 +254,8 @@ module ts {
 
     export function getLocaleSpecificMessage(message: string) {
         return localizedDiagnosticMessages && localizedDiagnosticMessages[message] ?
-                   localizedDiagnosticMessages[message] :
-                   message;
+                       localizedDiagnosticMessages[message] :
+                       message;
     }
 
     export function createFileDiagnostic(file: SourceFile, start: number, length: number, message: DiagnosticMessage,
@@ -521,8 +521,8 @@ module ts {
     }
 
     export function getRelativePathToDirectoryOrUrl(
-        directoryPathOrUrl: string, relativeOrAbsolutePath: string, currentDirectory: string,
-        getCanonicalFileName: (fileName: string) => string, isAbsolutePathAnUrl: boolean) {
+            directoryPathOrUrl: string, relativeOrAbsolutePath: string, currentDirectory: string,
+            getCanonicalFileName: (fileName: string) => string, isAbsolutePathAnUrl: boolean) {
         var pathComponents = getNormalizedPathOrUrlComponents(relativeOrAbsolutePath, currentDirectory);
         var directoryComponents = getNormalizedPathOrUrlComponents(directoryPathOrUrl, currentDirectory);
         if (directoryComponents.length > 1 && directoryComponents[directoryComponents.length - 1] === "") {

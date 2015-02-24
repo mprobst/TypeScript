@@ -18,8 +18,8 @@ module ts {
 
         if (!matchResult) {
             errors.push(createCompilerDiagnostic(
-                Diagnostics.Locale_must_be_of_the_form_language_or_language_territory_For_example_0_or_1, 'en',
-                'ja-jp'));
+                    Diagnostics.Locale_must_be_of_the_form_language_or_language_territory_For_example_0_or_1, 'en',
+                    'ja-jp'));
             return false;
         }
 
@@ -91,7 +91,7 @@ module ts {
 
         var category = DiagnosticCategory[diagnostic.category].toLowerCase();
         output +=
-            `${ category } TS${ diagnostic.code }: ${ flattenDiagnosticMessageText(diagnostic.messageText, sys.newLine) }${ sys.newLine }`;
+                `${ category } TS${ diagnostic.code }: ${ flattenDiagnosticMessageText(diagnostic.messageText, sys.newLine) }${ sys.newLine }`;
 
         sys.write(output);
     }
@@ -159,8 +159,8 @@ module ts {
 
         if (commandLine.options.locale) {
             if (!isJSONSupported()) {
-                reportDiagnostic(
-                    createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option, "--locale"));
+                reportDiagnostic(createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option,
+                                                          "--locale"));
                 return sys.exit(ExitStatus.DiagnosticsPresent_OutputsSkipped);
             }
             validateLocaleAndSetLanguage(commandLine.options.locale, commandLine.errors);
@@ -186,14 +186,14 @@ module ts {
 
         if (commandLine.options.project) {
             if (!isJSONSupported()) {
-                reportDiagnostic(
-                    createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option, "--project"));
+                reportDiagnostic(createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option,
+                                                          "--project"));
                 return sys.exit(ExitStatus.DiagnosticsPresent_OutputsSkipped);
             }
             configFileName = normalizePath(combinePaths(commandLine.options.project, "tsconfig.json"));
             if (commandLine.fileNames.length !== 0) {
                 reportDiagnostic(createCompilerDiagnostic(
-                    Diagnostics.Option_project_cannot_be_mixed_with_source_files_on_a_command_line));
+                        Diagnostics.Option_project_cannot_be_mixed_with_source_files_on_a_command_line));
                 return sys.exit(ExitStatus.DiagnosticsPresent_OutputsSkipped);
             }
         } else if (commandLine.fileNames.length === 0 && isJSONSupported()) {
@@ -208,8 +208,8 @@ module ts {
 
         if (commandLine.options.watch) {
             if (!sys.watchFile) {
-                reportDiagnostic(
-                    createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option, "--watch"));
+                reportDiagnostic(createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option,
+                                                          "--watch"));
                 return sys.exit(ExitStatus.DiagnosticsPresent_OutputsSkipped);
             }
             if (configFileName) {
@@ -313,7 +313,7 @@ module ts {
         function recompile() {
             timerHandle = undefined;
             reportDiagnostic(
-                createCompilerDiagnostic(Diagnostics.File_change_detected_Starting_incremental_compilation));
+                    createCompilerDiagnostic(Diagnostics.File_change_detected_Starting_incremental_compilation));
             performCompilation();
         }
     }
@@ -410,8 +410,8 @@ module ts {
 
         // Build up the syntactic skeleton.
         var syntax = makePadding(marginLength - syntaxLength);
-        syntax +=
-            "tsc [" + getDiagnosticText(Diagnostics.options) + "] [" + getDiagnosticText(Diagnostics.file) + " ...]";
+        syntax += "tsc [" + getDiagnosticText(Diagnostics.options) + "] [" + getDiagnosticText(Diagnostics.file) +
+                  " ...]";
 
         output += getDiagnosticText(Diagnostics.Syntax_Colon_0, syntax);
         output += sys.newLine + sys.newLine;

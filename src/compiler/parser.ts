@@ -46,7 +46,7 @@ module ts {
         // callback parameters, but that causes a closure allocation for each invocation with noticeable effects
         // on performance.
         var visitNodes: (cb: (node: Node | Node[]) => T, nodes: Node[]) => T =
-            cbNodeArray ? visitNodeArray : visitEachNode;
+                cbNodeArray ? visitNodeArray : visitEachNode;
         var cbNodes = cbNodeArray || cbNode;
         switch (node.kind) {
             case SyntaxKind.QualifiedName:
@@ -748,7 +748,7 @@ module ts {
 
                 var oldTextSuffix = oldText.substring(textSpanEnd(textChangeRange.span), oldText.length);
                 var newTextSuffix =
-                    newText.substring(textSpanEnd(textChangeRangeNewSpan(textChangeRange)), newText.length);
+                        newText.substring(textSpanEnd(textChangeRangeNewSpan(textChangeRange)), newText.length);
                 Debug.assert(oldTextSuffix === newTextSuffix);
             }
         }
@@ -830,8 +830,8 @@ module ts {
         // Also, mark any syntax elements that intersect the changed span.  We know, up front,
         // that we cannot reuse these elements.
         updateTokenPositionsAndMarkElements(
-            incrementalSourceFile, changeRange.span.start, textSpanEnd(changeRange.span),
-            textSpanEnd(textChangeRangeNewSpan(changeRange)), delta, oldText, newText, aggressiveChecks);
+                incrementalSourceFile, changeRange.span.start, textSpanEnd(changeRange.span),
+                textSpanEnd(textChangeRangeNewSpan(changeRange)), delta, oldText, newText, aggressiveChecks);
 
         // Now that we've set up our internal incremental state just proceed and parse the
         // source file in the normal fashion.  When possible the parser will retrieve and
@@ -846,7 +846,7 @@ module ts {
         var result = parseSourceFile(sourceFile.fileName, newText, sourceFile.languageVersion, syntaxCursor,
                                      /* setParentNode */ true)
 
-            return result;
+                return result;
     }
 
     export function isEvalOrArgumentsIdentifier(node: Node): boolean {
@@ -900,16 +900,16 @@ module ts {
         var lastQueriedPosition = InvalidPosition.Value;
 
         return {currentNode(position: number){
-            // Only compute the current node if the position is different than the last time
-            // we were asked.  The parser commonly asks for the node at the same position
-            // twice.  Once to know if can read an appropriate list element at a certain point,
-            // and then to actually read and consume the node.
-            if (position !== lastQueriedPosition){
-                // Much of the time the parser will need the very next node in the array that
-                // we just returned a node from.So just simply check for that case and move
-                // forward in the array instead of searching for the node again.
-                if (current && current.end === position &&
-                    currentArrayIndex < (currentArray.length - 1)){currentArrayIndex++;
+                // Only compute the current node if the position is different than the last time
+                // we were asked.  The parser commonly asks for the node at the same position
+                // twice.  Once to know if can read an appropriate list element at a certain point,
+                // and then to actually read and consume the node.
+                if (position !== lastQueriedPosition){
+                        // Much of the time the parser will need the very next node in the array that
+                        // we just returned a node from.So just simply check for that case and move
+                        // forward in the array instead of searching for the node again.
+                        if (current && current.end === position &&
+                            currentArrayIndex < (currentArray.length - 1)){currentArrayIndex++;
         current = currentArray[currentArrayIndex];
     }
 
@@ -1351,7 +1351,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
     function createNode(kind: SyntaxKind, pos ?: number): Node {
         nodeCount++;
         var node =
-            new (nodeConstructors[kind] || (nodeConstructors[kind] = objectAllocator.getNodeConstructor(kind)))();
+                new (nodeConstructors[kind] || (nodeConstructors[kind] = objectAllocator.getNodeConstructor(kind)))();
         if (!(pos >= 0)) {
             pos = scanner.getStartPos();
         }
@@ -2121,7 +2121,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
             templateSpans.push(parseTemplateSpan());
         } while (templateSpans[templateSpans.length - 1].literal.kind === SyntaxKind.TemplateMiddle)
 
-            templateSpans.end = getNodeEnd();
+                templateSpans.end = getNodeEnd();
         template.templateSpans = templateSpans;
 
         return finishNode(template);
@@ -2253,7 +2253,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
         //      [~GeneratorParameter]BindingIdentifier[?Yield]Initializer[In, ?Yield]opt
 
         node.name =
-            inGeneratorParameterContext() ? doInYieldContext(parseIdentifierOrPattern) : parseIdentifierOrPattern();
+                inGeneratorParameterContext() ? doInYieldContext(parseIdentifierOrPattern) : parseIdentifierOrPattern();
 
         if (getFullWidth(node.name) === 0 && node.flags === 0 && isModifier(token)) {
             // in cases like
@@ -2984,8 +2984,8 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
         // it out, but don't allow any ambiguity, and return 'undefined' if this could be an
         // expression instead.
         var arrowFunction = triState === Tristate.True ?
-                                parseParenthesizedArrowFunctionExpressionHead(/*allowAmbiguity:*/ true) :
-                                tryParse(parsePossibleParenthesizedArrowFunctionExpressionHead);
+                                    parseParenthesizedArrowFunctionExpressionHead(/*allowAmbiguity:*/ true) :
+                                    tryParse(parsePossibleParenthesizedArrowFunctionExpressionHead);
 
         if (!arrowFunction) {
             // Didn't appear to actually be a parenthesized arrow function.  Just bail out.
@@ -3187,7 +3187,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
             }
 
             leftOperand =
-                makeBinaryExpression(leftOperand, parseTokenNode(), parseBinaryExpressionOrHigher(newPrecedence));
+                    makeBinaryExpression(leftOperand, parseTokenNode(), parseBinaryExpressionOrHigher(newPrecedence));
         }
 
         return leftOperand;
@@ -3437,7 +3437,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
             var dotOrBracketStart = scanner.getTokenPos();
             if (parseOptional(SyntaxKind.DotToken)) {
                 var propertyAccess =
-                    <PropertyAccessExpression> createNode(SyntaxKind.PropertyAccessExpression, expression.pos);
+                        <PropertyAccessExpression> createNode(SyntaxKind.PropertyAccessExpression, expression.pos);
                 propertyAccess.expression = expression;
                 propertyAccess.name = parseRightSideOfDot(/*allowIdentifierNames:*/ true);
                 expression = finishNode(propertyAccess);
@@ -3446,7 +3446,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
 
             if (parseOptional(SyntaxKind.OpenBracketToken)) {
                 var indexedAccess =
-                    <ElementAccessExpression> createNode(SyntaxKind.ElementAccessExpression, expression.pos);
+                        <ElementAccessExpression> createNode(SyntaxKind.ElementAccessExpression, expression.pos);
                 indexedAccess.expression = expression;
 
                 // It's not uncommon for a user to write: "new Type[]".
@@ -3467,10 +3467,10 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
 
             if (token === SyntaxKind.NoSubstitutionTemplateLiteral || token === SyntaxKind.TemplateHead) {
                 var tagExpression =
-                    <TaggedTemplateExpression> createNode(SyntaxKind.TaggedTemplateExpression, expression.pos);
+                        <TaggedTemplateExpression> createNode(SyntaxKind.TaggedTemplateExpression, expression.pos);
                 tagExpression.tag = expression;
-                tagExpression.template =
-                    token === SyntaxKind.NoSubstitutionTemplateLiteral ? parseLiteralNode() : parseTemplateExpression();
+                tagExpression.template = token === SyntaxKind.NoSubstitutionTemplateLiteral ? parseLiteralNode() :
+                                                                                              parseTemplateExpression();
                 expression = finishNode(tagExpression);
                 continue;
             }
@@ -3669,7 +3669,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
         // Parse to check if it is short-hand property assignment or normal property assignment
         if ((token === SyntaxKind.CommaToken || token === SyntaxKind.CloseBraceToken) && tokenIsIdentifier) {
             var shorthandDeclaration =
-                <ShorthandPropertyAssignment> createNode(SyntaxKind.ShorthandPropertyAssignment, fullStart);
+                    <ShorthandPropertyAssignment> createNode(SyntaxKind.ShorthandPropertyAssignment, fullStart);
             shorthandDeclaration.name = <Identifier> propertyName;
             shorthandDeclaration.questionToken = questionToken;
             return finishNode(shorthandDeclaration);
@@ -3882,7 +3882,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
         node.expression = allowInAnd(parseExpression);
         parseExpected(SyntaxKind.ColonToken);
         node.statements =
-            parseList(ParsingContext.SwitchClauseStatements, /*checkForStrictMode*/ false, parseStatement);
+                parseList(ParsingContext.SwitchClauseStatements, /*checkForStrictMode*/ false, parseStatement);
         return finishNode(node);
     }
 
@@ -3891,7 +3891,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
         parseExpected(SyntaxKind.DefaultKeyword);
         parseExpected(SyntaxKind.ColonToken);
         node.statements =
-            parseList(ParsingContext.SwitchClauseStatements, /*checkForStrictMode*/ false, parseStatement);
+                parseList(ParsingContext.SwitchClauseStatements, /*checkForStrictMode*/ false, parseStatement);
         return finishNode(node);
     }
 
@@ -4475,7 +4475,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
             //      [+GeneratorParameter] ClassHeritageopt { ClassBodyopt }
 
             node.members =
-                inGeneratorParameterContext() ? doOutsideOfYieldContext(parseClassMembers) : parseClassMembers();
+                    inGeneratorParameterContext() ? doOutsideOfYieldContext(parseClassMembers) : parseClassMembers();
             parseExpected(SyntaxKind.CloseBraceToken);
         } else {
             node.members = createMissingList<ClassElement>();
@@ -4490,8 +4490,8 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
 
         if (isHeritageClause()) {
             return isClassHeritageClause && inGeneratorParameterContext() ?
-                       doOutsideOfYieldContext(parseHeritageClausesWorker) :
-                       parseHeritageClausesWorker();
+                           doOutsideOfYieldContext(parseHeritageClausesWorker) :
+                           parseHeritageClausesWorker();
         }
 
         return undefined;
@@ -4572,7 +4572,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
         var node = <ModuleBlock> createNode(SyntaxKind.ModuleBlock, scanner.getStartPos());
         if (parseExpected(SyntaxKind.OpenBraceToken)) {
             node.statements =
-                parseList(ParsingContext.ModuleElements, /*checkForStrictMode*/ false, parseModuleElement);
+                    parseList(ParsingContext.ModuleElements, /*checkForStrictMode*/ false, parseModuleElement);
             parseExpected(SyntaxKind.CloseBraceToken);
         } else {
             node.statements = createMissingList<Statement>();
@@ -4587,8 +4587,8 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
         node.flags |= flags;
         node.name = parseIdentifier();
         node.body = parseOptional(SyntaxKind.DotToken) ?
-                        parseInternalModuleTail(getNodePos(), /*modifiers:*/ undefined, NodeFlags.Export) :
-                        parseModuleBlock();
+                            parseInternalModuleTail(getNodePos(), /*modifiers:*/ undefined, NodeFlags.Export) :
+                            parseModuleBlock();
         return finishNode(node);
     }
 
@@ -4603,8 +4603,8 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
     function parseModuleDeclaration(fullStart: number, modifiers: ModifiersArray): ModuleDeclaration {
         parseExpected(SyntaxKind.ModuleKeyword);
         return token === SyntaxKind.StringLiteral ?
-                   parseAmbientExternalModuleDeclaration(fullStart, modifiers) :
-                   parseInternalModuleTail(fullStart, modifiers, modifiers ? modifiers.flags : 0);
+                       parseAmbientExternalModuleDeclaration(fullStart, modifiers) :
+                       parseInternalModuleTail(fullStart, modifiers, modifiers ? modifiers.flags : 0);
     }
 
     function isExternalModuleReference() {
@@ -4620,7 +4620,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
 
     function parseImportDeclarationOrImportEqualsDeclaration(fullStart: number,
                                                              modifiers: ModifiersArray): ImportEqualsDeclaration |
-        ImportDeclaration {
+            ImportDeclaration {
         parseExpected(SyntaxKind.ImportKeyword);
         var afterImportPos = scanner.getStartPos();
 
@@ -4632,7 +4632,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
                 // import x = require("mod"); or
                 // import x = M.x;
                 var importEqualsDeclaration =
-                    <ImportEqualsDeclaration> createNode(SyntaxKind.ImportEqualsDeclaration, fullStart);
+                        <ImportEqualsDeclaration> createNode(SyntaxKind.ImportEqualsDeclaration, fullStart);
                 setModifiers(importEqualsDeclaration, modifiers);
                 importEqualsDeclaration.name = identifier;
                 parseExpected(SyntaxKind.EqualsToken);
@@ -4680,8 +4680,8 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
         // parse namespace or named imports
         if (!importClause.name || parseOptional(SyntaxKind.CommaToken)) {
             importClause.namedBindings = token === SyntaxKind.AsteriskToken ?
-                                             parseNamespaceImport() :
-                                             parseNamedImportsOrExports(SyntaxKind.NamedImports);
+                                                 parseNamespaceImport() :
+                                                 parseNamedImportsOrExports(SyntaxKind.NamedImports);
         }
 
         return finishNode(importClause);
@@ -4736,9 +4736,9 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
         //  ImportSpecifier
         //  ImportsList, ImportSpecifier
         node.elements =
-            parseBracketedList(ParsingContext.ImportOrExportSpecifiers,
-                               kind === SyntaxKind.NamedImports ? parseImportSpecifier : parseExportSpecifier,
-                               SyntaxKind.OpenBraceToken, SyntaxKind.CloseBraceToken);
+                parseBracketedList(ParsingContext.ImportOrExportSpecifiers,
+                                   kind === SyntaxKind.NamedImports ? parseImportSpecifier : parseExportSpecifier,
+                                   SyntaxKind.OpenBraceToken, SyntaxKind.CloseBraceToken);
         return finishNode(node);
     }
 
@@ -4957,7 +4957,7 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
                 }
                 if (diagnosticMessage) {
                     sourceFile.parseDiagnostics.push(
-                        createFileDiagnostic(sourceFile, range.pos, range.end - range.pos, diagnosticMessage));
+                            createFileDiagnostic(sourceFile, range.pos, range.end - range.pos, diagnosticMessage));
                 }
             } else {
                     var amdModuleNameRegEx = /^\/\/\/\s*<amd-module\s+name\s*=\s*('|")(.+?)\1/gim;
@@ -4965,8 +4965,8 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
                     if (amdModuleNameMatchResult) {
                     if (amdModuleName) {
                         sourceFile.parseDiagnostics.push(
-                            createFileDiagnostic(sourceFile, range.pos, range.end - range.pos,
-                                                 Diagnostics.An_AMD_module_cannot_have_multiple_name_assignments));
+                                createFileDiagnostic(sourceFile, range.pos, range.end - range.pos,
+                                                     Diagnostics.An_AMD_module_cannot_have_multiple_name_assignments));
                     }
                     amdModuleName = amdModuleNameMatchResult[2];
                     }
@@ -4996,15 +4996,16 @@ function parseSourceFile(fileName: string, sourceText: string, languageVersion: 
 
     function setExternalModuleIndicator(sourceFile: SourceFile) {
         sourceFile.externalModuleIndicator =
-            forEach(sourceFile.statements, node => node.flags & NodeFlags.Export ||
-                                                           node.kind === SyntaxKind.ImportEqualsDeclaration &&
-                                                               (<ImportEqualsDeclaration> node).moduleReference.kind ===
-                                                                   SyntaxKind.ExternalModuleReference ||
-                                                           node.kind === SyntaxKind.ImportDeclaration ||
-                                                           node.kind === SyntaxKind.ExportAssignment ||
-                                                           node.kind === SyntaxKind.ExportDeclaration ?
-                                                       node :
-                                                       undefined);
+                forEach(sourceFile.statements,
+                        node => node.flags & NodeFlags.Export ||
+                                                node.kind === SyntaxKind.ImportEqualsDeclaration &&
+                                                        (<ImportEqualsDeclaration> node).moduleReference.kind ===
+                                                                SyntaxKind.ExternalModuleReference ||
+                                                node.kind === SyntaxKind.ImportDeclaration ||
+                                                node.kind === SyntaxKind.ExportAssignment ||
+                                                node.kind === SyntaxKind.ExportDeclaration ?
+                                        node :
+                                        undefined);
     }
 }
 

@@ -43,7 +43,8 @@ module ts {
           type: "string",
           isFilePath: true,
           description:
-              Diagnostics.Specifies_the_location_where_debugger_should_locate_map_files_instead_of_generated_locations,
+                  Diagnostics
+                          .Specifies_the_location_where_debugger_should_locate_map_files_instead_of_generated_locations,
           paramType: Diagnostics.LOCATION,
         },
         {
@@ -122,8 +123,8 @@ module ts {
           type: "string",
           isFilePath: true,
           description:
-              Diagnostics
-                  .Specifies_the_location_where_debugger_should_locate_TypeScript_files_instead_of_source_locations,
+                  Diagnostics
+                          .Specifies_the_location_where_debugger_should_locate_TypeScript_files_instead_of_source_locations,
           paramType: Diagnostics.LOCATION,
         },
         {
@@ -194,8 +195,8 @@ module ts {
 
                         // Check to see if no argument was provided (e.g. "--locale" is the last command-line argument).
                         if (!args[i] && opt.type !== "boolean") {
-                            errors.push(
-                                createCompilerDiagnostic(Diagnostics.Compiler_option_0_expects_an_argument, opt.name));
+                            errors.push(createCompilerDiagnostic(Diagnostics.Compiler_option_0_expects_an_argument,
+                                                                 opt.name));
                         }
 
                         switch (opt.type) {
@@ -305,7 +306,7 @@ module ts {
                             options[opt.name] = value;
                         } else {
                             errors.push(createCompilerDiagnostic(
-                                Diagnostics.Compiler_option_0_requires_a_value_of_type_1, id, expectedType));
+                                    Diagnostics.Compiler_option_0_requires_a_value_of_type_1, id, expectedType));
                         }
                     } else {
                         errors.push(createCompilerDiagnostic(Diagnostics.Unknown_compiler_option_0, id));
