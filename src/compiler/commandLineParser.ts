@@ -6,162 +6,159 @@
 module ts {
     export var optionDeclarations: CommandLineOption[] = [
         {
-            name: "charset",
-            type: "string",
+          name: "charset",
+          type: "string",
         },
         {
-            name: "codepage",
-            type: "number",
+          name: "codepage",
+          type: "number",
         },
         {
-            name: "declaration",
-            shortName: "d",
-            type: "boolean",
-            description: Diagnostics.Generates_corresponding_d_ts_file,
+          name: "declaration",
+          shortName: "d",
+          type: "boolean",
+          description: Diagnostics.Generates_corresponding_d_ts_file,
         },
         {
-            name: "diagnostics",
-            type: "boolean",
+          name: "diagnostics",
+          type: "boolean",
+        },
+        {name: "emitBOM", type: "boolean"},
+        {
+          name: "help",
+          shortName: "h",
+          type: "boolean",
+          description: Diagnostics.Print_this_message,
         },
         {
-            name: "emitBOM",
-            type: "boolean"
+          name: "listFiles",
+          type: "boolean",
         },
         {
-            name: "help",
-            shortName: "h",
-            type: "boolean",
-            description: Diagnostics.Print_this_message,
+          name: "locale",
+          type: "string",
         },
         {
-            name: "listFiles",
-            type: "boolean",
+          name: "mapRoot",
+          type: "string",
+          isFilePath: true,
+          description:
+              Diagnostics.Specifies_the_location_where_debugger_should_locate_map_files_instead_of_generated_locations,
+          paramType: Diagnostics.LOCATION,
         },
         {
-            name: "locale",
-            type: "string",
+          name: "module",
+          shortName: "m",
+          type: {"commonjs": ModuleKind.CommonJS, "amd": ModuleKind.AMD},
+          description: Diagnostics.Specify_module_code_generation_Colon_commonjs_or_amd,
+          paramType: Diagnostics.KIND,
+          error: Diagnostics.Argument_for_module_option_must_be_commonjs_or_amd
         },
         {
-            name: "mapRoot",
-            type: "string",
-            isFilePath: true,
-            description: Diagnostics.Specifies_the_location_where_debugger_should_locate_map_files_instead_of_generated_locations,
-            paramType: Diagnostics.LOCATION,
+          name: "noEmit",
+          type: "boolean",
+          description: Diagnostics.Do_not_emit_outputs,
         },
         {
-            name: "module",
-            shortName: "m",
-            type: {
-                "commonjs": ModuleKind.CommonJS,
-                "amd": ModuleKind.AMD
-            },
-            description: Diagnostics.Specify_module_code_generation_Colon_commonjs_or_amd,
-            paramType: Diagnostics.KIND,
-            error: Diagnostics.Argument_for_module_option_must_be_commonjs_or_amd
+          name: "noEmitOnError",
+          type: "boolean",
+          description: Diagnostics.Do_not_emit_outputs_if_any_type_checking_errors_were_reported,
         },
         {
-            name: "noEmit",
-            type: "boolean",
-            description: Diagnostics.Do_not_emit_outputs,
+          name: "noImplicitAny",
+          type: "boolean",
+          description: Diagnostics.Raise_error_on_expressions_and_declarations_with_an_implied_any_type,
         },
         {
-            name: "noEmitOnError",
-            type: "boolean",
-            description: Diagnostics.Do_not_emit_outputs_if_any_type_checking_errors_were_reported,
+          name: "noLib",
+          type: "boolean",
         },
         {
-            name: "noImplicitAny",
-            type: "boolean",
-            description: Diagnostics.Raise_error_on_expressions_and_declarations_with_an_implied_any_type,
+          name: "noLibCheck",
+          type: "boolean",
         },
         {
-            name: "noLib",
-            type: "boolean",
+          name: "noResolve",
+          type: "boolean",
         },
         {
-            name: "noLibCheck",
-            type: "boolean",
+          name: "out",
+          type: "string",
+          description: Diagnostics.Concatenate_and_emit_output_to_single_file,
+          paramType: Diagnostics.FILE,
         },
         {
-            name: "noResolve",
-            type: "boolean",
+          name: "outDir",
+          type: "string",
+          isFilePath: true,
+          description: Diagnostics.Redirect_output_structure_to_the_directory,
+          paramType: Diagnostics.DIRECTORY,
         },
         {
-            name: "out",
-            type: "string",
-            description: Diagnostics.Concatenate_and_emit_output_to_single_file,
-            paramType: Diagnostics.FILE,
+          name: "preserveConstEnums",
+          type: "boolean",
+          description: Diagnostics.Do_not_erase_const_enum_declarations_in_generated_code
         },
         {
-            name: "outDir",
-            type: "string",
-            isFilePath: true,
-            description: Diagnostics.Redirect_output_structure_to_the_directory,
-            paramType: Diagnostics.DIRECTORY,
+          name: "project",
+          shortName: "p",
+          type: "string",
+          isFilePath: true,
+          description: Diagnostics.Compile_the_project_in_the_given_directory,
+          paramType: Diagnostics.DIRECTORY
         },
         {
-            name: "preserveConstEnums",
-            type: "boolean",
-            description: Diagnostics.Do_not_erase_const_enum_declarations_in_generated_code
+          name: "removeComments",
+          type: "boolean",
+          description: Diagnostics.Do_not_emit_comments_to_output,
         },
         {
-            name: "project",
-            shortName: "p",
-            type: "string",
-            isFilePath: true,
-            description: Diagnostics.Compile_the_project_in_the_given_directory,
-            paramType: Diagnostics.DIRECTORY
+          name: "sourceMap",
+          type: "boolean",
+          description: Diagnostics.Generates_corresponding_map_file,
         },
         {
-            name: "removeComments",
-            type: "boolean",
-            description: Diagnostics.Do_not_emit_comments_to_output,
+          name: "sourceRoot",
+          type: "string",
+          isFilePath: true,
+          description:
+              Diagnostics
+                  .Specifies_the_location_where_debugger_should_locate_TypeScript_files_instead_of_source_locations,
+          paramType: Diagnostics.LOCATION,
         },
         {
-            name: "sourceMap",
-            type: "boolean",
-            description: Diagnostics.Generates_corresponding_map_file,
+          name: "suppressImplicitAnyIndexErrors",
+          type: "boolean",
+          description: Diagnostics.Suppress_noImplicitAny_errors_for_indexing_objects_lacking_index_signatures,
         },
         {
-            name: "sourceRoot",
-            type: "string",
-            isFilePath: true,
-            description: Diagnostics.Specifies_the_location_where_debugger_should_locate_TypeScript_files_instead_of_source_locations,
-            paramType: Diagnostics.LOCATION,
+          name: "stripInternal",
+          type: "boolean",
+          description: Diagnostics.Do_not_emit_declarations_for_code_that_has_an_internal_annotation,
+          experimental: true
         },
         {
-            name: "suppressImplicitAnyIndexErrors",
-            type: "boolean",
-            description: Diagnostics.Suppress_noImplicitAny_errors_for_indexing_objects_lacking_index_signatures,
+          name: "target",
+          shortName: "t",
+          type: {"es3": ScriptTarget.ES3, "es5": ScriptTarget.ES5, "es6": ScriptTarget.ES6},
+          description: Diagnostics.Specify_ECMAScript_target_version_Colon_ES3_default_ES5_or_ES6_experimental,
+          paramType: Diagnostics.VERSION,
+          error: Diagnostics.Argument_for_target_option_must_be_es3_es5_or_es6
         },
         {
-            name: "stripInternal",
-            type: "boolean",
-            description: Diagnostics.Do_not_emit_declarations_for_code_that_has_an_internal_annotation,
-            experimental: true
+          name: "version",
+          shortName: "v",
+          type: "boolean",
+          description: Diagnostics.Print_the_compiler_s_version,
         },
         {
-            name: "target",
-            shortName: "t",
-            type: { "es3": ScriptTarget.ES3, "es5": ScriptTarget.ES5, "es6": ScriptTarget.ES6 },
-            description: Diagnostics.Specify_ECMAScript_target_version_Colon_ES3_default_ES5_or_ES6_experimental,
-            paramType: Diagnostics.VERSION,
-            error: Diagnostics.Argument_for_target_option_must_be_es3_es5_or_es6
-        },
-        {
-            name: "version",
-            shortName: "v",
-            type: "boolean",
-            description: Diagnostics.Print_the_compiler_s_version,
-        },
-        {
-            name: "watch",
-            shortName: "w",
-            type: "boolean",
-            description: Diagnostics.Watch_input_files,
+          name: "watch",
+          shortName: "w",
+          type: "boolean",
+          description: Diagnostics.Watch_input_files,
         }
     ];
-    
+
     export function parseCommandLine(commandLine: string[]): ParsedCommandLine {
         var options: CompilerOptions = {};
         var fileNames: string[] = [];
@@ -176,11 +173,7 @@ module ts {
             }
         });
         parseStrings(commandLine);
-        return {
-            options,
-            fileNames,
-            errors
-        };
+        return {options, fileNames, errors};
 
         function parseStrings(args: string[]) {
             var i = 0;
@@ -188,8 +181,7 @@ module ts {
                 var s = args[i++];
                 if (s.charCodeAt(0) === CharacterCodes.at) {
                     parseResponseFile(s.slice(1));
-                }
-                else if (s.charCodeAt(0) === CharacterCodes.minus) {
+                } else if (s.charCodeAt(0) === CharacterCodes.minus) {
                     s = s.slice(s.charCodeAt(1) === CharacterCodes.minus ? 2 : 1).toLowerCase();
 
                     // Try to translate short option names to their full equivalents.
@@ -202,7 +194,8 @@ module ts {
 
                         // Check to see if no argument was provided (e.g. "--locale" is the last command-line argument).
                         if (!args[i] && opt.type !== "boolean") {
-                            errors.push(createCompilerDiagnostic(Diagnostics.Compiler_option_0_expects_an_argument, opt.name));
+                            errors.push(
+                                createCompilerDiagnostic(Diagnostics.Compiler_option_0_expects_an_argument, opt.name));
                         }
 
                         switch (opt.type) {
@@ -215,23 +208,21 @@ module ts {
                             case "string":
                                 options[opt.name] = args[i++] || "";
                                 break;
-                            // If not a primitive, the possible types are specified in what is effectively a map of options.
+                            // If not a primitive, the possible types are specified in what is effectively a map of
+                            // options.
                             default:
-                                var map = <Map<number>>opt.type;
+                                var map = <Map<number>> opt.type;
                                 var key = (args[i++] || "").toLowerCase();
                                 if (hasProperty(map, key)) {
                                     options[opt.name] = map[key];
-                                }
-                                else {
+                                } else {
                                     errors.push(createCompilerDiagnostic(opt.error));
                                 }
                         }
-                    }
-                    else {
+                    } else {
                         errors.push(createCompilerDiagnostic(Diagnostics.Unknown_compiler_option_0, s));
                     }
-                }
-                else {
+                } else {
                     fileNames.push(s);
                 }
             }
@@ -257,12 +248,11 @@ module ts {
                     if (pos < text.length) {
                         args.push(text.substring(start + 1, pos));
                         pos++;
+                    } else {
+                        errors.push(createCompilerDiagnostic(Diagnostics.Unterminated_quoted_string_in_response_file_0,
+                                                             fileName));
                     }
-                    else {
-                        errors.push(createCompilerDiagnostic(Diagnostics.Unterminated_quoted_string_in_response_file_0, fileName));
-                    }
-                }
-                else {
+                } else {
                     while (text.charCodeAt(pos) > CharacterCodes.space) pos++;
                     args.push(text.substring(start, pos));
                 }
@@ -275,26 +265,22 @@ module ts {
         try {
             var text = sys.readFile(fileName);
             return /\S/.test(text) ? JSON.parse(text) : {};
-        }
-        catch (e) {
+        } catch (e) {
         }
     }
 
-    export function parseConfigFile(json: any, basePath?: string): ParsedCommandLine {
+    export function parseConfigFile(json: any, basePath ?: string): ParsedCommandLine {
         var errors: Diagnostic[] = [];
 
         return {
             options: getCompilerOptions(),
-            fileNames: getFiles(),
-            errors
+            fileNames: getFiles(), errors
         };
 
         function getCompilerOptions(): CompilerOptions {
             var options: CompilerOptions = {};
             var optionNameMap: Map<CommandLineOption> = {};
-            forEach(optionDeclarations, option => {
-                optionNameMap[option.name] = option;
-            });
+            forEach(optionDeclarations, option => { optionNameMap[option.name] = option; });
             var jsonOptions = json["compilerOptions"];
             if (jsonOptions) {
                 for (var id in jsonOptions) {
@@ -308,8 +294,7 @@ module ts {
                                 var key = value.toLowerCase();
                                 if (hasProperty(optType, key)) {
                                     value = optType[key];
-                                }
-                                else {
+                                } else {
                                     errors.push(createCompilerDiagnostic(opt.error));
                                     value = 0;
                                 }
@@ -318,12 +303,11 @@ module ts {
                                 value = normalizePath(combinePaths(basePath, value));
                             }
                             options[opt.name] = value;
+                        } else {
+                            errors.push(createCompilerDiagnostic(
+                                Diagnostics.Compiler_option_0_requires_a_value_of_type_1, id, expectedType));
                         }
-                        else {
-                            errors.push(createCompilerDiagnostic(Diagnostics.Compiler_option_0_requires_a_value_of_type_1, id, expectedType));
-                        }
-                    }
-                    else {
+                    } else {
                         errors.push(createCompilerDiagnostic(Diagnostics.Unknown_compiler_option_0, id));
                     }
                 }
@@ -335,14 +319,14 @@ module ts {
             var files: string[] = [];
             if (hasProperty(json, "files")) {
                 if (json["files"] instanceof Array) {
-                    var files = map(<string[]>json["files"], s => combinePaths(basePath, s));
+                    var files = map(<string[]> json["files"], s => combinePaths(basePath, s));
                 }
-            }
-            else {
+            } else {
                 var sysFiles = sys.readDirectory(basePath, ".ts");
                 for (var i = 0; i < sysFiles.length; i++) {
                     var name = sysFiles[i];
-                    if (!fileExtensionIs(name, ".d.ts") || !contains(sysFiles, name.substr(0, name.length - 5) + ".ts")) {
+                    if (!fileExtensionIs(name, ".d.ts") ||
+                        !contains(sysFiles, name.substr(0, name.length - 5) + ".ts")) {
                         files.push(name);
                     }
                 }

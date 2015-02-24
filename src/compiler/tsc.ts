@@ -5,7 +5,8 @@ module ts {
     var version = "1.5.0.0";
 
     export interface SourceFile {
-        fileWatcher: FileWatcher;
+    fileWatcher:
+        FileWatcher;
     }
 
     /**
@@ -16,7 +17,9 @@ module ts {
         var matchResult = /^([a-z]+)([_\-]([a-z]+))?$/.exec(locale.toLowerCase());
 
         if (!matchResult) {
-            errors.push(createCompilerDiagnostic(Diagnostics.Locale_must_be_of_the_form_language_or_language_territory_For_example_0_or_1, 'en', 'ja-jp'));
+            errors.push(createCompilerDiagnostic(
+                Diagnostics.Locale_must_be_of_the_form_language_or_language_territory_For_example_0_or_1, 'en',
+                'ja-jp'));
             return false;
         }
 
@@ -26,7 +29,6 @@ module ts {
         // First try the entire locale, then fall back to just language if that's all we have.
         if (!trySetLanguageAndTerritory(language, territory, errors) &&
             !trySetLanguageAndTerritory(language, undefined, errors)) {
-
             errors.push(createCompilerDiagnostic(Diagnostics.Unsupported_locale_0, locale));
             return false;
         }
@@ -53,15 +55,13 @@ module ts {
         // TODO: Add codePage support for readFile?
         try {
             var fileContents = sys.readFile(filePath);
-        }
-        catch (e) {
+        } catch (e) {
             errors.push(createCompilerDiagnostic(Diagnostics.Unable_to_open_file_0, filePath));
             return false;
         }
         try {
             ts.localizedDiagnosticMessages = JSON.parse(fileContents);
-        }
-        catch (e) {
+        } catch (e) {
             errors.push(createCompilerDiagnostic(Diagnostics.Corrupted_locale_file_0, filePath));
             return false;
         }
@@ -71,20 +71,18 @@ module ts {
 
     function countLines(program: Program): number {
         var count = 0;
-        forEach(program.getSourceFiles(), file => {
-            count += getLineStarts(file).length;
-        });
+        forEach(program.getSourceFiles(), file => { count += getLineStarts(file).length; });
         return count;
     }
 
-    function getDiagnosticText(message: DiagnosticMessage, ...args: any[]): string {
+    function getDiagnosticText(message: DiagnosticMessage, ... args: any[]): string {
         var diagnostic = createCompilerDiagnostic.apply(undefined, arguments);
-        return <string>diagnostic.messageText;
+        return <string> diagnostic.messageText;
     }
 
     function reportDiagnostic(diagnostic: Diagnostic) {
         var output = "";
-        
+
         if (diagnostic.file) {
             var loc = getLineAndCharacterOfPosition(diagnostic.file, diagnostic.start);
 
@@ -92,7 +90,8 @@ module ts {
         }
 
         var category = DiagnosticCategory[diagnostic.category].toLowerCase();
-        output += `${ category } TS${ diagnostic.code }: ${ flattenDiagnosticMessageText(diagnostic.messageText, sys.newLine) }${ sys.newLine }`;
+        output +=
+            `${ category } TS${ diagnostic.code }: ${ flattenDiagnosticMessageText(diagnostic.messageText, sys.newLine) }${ sys.newLine }`;
 
         sys.write(output);
     }
@@ -122,17 +121,13 @@ module ts {
         sys.write(padRight(name + ":", 12) + padLeft(value.toString(), 10) + sys.newLine);
     }
 
-    function reportCountStatistic(name: string, count: number) {
-        reportStatisticalValue(name, "" + count);
-    }
+    function reportCountStatistic(name: string, count: number) { reportStatisticalValue(name, "" + count); }
 
     function reportTimeStatistic(name: string, time: number) {
         reportStatisticalValue(name, (time / 1000).toFixed(2) + "s");
     }
 
-    function isJSONSupported() {
-        return typeof JSON === "object" && typeof JSON.parse === "function";
-    }
+    function isJSONSupported() { return typeof JSON === "object" && typeof JSON.parse === "function"; }
 
     function findConfigFile(): string {
         var searchPath = normalizePath(sys.getCurrentDirectory());
@@ -153,18 +148,19 @@ module ts {
 
     export function executeCommandLine(args: string[]): void {
         var commandLine = parseCommandLine(args);
-        var configFileName: string;                 // Configuration file name (if any)
-        var configFileWatcher: FileWatcher;         // Configuration file watcher
-        var cachedProgram: Program;                 // Program cached from last compilation
-        var rootFileNames: string[];                // Root fileNames for compilation
-        var compilerOptions: CompilerOptions;       // Compiler options for compilation
-        var compilerHost: CompilerHost;             // Compiler host
+        var configFileName: string;                                // Configuration file name (if any)
+        var configFileWatcher: FileWatcher;                        // Configuration file watcher
+        var cachedProgram: Program;                                // Program cached from last compilation
+        var rootFileNames: string[];                               // Root fileNames for compilation
+        var compilerOptions: CompilerOptions;                      // Compiler options for compilation
+        var compilerHost: CompilerHost;                            // Compiler host
         var hostGetSourceFile: typeof compilerHost.getSourceFile;  // getSourceFile method from default host
-        var timerHandle: number;                    // Handle for 0.25s wait timer
+        var timerHandle: number;                                   // Handle for 0.25s wait timer
 
         if (commandLine.options.locale) {
             if (!isJSONSupported()) {
-                reportDiagnostic(createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option, "--locale"));
+                reportDiagnostic(
+                    createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option, "--locale"));
                 return sys.exit(ExitStatus.DiagnosticsPresent_OutputsSkipped);
             }
             validateLocaleAndSetLanguage(commandLine.options.locale, commandLine.errors);
@@ -190,16 +186,17 @@ module ts {
 
         if (commandLine.options.project) {
             if (!isJSONSupported()) {
-                reportDiagnostic(createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option, "--project"));
+                reportDiagnostic(
+                    createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option, "--project"));
                 return sys.exit(ExitStatus.DiagnosticsPresent_OutputsSkipped);
             }
             configFileName = normalizePath(combinePaths(commandLine.options.project, "tsconfig.json"));
             if (commandLine.fileNames.length !== 0) {
-                reportDiagnostic(createCompilerDiagnostic(Diagnostics.Option_project_cannot_be_mixed_with_source_files_on_a_command_line));
+                reportDiagnostic(createCompilerDiagnostic(
+                    Diagnostics.Option_project_cannot_be_mixed_with_source_files_on_a_command_line));
                 return sys.exit(ExitStatus.DiagnosticsPresent_OutputsSkipped);
             }
-        }
-        else if (commandLine.fileNames.length === 0 && isJSONSupported()) {
+        } else if (commandLine.fileNames.length === 0 && isJSONSupported()) {
             configFileName = findConfigFile();
         }
 
@@ -211,7 +208,8 @@ module ts {
 
         if (commandLine.options.watch) {
             if (!sys.watchFile) {
-                reportDiagnostic(createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option, "--watch"));
+                reportDiagnostic(
+                    createCompilerDiagnostic(Diagnostics.The_current_host_does_not_support_the_0_option, "--watch"));
                 return sys.exit(ExitStatus.DiagnosticsPresent_OutputsSkipped);
             }
             if (configFileName) {
@@ -223,7 +221,6 @@ module ts {
 
         // Invoked to perform initial compilation or re-compilation in watch mode
         function performCompilation() {
-
             if (!cachedProgram) {
                 if (configFileName) {
                     var configObject = readConfigFile(configFileName);
@@ -238,8 +235,7 @@ module ts {
                     }
                     rootFileNames = configParseResult.fileNames;
                     compilerOptions = extend(commandLine.options, configParseResult.options);
-                }
-                else {
+                } else {
                     rootFileNames = commandLine.fileNames;
                     compilerOptions = commandLine.options;
                 }
@@ -316,7 +312,8 @@ module ts {
 
         function recompile() {
             timerHandle = undefined;
-            reportDiagnostic(createCompilerDiagnostic(Diagnostics.File_change_detected_Starting_incremental_compilation));
+            reportDiagnostic(
+                createCompilerDiagnostic(Diagnostics.File_change_detected_Starting_incremental_compilation));
             performCompilation();
         }
     }
@@ -335,9 +332,7 @@ module ts {
         var end = new Date().getTime() - start;
 
         if (compilerOptions.listFiles) {
-            forEach(program.getSourceFiles(), file => {
-                sys.write(file.fileName + sys.newLine);
-            });
+            forEach(program.getSourceFiles(), file => { sys.write(file.fileName + sys.newLine); });
         }
 
         if (compilerOptions.diagnostics) {
@@ -360,14 +355,14 @@ module ts {
             reportTimeStatistic("Total time", end);
         }
 
-        return { program, exitStatus };
+        return {program, exitStatus};
 
         function compileProgram(): ExitStatus {
-            // First get any syntactic errors. 
+            // First get any syntactic errors.
             var diagnostics = program.getSyntacticDiagnostics();
             reportDiagnostics(diagnostics);
 
-            // If we didn't have any syntactic errors, then also try getting the global and 
+            // If we didn't have any syntactic errors, then also try getting the global and
             // semantic errors.
             if (diagnostics.length === 0) {
                 var diagnostics = program.getGlobalDiagnostics();
@@ -381,9 +376,7 @@ module ts {
 
             // If the user doesn't want us to emit, then we're done at this point.
             if (compilerOptions.noEmit) {
-                return diagnostics.length
-                    ? ExitStatus.DiagnosticsPresent_OutputsSkipped
-                    : ExitStatus.Success;
+                return diagnostics.length ? ExitStatus.DiagnosticsPresent_OutputsSkipped : ExitStatus.Success;
             }
 
             // Otherwise, emit and report any errors we ran into.
@@ -405,9 +398,7 @@ module ts {
         }
     }
 
-    function printVersion() {
-        sys.write(getDiagnosticText(Diagnostics.Version_0, version) + sys.newLine);
-    }
+    function printVersion() { sys.write(getDiagnosticText(Diagnostics.Version_0, version) + sys.newLine); }
 
     function printHelp() {
         var output = "";
@@ -419,14 +410,17 @@ module ts {
 
         // Build up the syntactic skeleton.
         var syntax = makePadding(marginLength - syntaxLength);
-        syntax += "tsc [" + getDiagnosticText(Diagnostics.options) + "] [" + getDiagnosticText(Diagnostics.file) + " ...]";
+        syntax +=
+            "tsc [" + getDiagnosticText(Diagnostics.options) + "] [" + getDiagnosticText(Diagnostics.file) + " ...]";
 
         output += getDiagnosticText(Diagnostics.Syntax_Colon_0, syntax);
         output += sys.newLine + sys.newLine;
 
         // Build up the list of examples.
         var padding = makePadding(marginLength);
-        output += getDiagnosticText(Diagnostics.Examples_Colon_0, makePadding(marginLength - examplesLength) + "tsc hello.ts") + sys.newLine;
+        output += getDiagnosticText(Diagnostics.Examples_Colon_0,
+                                    makePadding(marginLength - examplesLength) + "tsc hello.ts") +
+                  sys.newLine;
         output += padding + "tsc --out file.js file.ts" + sys.newLine;
         output += padding + "tsc @args.txt" + sys.newLine;
         output += sys.newLine;
@@ -440,7 +434,7 @@ module ts {
         // We want our descriptions to align at the same column in our output,
         // so we keep track of the longest option usage string.
         var marginLength = 0;
-        var usageColumn: string[] = []; // Things like "-d, --declaration" go in here.
+        var usageColumn: string[] = [];  // Things like "-d, --declaration" go in here.
         var descriptionColumn: string[] = [];
 
         for (var i = 0; i < optsList.length; i++) {
@@ -492,9 +486,7 @@ module ts {
             return "";
         }
 
-        function makePadding(paddingLength: number): string {
-            return Array(paddingLength + 1).join(" ");
-        }
+        function makePadding(paddingLength: number): string { return Array(paddingLength + 1).join(" "); }
     }
 }
 

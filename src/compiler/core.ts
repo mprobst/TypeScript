@@ -1,7 +1,6 @@
 /// <reference path="types.ts"/>
 
 module ts {
-
     // Ternary values are defined such that
     // x & y is False if either x or y is False.
     // x & y is Maybe if either x or y is Maybe, but neither x or y is False.
@@ -12,16 +11,16 @@ module ts {
     export const enum Ternary {
         False = 0,
         Maybe = 1,
-        True  = -1
+        True = -1
     }
 
     export const enum Comparison {
-        LessThan    = -1,
-        EqualTo     = 0,
+        LessThan = -1,
+        EqualTo = 0,
         GreaterThan = 1
     }
 
-    export interface StringSet extends Map<any> { }
+    export interface StringSet extends Map<any> {}
 
     export function forEach<T, U>(array: T[], callback: (element: T, index: number) => U): U {
         if (array) {
@@ -122,7 +121,7 @@ module ts {
         for (var i = 0, n = from.length; i < n; i++) {
             to.push(from[i]);
         }
-    } 
+    }
 
     /**
      * Returns the last element of an array if non-empty, undefined otherwise.
@@ -145,11 +144,9 @@ module ts {
 
             if (midValue === value) {
                 return middle;
-            }
-            else if (midValue > value) {
+            } else if (midValue > value) {
                 high = middle - 1;
-            }
-            else {
+            } else {
                 low = middle + 1;
             }
         }
@@ -159,9 +156,7 @@ module ts {
 
     var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-    export function hasProperty<T>(map: Map<T>, key: string): boolean {
-        return hasOwnProperty.call(map, key);
-    }
+    export function hasProperty<T>(map: Map<T>, key: string): boolean { return hasOwnProperty.call(map, key); }
 
     export function getProperty<T>(map: Map<T>, key: string): T {
         return hasOwnProperty.call(map, key) ? map[key] : undefined;
@@ -179,9 +174,9 @@ module ts {
     export function clone<T>(object: T): T {
         var result: any = {};
         for (var id in object) {
-            result[id] = (<any>object)[id];
+            result[id] = (<any> object)[id];
         }
-        return <T>result;
+        return <T> result;
     }
 
     export function extend<T>(first: Map<T>, second: Map<T>): Map<T> {
@@ -213,9 +208,7 @@ module ts {
         return result;
     }
 
-    export function lookUp<T>(map: Map<T>, key: string): T {
-        return hasProperty(map, key) ? map[key] : undefined;
-    }
+    export function lookUp<T>(map: Map<T>, key: string): T { return hasProperty(map, key) ? map[key] : undefined; }
 
     export function mapToArray<T>(map: Map<T>): T[] {
         var result: T[] = [];
@@ -246,14 +239,12 @@ module ts {
     export function arrayToMap<T>(array: T[], makeKey: (value: T) => string): Map<T> {
         var result: Map<T> = {};
 
-        forEach(array, value => {
-            result[makeKey(value)] = value;
-        });
+        forEach(array, value => { result[makeKey(value)] = value; });
 
         return result;
     }
 
-    function formatStringFromArgs(text: string, args: { [index: number]: any; }, baseIndex?: number): string {
+    function formatStringFromArgs(text: string, args: { [index:number]: any; }, baseIndex ?: number): string {
         baseIndex = baseIndex || 0;
 
         return text.replace(/{(\d+)}/g, (match, index?) => args[+index + baseIndex]);
@@ -262,18 +253,20 @@ module ts {
     export var localizedDiagnosticMessages: Map<string> = undefined;
 
     export function getLocaleSpecificMessage(message: string) {
-        return localizedDiagnosticMessages && localizedDiagnosticMessages[message]
-            ? localizedDiagnosticMessages[message]
-            : message;
+        return localizedDiagnosticMessages && localizedDiagnosticMessages[message] ?
+                   localizedDiagnosticMessages[message] :
+                   message;
     }
 
-    export function createFileDiagnostic(file: SourceFile, start: number, length: number, message: DiagnosticMessage, ...args: any[]): Diagnostic;
-    export function createFileDiagnostic(file: SourceFile, start: number, length: number, message: DiagnosticMessage): Diagnostic {
+    export function createFileDiagnostic(file: SourceFile, start: number, length: number, message: DiagnosticMessage,
+                                         ... args: any[]): Diagnostic;
+    export function createFileDiagnostic(file: SourceFile, start: number, length: number,
+                                         message: DiagnosticMessage): Diagnostic {
         Debug.assert(start >= 0, "start must be non-negative, is " + start);
         Debug.assert(length >= 0, "length must be non-negative, is " + length);
 
         var text = getLocaleSpecificMessage(message.key);
-        
+
         if (arguments.length > 4) {
             text = formatStringFromArgs(text, arguments, 4);
         }
@@ -289,7 +282,7 @@ module ts {
         };
     }
 
-    export function createCompilerDiagnostic(message: DiagnosticMessage, ...args: any[]): Diagnostic;
+    export function createCompilerDiagnostic(message: DiagnosticMessage, ... args: any[]): Diagnostic;
     export function createCompilerDiagnostic(message: DiagnosticMessage): Diagnostic {
         var text = getLocaleSpecificMessage(message.key);
 
@@ -308,8 +301,10 @@ module ts {
         };
     }
 
-    export function chainDiagnosticMessages(details: DiagnosticMessageChain, message: DiagnosticMessage, ...args: any[]): DiagnosticMessageChain;
-    export function chainDiagnosticMessages(details: DiagnosticMessageChain, message: DiagnosticMessage): DiagnosticMessageChain {
+    export function chainDiagnosticMessages(details: DiagnosticMessageChain, message: DiagnosticMessage,
+                                            ... args: any[]): DiagnosticMessageChain;
+    export function chainDiagnosticMessages(details: DiagnosticMessageChain,
+                                            message: DiagnosticMessage): DiagnosticMessageChain {
         var text = getLocaleSpecificMessage(message.key);
 
         if (arguments.length > 2) {
@@ -325,7 +320,8 @@ module ts {
         };
     }
 
-    export function concatenateDiagnosticMessageChains(headChain: DiagnosticMessageChain, tailChain: DiagnosticMessageChain): DiagnosticMessageChain {
+    export function concatenateDiagnosticMessageChains(headChain: DiagnosticMessageChain,
+                                                       tailChain: DiagnosticMessageChain): DiagnosticMessageChain {
         Debug.assert(!headChain.next);
         headChain.next = tailChain;
         return headChain;
@@ -344,14 +340,13 @@ module ts {
 
     export function compareDiagnostics(d1: Diagnostic, d2: Diagnostic): Comparison {
         return compareValues(getDiagnosticFileName(d1), getDiagnosticFileName(d2)) ||
-            compareValues(d1.start, d2.start) ||
-            compareValues(d1.length, d2.length) ||
-            compareValues(d1.code, d2.code) ||
-            compareMessageText(d1.messageText, d2.messageText) ||
-            Comparison.EqualTo;
+               compareValues(d1.start, d2.start) || compareValues(d1.length, d2.length) ||
+               compareValues(d1.code, d2.code) || compareMessageText(d1.messageText, d2.messageText) ||
+               Comparison.EqualTo;
     }
 
-    function compareMessageText(text1: string | DiagnosticMessageChain, text2: string | DiagnosticMessageChain): Comparison {
+    function compareMessageText(text1: string | DiagnosticMessageChain,
+                                text2: string | DiagnosticMessageChain): Comparison {
         while (text1 && text2) {
             // We still have both chains.
             var string1 = typeof text1 === "string" ? text1 : text1.messageText;
@@ -375,7 +370,7 @@ module ts {
         return text1 ? Comparison.GreaterThan : Comparison.LessThan;
     }
 
-    export function sortAndDeduplicateDiagnostics(diagnostics: Diagnostic[]): Diagnostic[]{
+    export function sortAndDeduplicateDiagnostics(diagnostics: Diagnostic[]): Diagnostic[] {
         return deduplicateSortedDiagnostics(diagnostics.sort(compareDiagnostics));
     }
 
@@ -398,9 +393,7 @@ module ts {
         return newDiagnostics;
     }
 
-    export function normalizeSlashes(path: string): string {
-        return path.replace(/\\/g, "/");
-    }
+    export function normalizeSlashes(path: string): string { return path.replace(/\\/g, "/"); }
 
     // Returns length of path root (i.e. length of "/", "x:/", "//server/share/")
     export function getRootLength(path: string): number {
@@ -428,8 +421,7 @@ module ts {
             if (part !== ".") {
                 if (part === ".." && normalized.length > 0 && normalized[normalized.length - 1] !== "..") {
                     normalized.pop();
-                }
-                else {
+                } else {
                     normalized.push(part);
                 }
             }
@@ -449,13 +441,9 @@ module ts {
         return path.substr(0, Math.max(getRootLength(path), path.lastIndexOf(directorySeparator)));
     }
 
-    export function isUrl(path: string) {
-        return path && !isRootedDiskPath(path) && path.indexOf("://") !== -1;
-    }
+    export function isUrl(path: string) { return path && !isRootedDiskPath(path) && path.indexOf("://") !== -1; }
 
-    export function isRootedDiskPath(path: string) {
-        return getRootLength(path) !== 0;
-    }
+    export function isRootedDiskPath(path: string) { return getRootLength(path) !== 0; }
 
     function normalizedPathComponents(path: string, rootLength: number) {
         var normalizedParts = getNormalizedParts(path, rootLength);
@@ -486,20 +474,19 @@ module ts {
 
     function getNormalizedPathComponentsOfUrl(url: string) {
         // Get root length of http://www.website.com/folder1/foler2/
-        // In this example the root is:  http://www.website.com/ 
+        // In this example the root is:  http://www.website.com/
         // normalized path components should be ["http://www.website.com/", "folder1", "folder2"]
 
         var urlLength = url.length;
         // Initial root length is http:// part
         var rootLength = url.indexOf("://") + "://".length;
         while (rootLength < urlLength) {
-            // Consume all immediate slashes in the protocol 
+            // Consume all immediate slashes in the protocol
             // eg.initial rootlength is just file:// but it needs to consume another "/" in file:///
             if (url.charCodeAt(rootLength) === CharacterCodes.slash) {
                 rootLength++;
-            }
-            else {
-                // non slash character means we continue proceeding to next component of root search 
+            } else {
+                // non slash character means we continue proceeding to next component of root search
                 break;
             }
         }
@@ -512,15 +499,14 @@ module ts {
         // Find the index of "/" after website.com so the root can be http://www.website.com/ (from existing http://)
         var indexOfNextSlash = url.indexOf(directorySeparator, rootLength);
         if (indexOfNextSlash !== -1) {
-            // Found the "/" after the website.com so the root is length of http://www.website.com/ 
+            // Found the "/" after the website.com so the root is length of http://www.website.com/
             // and get components afetr the root normally like any other folder components
             rootLength = indexOfNextSlash + 1;
             return normalizedPathComponents(url, rootLength);
-        }
-        else {
-            // Can't find the host assume the rest of the string as component 
+        } else {
+            // Can't find the host assume the rest of the string as component
             // but make sure we append "/"  to it as root is not joined using "/"
-            // eg. if url passed in was http://website.com we want to use root as [http://website.com/] 
+            // eg. if url passed in was http://website.com we want to use root as [http://website.com/]
             // so that other path manipulations will be correct and it can be merged with relative paths correctly
             return [url + directorySeparator];
         }
@@ -529,24 +515,28 @@ module ts {
     function getNormalizedPathOrUrlComponents(pathOrUrl: string, currentDirectory: string) {
         if (isUrl(pathOrUrl)) {
             return getNormalizedPathComponentsOfUrl(pathOrUrl);
-        }
-        else {
+        } else {
             return getNormalizedPathComponents(pathOrUrl, currentDirectory);
         }
     }
 
-    export function getRelativePathToDirectoryOrUrl(directoryPathOrUrl: string, relativeOrAbsolutePath: string, currentDirectory: string, getCanonicalFileName: (fileName: string) => string, isAbsolutePathAnUrl: boolean) {
+    export function getRelativePathToDirectoryOrUrl(
+        directoryPathOrUrl: string, relativeOrAbsolutePath: string, currentDirectory: string,
+        getCanonicalFileName: (fileName: string) => string, isAbsolutePathAnUrl: boolean) {
         var pathComponents = getNormalizedPathOrUrlComponents(relativeOrAbsolutePath, currentDirectory);
         var directoryComponents = getNormalizedPathOrUrlComponents(directoryPathOrUrl, currentDirectory);
         if (directoryComponents.length > 1 && directoryComponents[directoryComponents.length - 1] === "") {
-            // If the directory path given was of type test/cases/ then we really need components of directory to be only till its name
+            // If the directory path given was of type test/cases/ then we really need components of directory to be
+            // only till its name
             // that is  ["test", "cases", ""] needs to be actually ["test", "cases"]
             directoryComponents.length--;
         }
 
         // Find the component that differs
-        for (var joinStartIndex = 0; joinStartIndex < pathComponents.length && joinStartIndex < directoryComponents.length; joinStartIndex++) {
-            if (getCanonicalFileName(directoryComponents[joinStartIndex]) !== getCanonicalFileName(pathComponents[joinStartIndex])) {
+        for (var joinStartIndex = 0;
+             joinStartIndex < pathComponents.length && joinStartIndex < directoryComponents.length; joinStartIndex++) {
+            if (getCanonicalFileName(directoryComponents[joinStartIndex]) !==
+                getCanonicalFileName(pathComponents[joinStartIndex])) {
                 break;
             }
         }
@@ -618,9 +608,9 @@ module ts {
         "\n": "\\n",
         "\\": "\\\\",
         "\"": "\\\"",
-        "\u2028": "\\u2028", // lineSeparator
-        "\u2029": "\\u2029", // paragraphSeparator
-        "\u0085": "\\u0085"  // nextLine
+        "\u2028": "\\u2028",  // lineSeparator
+        "\u2029": "\\u2029",  // paragraphSeparator
+        "\u0085": "\\u0085"   // nextLine
     };
 
     /**
@@ -635,9 +625,7 @@ module ts {
 
         return s;
 
-        function getReplacement(c: string) {
-            return escapedCharsMap[c] || unicodeEscape(c);
-        }
+        function getReplacement(c: string) { return escapedCharsMap[c] || unicodeEscape(c); }
 
         function unicodeEscape(c: string): string {
             var hexCharCode = c.charCodeAt(0).toString(16);
@@ -663,58 +651,47 @@ module ts {
         this.declarations = undefined;
     }
 
-    function Type(checker: TypeChecker, flags: TypeFlags) {
-        this.flags = flags;
-    }
+    function Type(checker: TypeChecker, flags: TypeFlags) { this.flags = flags; }
 
-    function Signature(checker: TypeChecker) {
-    }
+    function Signature(checker: TypeChecker) {}
 
     export var objectAllocator: ObjectAllocator = {
-        getNodeConstructor: kind => {
-            function Node() {
+        getNodeConstructor: kind => {function Node() {} Node.prototype = {
+            kind: kind,
+            pos: 0,
+            end: 0,
+            flags: 0,
+            parent: undefined,
+        };
+    return <any> Node;
+}
+, getSymbolConstructor: () => <any> Symbol, getTypeConstructor: () => <any> Type,
+                        getSignatureConstructor: () => <any> Signature
+}
+
+export const enum AssertionLevel {
+    None = 0,
+    Normal = 1,
+    Aggressive = 2,
+    VeryAggressive = 3,
+}
+
+export module Debug {
+    var currentAssertionLevel = AssertionLevel.None;
+
+    export function shouldAssert(level: AssertionLevel): boolean { return currentAssertionLevel >= level; }
+
+    export function assert(expression: boolean, message ?: string, verboseDebugInfo ?: () => string): void {
+        if (!expression) {
+            var verboseDebugString = "";
+            if (verboseDebugInfo) {
+                verboseDebugString = "\r\nVerbose Debug Information: " + verboseDebugInfo();
             }
-            Node.prototype = {
-                kind: kind,
-                pos: 0,
-                end: 0,
-                flags: 0,
-                parent: undefined,
-            };
-            return <any>Node;
-        },
-        getSymbolConstructor: () => <any>Symbol,
-        getTypeConstructor: () => <any>Type,
-        getSignatureConstructor: () => <any>Signature
-    }
 
-    export const enum AssertionLevel {
-        None = 0,
-        Normal = 1,
-        Aggressive = 2,
-        VeryAggressive = 3,
-    }
-
-    export module Debug {
-        var currentAssertionLevel = AssertionLevel.None;
-
-        export function shouldAssert(level: AssertionLevel): boolean {
-            return currentAssertionLevel >= level;
-        }
-
-        export function assert(expression: boolean, message?: string, verboseDebugInfo?: () => string): void {
-            if (!expression) {
-                var verboseDebugString = "";
-                if (verboseDebugInfo) {
-                    verboseDebugString = "\r\nVerbose Debug Information: " + verboseDebugInfo();
-                }
-
-                throw new Error("Debug Failure. False expression: " + (message || "") + verboseDebugString);
-            }
-        }
-
-        export function fail(message?: string): void {
-            Debug.assert(false, message);
+            throw new Error("Debug Failure. False expression: " + (message || "") + verboseDebugString);
         }
     }
+
+    export function fail(message ?: string): void { Debug.assert(false, message); }
+}
 }

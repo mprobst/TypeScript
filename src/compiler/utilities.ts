@@ -2,9 +2,7 @@
 
 module ts {
     export interface ReferencePathMatchResult {
-        fileReference?: FileReference
-        diagnosticMessage?: DiagnosticMessage
-        isNoDefaultLib?: boolean
+        fileReference ?: FileReference diagnosticMessage ?: DiagnosticMessage isNoDefaultLib ?: boolean
     }
 
     export function getDeclarationOfKind(symbol: Symbol, kind: SyntaxKind): Declaration {
@@ -19,9 +17,7 @@ module ts {
         return undefined;
     }
 
-    export interface StringSymbolWriter extends SymbolWriter {
-        string(): string;
-    }
+    export interface StringSymbolWriter extends SymbolWriter { string(): string; }
 
     export interface EmitHost extends ScriptReferenceHost {
         getSourceFiles(): SourceFile[];
@@ -30,7 +26,8 @@ module ts {
         getCanonicalFileName(fileName: string): string;
         getNewLine(): string;
 
-        writeFile: WriteFileCallback;
+    writeFile:
+        WriteFileCallback;
     }
 
     // Pool writers to avoid needing to allocate them for every symbol we write.
@@ -53,24 +50,19 @@ module ts {
                 // Completely ignore indentation for string writers.  And map newlines to
                 // a single space.
                 writeLine: () => str += " ",
-                increaseIndent: () => { },
-                decreaseIndent: () => { },
+                increaseIndent: () => {},
+                decreaseIndent: () => {},
                 clear: () => str = "",
-                trackSymbol: () => { }
+                trackSymbol: () => {}
             };
         }
 
         return stringWriters.pop();
     }
 
-    export function releaseStringWriter(writer: StringSymbolWriter) {
-        writer.clear()
-        stringWriters.push(writer);
-    }
+    export function releaseStringWriter(writer: StringSymbolWriter) { writer.clear() stringWriters.push(writer); }
 
-    export function getFullWidth(node: Node) {
-        return node.end - node.pos;
-    }
+    export function getFullWidth(node: Node) { return node.end - node.pos; }
 
     // Returns true if this node contains a parse error anywhere underneath it.
     export function containsParseError(node: Node): boolean {
@@ -83,10 +75,11 @@ module ts {
             // A node is considered to contain a parse error if:
             //  a) the parser explicitly marked that it had an error
             //  b) any of it's children reported that it had an error.
-            var thisNodeOrAnySubNodesHasError = ((node.parserContextFlags & ParserContextFlags.ThisNodeHasError) !== 0) ||
+            var thisNodeOrAnySubNodesHasError =
+                ((node.parserContextFlags & ParserContextFlags.ThisNodeHasError) !== 0) ||
                 forEachChild(node, containsParseError);
 
-            // If so, mark ourselves accordingly. 
+            // If so, mark ourselves accordingly.
             if (thisNodeOrAnySubNodesHasError) {
                 node.parserContextFlags |= ParserContextFlags.ThisNodeOrAnySubNodesHasError;
             }
@@ -102,7 +95,7 @@ module ts {
         while (node && node.kind !== SyntaxKind.SourceFile) {
             node = node.parent;
         }
-        return <SourceFile>node;
+        return <SourceFile> node;
     }
 
     export function getStartPositionOfLine(line: number, sourceFile: SourceFile): number {
@@ -117,19 +110,17 @@ module ts {
         return `${ file.fileName }(${ loc.line + 1 },${ loc.character + 1 })`;
     }
 
-    export function getStartPosOfNode(node: Node): number {
-        return node.pos;
-    }
+    export function getStartPosOfNode(node: Node): number { return node.pos; }
 
     // Returns true if this node is missing from the actual source code.  'missing' is different
     // from 'undefined/defined'.  When a node is undefined (which can happen for optional nodes
-    // in the tree), it is definitel missing.  HOwever, a node may be defined, but still be 
+    // in the tree), it is definitel missing.  HOwever, a node may be defined, but still be
     // missing.  This happens whenever the parser knows it needs to parse something, but can't
     // get anything in the source code that it expects at that location.  For example:
     //
     //          var a: ;
     //
-    // Here, the Type in the Type-Annotation is not-optional (as there is a colon in the source 
+    // Here, the Type in the Type-Annotation is not-optional (as there is a colon in the source
     // code).  So the parser will attempt to parse out a type, and will create an actual node.
     // However, this node will be 'missing' in the sense that no actual source-code/tokens are
     // contained within it.
@@ -140,12 +131,10 @@ module ts {
 
         return node.pos === node.end && node.kind !== SyntaxKind.EndOfFileToken;
     }
-    
-    export function nodeIsPresent(node: Node) {
-        return !nodeIsMissing(node);
-    }
 
-    export function getTokenPosOfNode(node: Node, sourceFile?: SourceFile): number {
+    export function nodeIsPresent(node: Node) { return !nodeIsMissing(node); }
+
+    export function getTokenPosOfNode(node: Node, sourceFile ?: SourceFile): number {
         // With nodes that have no width (i.e. 'Missing' nodes), we actually *don't*
         // want to skip trivia because this will launch us forward to the next token.
         if (nodeIsMissing(node)) {
@@ -176,14 +165,21 @@ module ts {
         return getSourceTextOfNodeFromSourceFile(getSourceFileOfNode(node), node);
     }
 
-    // Add an extra underscore to identifiers that start with two underscores to avoid issues with magic names like '__proto__'
+    // Add an extra underscore to identifiers that start with two underscores to avoid issues with magic names like
+    // '__proto__'
     export function escapeIdentifier(identifier: string): string {
-        return identifier.length >= 2 && identifier.charCodeAt(0) === CharacterCodes._ && identifier.charCodeAt(1) === CharacterCodes._ ? "_" + identifier : identifier;
+        return identifier.length >= 2 && identifier.charCodeAt(0) === CharacterCodes._ &&
+                       identifier.charCodeAt(1) === CharacterCodes._ ?
+                   "_" + identifier :
+                   identifier;
     }
 
     // Remove extra underscore from escaped identifier
     export function unescapeIdentifier(identifier: string): string {
-        return identifier.length >= 3 && identifier.charCodeAt(0) === CharacterCodes._ && identifier.charCodeAt(1) === CharacterCodes._ && identifier.charCodeAt(2) === CharacterCodes._ ? identifier.substr(1) : identifier;
+        return identifier.length >= 3 && identifier.charCodeAt(0) === CharacterCodes._ &&
+                       identifier.charCodeAt(1) === CharacterCodes._ && identifier.charCodeAt(2) === CharacterCodes._ ?
+                   identifier.substr(1) :
+                   identifier;
     }
 
     // Make an identifier from an external module name by extracting the string after the last "/" and replacing
@@ -199,7 +195,8 @@ module ts {
         return getFullWidth(name) === 0 ? "(Missing)" : getTextOfNode(name);
     }
 
-    export function createDiagnosticForNode(node: Node, message: DiagnosticMessage, arg0?: any, arg1?: any, arg2?: any): Diagnostic {
+    export function createDiagnosticForNode(node: Node, message: DiagnosticMessage, arg0 ?: any, arg1 ?: any,
+                                            arg2 ?: any): Diagnostic {
         node = getErrorSpanForNode(node);
         var file = getSourceFileOfNode(node);
 
@@ -209,7 +206,8 @@ module ts {
         return createFileDiagnostic(file, start, length, message, arg0, arg1, arg2);
     }
 
-    export function createDiagnosticForNodeFromMessageChain(node: Node, messageChain: DiagnosticMessageChain): Diagnostic {
+    export function createDiagnosticForNodeFromMessageChain(node: Node,
+                                                            messageChain: DiagnosticMessageChain): Diagnostic {
         node = getErrorSpanForNode(node);
         var file = getSourceFileOfNode(node);
         var start = skipTrivia(file.text, node.pos);
@@ -236,7 +234,7 @@ module ts {
             case SyntaxKind.ModuleDeclaration:
             case SyntaxKind.EnumDeclaration:
             case SyntaxKind.EnumMember:
-                errorSpan = (<Declaration>node).name;
+                errorSpan = (<Declaration> node).name;
                 break;
         }
 
@@ -248,9 +246,7 @@ module ts {
         return errorSpan && errorSpan.pos < errorSpan.end ? errorSpan : node;
     }
 
-    export function isExternalModule(file: SourceFile): boolean {
-        return file.externalModuleIndicator !== undefined;
-    }
+    export function isExternalModule(file: SourceFile): boolean { return file.externalModuleIndicator !== undefined; }
 
     export function isDeclarationFile(file: SourceFile): boolean {
         return (file.flags & NodeFlags.DeclarationFile) !== 0;
@@ -268,10 +264,10 @@ module ts {
         return node;
     }
 
-    // Returns the node flags for this node and all relevant parent nodes.  This is done so that 
+    // Returns the node flags for this node and all relevant parent nodes.  This is done so that
     // nodes like variable declarations and binding elements can returned a view of their flags
     // that includes the modifiers from their container.  i.e. flags like export/declare aren't
-    // stored on the variable declaration directly, but on the containing variable statement 
+    // stored on the variable declaration directly, but on the containing variable statement
     // (if it has one).  Similarly, flags for let/const are store on the variable declaration
     // list.  By calling this function, all those flags are combined so that the client can treat
     // the node as if it actually had those flags.
@@ -295,31 +291,27 @@ module ts {
         return flags;
     }
 
-    export function isConst(node: Node): boolean {
-        return !!(getCombinedNodeFlags(node) & NodeFlags.Const);
-    }
+    export function isConst(node: Node): boolean { return !!(getCombinedNodeFlags(node) & NodeFlags.Const); }
 
-    export function isLet(node: Node): boolean {
-        return !!(getCombinedNodeFlags(node) & NodeFlags.Let);
-    }
+    export function isLet(node: Node): boolean { return !!(getCombinedNodeFlags(node) & NodeFlags.Let); }
 
     export function isPrologueDirective(node: Node): boolean {
-        return node.kind === SyntaxKind.ExpressionStatement && (<ExpressionStatement>node).expression.kind === SyntaxKind.StringLiteral;
+        return node.kind === SyntaxKind.ExpressionStatement &&
+               (<ExpressionStatement> node).expression.kind === SyntaxKind.StringLiteral;
     }
 
-    export function getLeadingCommentRangesOfNode(node: Node, sourceFileOfNode?: SourceFile) {
+    export function getLeadingCommentRangesOfNode(node: Node, sourceFileOfNode ?: SourceFile) {
         sourceFileOfNode = sourceFileOfNode || getSourceFileOfNode(node);
 
         // If parameter/type parameter, the prev token trailing comments are part of this node too
         if (node.kind === SyntaxKind.Parameter || node.kind === SyntaxKind.TypeParameter) {
             // e.g.   (/** blah */ a, /** blah */ b);
             return concatenate(getTrailingCommentRanges(sourceFileOfNode.text, node.pos),
-                // e.g.:     (
-                //            /** blah */ a,
-                //            /** blah */ b);
-                getLeadingCommentRanges(sourceFileOfNode.text, node.pos));
-        }
-        else {
+                               // e.g.:     (
+                               //            /** blah */ a,
+                               //            /** blah */ b);
+                               getLeadingCommentRanges(sourceFileOfNode.text, node.pos));
+        } else {
             return getLeadingCommentRanges(sourceFileOfNode.text, node.pos);
         }
     }
@@ -330,8 +322,8 @@ module ts {
         function isJsDocComment(comment: CommentRange) {
             // True if the comment starts with '/**' but not if it is '/**/'
             return sourceFileOfNode.text.charCodeAt(comment.pos + 1) === CharacterCodes.asterisk &&
-                sourceFileOfNode.text.charCodeAt(comment.pos + 2) === CharacterCodes.asterisk &&
-                sourceFileOfNode.text.charCodeAt(comment.pos + 3) !== CharacterCodes.slash;
+                   sourceFileOfNode.text.charCodeAt(comment.pos + 2) === CharacterCodes.asterisk &&
+                   sourceFileOfNode.text.charCodeAt(comment.pos + 3) !== CharacterCodes.slash;
         }
     }
 
@@ -347,7 +339,7 @@ module ts {
         function traverse(node: Node): T {
             switch (node.kind) {
                 case SyntaxKind.ReturnStatement:
-                    return visitor(<ReturnStatement>node);
+                    return visitor(<ReturnStatement> node);
                 case SyntaxKind.Block:
                 case SyntaxKind.IfStatement:
                 case SyntaxKind.DoStatement:
@@ -398,14 +390,15 @@ module ts {
     }
 
     export function isObjectLiteralMethod(node: Node) {
-        return node && node.kind === SyntaxKind.MethodDeclaration && node.parent.kind === SyntaxKind.ObjectLiteralExpression;
+        return node && node.kind === SyntaxKind.MethodDeclaration &&
+               node.parent.kind === SyntaxKind.ObjectLiteralExpression;
     }
 
     export function getContainingFunction(node: Node): FunctionLikeDeclaration {
         while (true) {
             node = node.parent;
             if (!node || isAnyFunction(node)) {
-                return <FunctionLikeDeclaration>node;
+                return <FunctionLikeDeclaration> node;
             }
         }
     }
@@ -494,11 +487,11 @@ module ts {
 
     export function getInvokedExpression(node: CallLikeExpression): Expression {
         if (node.kind === SyntaxKind.TaggedTemplateExpression) {
-            return (<TaggedTemplateExpression>node).tag;
+            return (<TaggedTemplateExpression> node).tag;
         }
-        
+
         // Will either be a CallExpression or NewExpression.
-        return (<CallExpression>node).expression;
+        return (<CallExpression> node).expression;
     }
 
     export function isExpression(node: Node): boolean {
@@ -554,7 +547,7 @@ module ts {
                     case SyntaxKind.EnumMember:
                     case SyntaxKind.PropertyAssignment:
                     case SyntaxKind.BindingElement:
-                        return (<VariableLikeDeclaration>parent).initializer === node;
+                        return (<VariableLikeDeclaration> parent).initializer === node;
                     case SyntaxKind.ExpressionStatement:
                     case SyntaxKind.IfStatement:
                     case SyntaxKind.DoStatement:
@@ -565,23 +558,24 @@ module ts {
                     case SyntaxKind.CaseClause:
                     case SyntaxKind.ThrowStatement:
                     case SyntaxKind.SwitchStatement:
-                        return (<ExpressionStatement>parent).expression === node;
+                        return (<ExpressionStatement> parent).expression === node;
                     case SyntaxKind.ForStatement:
-                        var forStatement = <ForStatement>parent;
-                        return (forStatement.initializer === node && forStatement.initializer.kind !== SyntaxKind.VariableDeclarationList) ||
-                            forStatement.condition === node ||
-                            forStatement.iterator === node;
+                        var forStatement = <ForStatement> parent;
+                        return (forStatement.initializer === node &&
+                                forStatement.initializer.kind !== SyntaxKind.VariableDeclarationList) ||
+                               forStatement.condition === node || forStatement.iterator === node;
                     case SyntaxKind.ForInStatement:
                     case SyntaxKind.ForOfStatement:
-                        var forInStatement = <ForInStatement | ForOfStatement>parent;
-                        return (forInStatement.initializer === node && forInStatement.initializer.kind !== SyntaxKind.VariableDeclarationList) ||
-                            forInStatement.expression === node;
+                        var forInStatement = <ForInStatement | ForOfStatement> parent;
+                        return (forInStatement.initializer === node &&
+                                forInStatement.initializer.kind !== SyntaxKind.VariableDeclarationList) ||
+                               forInStatement.expression === node;
                     case SyntaxKind.TypeAssertionExpression:
-                        return node === (<TypeAssertion>parent).expression;
+                        return node === (<TypeAssertion> parent).expression;
                     case SyntaxKind.TemplateSpan:
-                        return node === (<TemplateSpan>parent).expression;
+                        return node === (<TemplateSpan> parent).expression;
                     case SyntaxKind.ComputedPropertyName:
-                        return node === (<ComputedPropertyName>parent).expression;
+                        return node === (<ComputedPropertyName> parent).expression;
                     default:
                         if (isExpression(parent)) {
                             return true;
@@ -592,56 +586,57 @@ module ts {
     }
 
     export function isInstantiatedModule(node: ModuleDeclaration, preserveConstEnums: boolean) {
-        var moduleState = getModuleInstanceState(node)
-        return moduleState === ModuleInstanceState.Instantiated ||
-               (preserveConstEnums && moduleState === ModuleInstanceState.ConstEnumOnly);
+        var moduleState = getModuleInstanceState(node) return moduleState === ModuleInstanceState.Instantiated ||
+                          (preserveConstEnums && moduleState === ModuleInstanceState.ConstEnumOnly);
     }
 
     export function isExternalModuleImportEqualsDeclaration(node: Node) {
-        return node.kind === SyntaxKind.ImportEqualsDeclaration && (<ImportEqualsDeclaration>node).moduleReference.kind === SyntaxKind.ExternalModuleReference;
+        return node.kind === SyntaxKind.ImportEqualsDeclaration &&
+               (<ImportEqualsDeclaration> node).moduleReference.kind === SyntaxKind.ExternalModuleReference;
     }
 
     export function getExternalModuleImportEqualsDeclarationExpression(node: Node) {
         Debug.assert(isExternalModuleImportEqualsDeclaration(node));
-        return (<ExternalModuleReference>(<ImportEqualsDeclaration>node).moduleReference).expression;
+        return (<ExternalModuleReference>(<ImportEqualsDeclaration> node).moduleReference).expression;
     }
 
     export function isInternalModuleImportEqualsDeclaration(node: Node) {
-        return node.kind === SyntaxKind.ImportEqualsDeclaration && (<ImportEqualsDeclaration>node).moduleReference.kind !== SyntaxKind.ExternalModuleReference;
+        return node.kind === SyntaxKind.ImportEqualsDeclaration &&
+               (<ImportEqualsDeclaration> node).moduleReference.kind !== SyntaxKind.ExternalModuleReference;
     }
 
     export function getExternalModuleName(node: Node): Expression {
         if (node.kind === SyntaxKind.ImportDeclaration) {
-            return (<ImportDeclaration>node).moduleSpecifier;
+            return (<ImportDeclaration> node).moduleSpecifier;
         }
         if (node.kind === SyntaxKind.ImportEqualsDeclaration) {
-            var reference = (<ImportEqualsDeclaration>node).moduleReference;
+            var reference = (<ImportEqualsDeclaration> node).moduleReference;
             if (reference.kind === SyntaxKind.ExternalModuleReference) {
-                return (<ExternalModuleReference>reference).expression;
+                return (<ExternalModuleReference> reference).expression;
             }
         }
         if (node.kind === SyntaxKind.ExportDeclaration) {
-            return (<ExportDeclaration>node).moduleSpecifier;
+            return (<ExportDeclaration> node).moduleSpecifier;
         }
     }
 
     export function hasDotDotDotToken(node: Node) {
-        return node && node.kind === SyntaxKind.Parameter && (<ParameterDeclaration>node).dotDotDotToken !== undefined;
+        return node && node.kind === SyntaxKind.Parameter && (<ParameterDeclaration> node).dotDotDotToken !== undefined;
     }
 
     export function hasQuestionToken(node: Node) {
         if (node) {
             switch (node.kind) {
                 case SyntaxKind.Parameter:
-                    return (<ParameterDeclaration>node).questionToken !== undefined;
+                    return (<ParameterDeclaration> node).questionToken !== undefined;
                 case SyntaxKind.MethodDeclaration:
                 case SyntaxKind.MethodSignature:
-                    return (<MethodDeclaration>node).questionToken !== undefined;
+                    return (<MethodDeclaration> node).questionToken !== undefined;
                 case SyntaxKind.ShorthandPropertyAssignment:
                 case SyntaxKind.PropertyAssignment:
                 case SyntaxKind.PropertyDeclaration:
                 case SyntaxKind.PropertySignature:
-                    return (<PropertyDeclaration>node).questionToken !== undefined;
+                    return (<PropertyDeclaration> node).questionToken !== undefined;
             }
         }
 
@@ -740,17 +735,18 @@ module ts {
 
     // True if the given identifier, string literal, or number literal is the name of a declaration node
     export function isDeclarationOrFunctionExpressionOrCatchVariableName(name: Node): boolean {
-        if (name.kind !== SyntaxKind.Identifier && name.kind !== SyntaxKind.StringLiteral && name.kind !== SyntaxKind.NumericLiteral) {
+        if (name.kind !== SyntaxKind.Identifier && name.kind !== SyntaxKind.StringLiteral &&
+            name.kind !== SyntaxKind.NumericLiteral) {
             return false;
         }
 
         var parent = name.parent;
         if (isDeclaration(parent) || parent.kind === SyntaxKind.FunctionExpression) {
-            return (<Declaration>parent).name === name;
+            return (<Declaration> parent).name === name;
         }
 
         if (parent.kind === SyntaxKind.CatchClause) {
-            return (<CatchClause>parent).name === name;
+            return (<CatchClause> parent).name === name;
         }
 
         return false;
@@ -783,9 +779,12 @@ module ts {
         return undefined;
     }
 
-    export function tryResolveScriptReference(host: ScriptReferenceHost, sourceFile: SourceFile, reference: FileReference) {
+    export function tryResolveScriptReference(host: ScriptReferenceHost, sourceFile: SourceFile,
+                                              reference: FileReference) {
         if (!host.getCompilerOptions().noResolve) {
-            var referenceFileName = isRootedDiskPath(reference.fileName) ? reference.fileName : combinePaths(getDirectoryPath(sourceFile.fileName), reference.fileName);
+            var referenceFileName = isRootedDiskPath(reference.fileName) ?
+                                        reference.fileName :
+                                        combinePaths(getDirectoryPath(sourceFile.fileName), reference.fileName);
             referenceFileName = getNormalizedAbsolutePath(referenceFileName, host.getCurrentDirectory());
             return host.getSourceFile(referenceFileName);
         }
@@ -801,30 +800,26 @@ module ts {
         return undefined;
     }
 
-    export function getFileReferenceFromReferencePath(comment: string, commentRange: CommentRange): ReferencePathMatchResult {
+    export function getFileReferenceFromReferencePath(comment: string,
+                                                      commentRange: CommentRange): ReferencePathMatchResult {
         var simpleReferenceRegEx = /^\/\/\/\s*<reference\s+/gim;
         var isNoDefaultLibRegEx = /^(\/\/\/\s*<reference\s+no-default-lib\s*=\s*)('|")(.+?)\2\s*\/>/gim;
         if (simpleReferenceRegEx.exec(comment)) {
             if (isNoDefaultLibRegEx.exec(comment)) {
                 return {
-                    isNoDefaultLib: true
+                isNoDefaultLib:
+                    true
                 }
-            }
-            else {
+            } else {
                 var matchResult = fullTripleSlashReferencePathRegEx.exec(comment);
                 if (matchResult) {
                     var start = commentRange.pos;
                     var end = commentRange.end;
                     return {
-                        fileReference: {
-                            pos: start,
-                            end: end,
-                            fileName: matchResult[3]
-                        },
+                        fileReference: {pos: start, end: end, fileName: matchResult[3]},
                         isNoDefaultLib: false
                     };
-                }
-                else {
+                } else {
                     return {
                         diagnosticMessage: Diagnostics.Invalid_reference_directive_syntax,
                         isNoDefaultLib: false
@@ -852,9 +847,8 @@ module ts {
      *      Symbol.
      */
     export function hasDynamicName(declaration: Declaration): boolean {
-        return declaration.name &&
-            declaration.name.kind === SyntaxKind.ComputedPropertyName &&
-            !isWellKnownSymbolSyntactically((<ComputedPropertyName>declaration.name).expression);
+        return declaration.name && declaration.name.kind === SyntaxKind.ComputedPropertyName &&
+               !isWellKnownSymbolSyntactically((<ComputedPropertyName> declaration.name).expression);
     }
 
     /**
@@ -863,17 +857,19 @@ module ts {
      * where Symbol is literally the word "Symbol", and name is any identifierName
      */
     export function isWellKnownSymbolSyntactically(node: Expression): boolean {
-        return node.kind === SyntaxKind.PropertyAccessExpression && isESSymbolIdentifier((<PropertyAccessExpression>node).expression);
+        return node.kind === SyntaxKind.PropertyAccessExpression &&
+               isESSymbolIdentifier((<PropertyAccessExpression> node).expression);
     }
 
     export function getPropertyNameForPropertyNameNode(name: DeclarationName): string {
-        if (name.kind === SyntaxKind.Identifier || name.kind === SyntaxKind.StringLiteral || name.kind === SyntaxKind.NumericLiteral) {
-            return (<Identifier | LiteralExpression>name).text;
+        if (name.kind === SyntaxKind.Identifier || name.kind === SyntaxKind.StringLiteral ||
+            name.kind === SyntaxKind.NumericLiteral) {
+            return (<Identifier | LiteralExpression> name).text;
         }
         if (name.kind === SyntaxKind.ComputedPropertyName) {
-            var nameExpression = (<ComputedPropertyName>name).expression;
+            var nameExpression = (<ComputedPropertyName> name).expression;
             if (isWellKnownSymbolSyntactically(nameExpression)) {
-                var rightHandSideName = (<PropertyAccessExpression>nameExpression).name.text;
+                var rightHandSideName = (<PropertyAccessExpression> nameExpression).name.text;
                 return getPropertyNameForKnownSymbolName(rightHandSideName);
             }
         }
@@ -881,15 +877,13 @@ module ts {
         return undefined;
     }
 
-    export function getPropertyNameForKnownSymbolName(symbolName: string): string {
-        return "__@" + symbolName;
-    }
+    export function getPropertyNameForKnownSymbolName(symbolName: string): string { return "__@" + symbolName; }
 
     /**
      * Includes the word "Symbol" with unicode escapes
      */
     export function isESSymbolIdentifier(node: Node): boolean {
-        return node.kind === SyntaxKind.Identifier && (<Identifier>node).text === "Symbol";
+        return node.kind === SyntaxKind.Identifier && (<Identifier> node).text === "Symbol";
     }
 
     export function isModifier(token: SyntaxKind): boolean {
@@ -906,13 +900,9 @@ module ts {
         return false;
     }
 
-    export function textSpanEnd(span: TextSpan) {
-        return span.start + span.length
-    }
+    export function textSpanEnd(span: TextSpan) { return span.start + span.length }
 
-    export function textSpanIsEmpty(span: TextSpan) {
-        return span.length === 0
-    }
+    export function textSpanIsEmpty(span: TextSpan) { return span.length === 0 }
 
     export function textSpanContainsPosition(span: TextSpan, position: number) {
         return position >= span.start && position < textSpanEnd(span);
@@ -968,13 +958,11 @@ module ts {
             throw new Error("length < 0");
         }
 
-        return { start, length };
+        return {start, length};
     }
 
-    export function createTextSpanFromBounds(start: number, end: number) {
-        return createTextSpan(start, end - start);
-    }
-    
+    export function createTextSpanFromBounds(start: number, end: number) { return createTextSpan(start, end - start); }
+
     export function textChangeRangeNewSpan(range: TextChangeRange) {
         return createTextSpan(range.span.start, range.newLength);
     }
@@ -988,16 +976,16 @@ module ts {
             throw new Error("newLength < 0");
         }
 
-        return { span, newLength };
+        return {span, newLength};
     }
 
     export var unchangedTextChangeRange = createTextChangeRange(createTextSpan(0, 0), 0);
 
     /**
-     * Called to merge all the changes that occurred across several versions of a script snapshot 
+     * Called to merge all the changes that occurred across several versions of a script snapshot
      * into a single change.  i.e. if a user keeps making successive edits to a script we will
-     * have a text change from V1 to V2, V2 to V3, ..., Vn.  
-     * 
+     * have a text change from V1 to V2, V2 to V3, ..., Vn.
+     *
      * This function will then merge those changes into a single change range valid between V1 and
      * Vn.
      */
@@ -1023,16 +1011,17 @@ module ts {
 
             // Consider the following case:
             // i.e. two edits.  The first represents the text change range { { 10, 50 }, 30 }.  i.e. The span starting
-            // at 10, with length 50 is reduced to length 30.  The second represents the text change range { { 30, 30 }, 40 }.
+            // at 10, with length 50 is reduced to length 30.  The second represents the text change range { { 30, 30 },
+            // 40 }.
             // i.e. the span starting at 30 with length 30 is increased to length 40.
             //
-            //      0         10        20        30        40        50        60        70        80        90        100
+            //      0         10        20        30        40        50        60        70        80        90 100
             //      -------------------------------------------------------------------------------------------------------
-            //                |                                                 /                                          
-            //                |                                            /----                                           
-            //  T1            |                                       /----                                                
-            //                |                                  /----                                                     
-            //                |                             /----                                                          
+            //                |                                                 /
+            //                |                                            /----
+            //  T1            |                                       /----
+            //                |                                  /----
+            //                |                             /----
             //      -------------------------------------------------------------------------------------------------------
             //                                     |                            \                                          
             //                                     |                               \                                       
@@ -1041,16 +1030,17 @@ module ts {
             //                                     |                                      \                                
             //      -------------------------------------------------------------------------------------------------------
             //
-            // Merging these turns out to not be too difficult.  First, determining the new start of the change is trivial
+            // Merging these turns out to not be too difficult.  First, determining the new start of the change is
+            // trivial
             // it's just the min of the old and new starts.  i.e.:
             //
-            //      0         10        20        30        40        50        60        70        80        90        100
+            //      0         10        20        30        40        50        60        70        80        90 100
             //      ------------------------------------------------------------*------------------------------------------
-            //                |                                                 /                                          
-            //                |                                            /----                                           
-            //  T1            |                                       /----                                                
-            //                |                                  /----                                                     
-            //                |                             /----                                                          
+            //                |                                                 /
+            //                |                                            /----
+            //  T1            |                                       /----
+            //                |                                  /----
+            //                |                             /----
             //      ----------------------------------------$-------------------$------------------------------------------
             //                .                    |                            \                                          
             //                .                    |                               \                                       
@@ -1060,18 +1050,20 @@ module ts {
             //      ----------------------------------------------------------------------*--------------------------------
             //
             // (Note the dots represent the newly inferrred start.
-            // Determining the new and old end is also pretty simple.  Basically it boils down to paying attention to the
+            // Determining the new and old end is also pretty simple.  Basically it boils down to paying attention to
+            // the
             // absolute positions at the asterixes, and the relative change between the dollar signs. Basically, we see
-            // which if the two $'s precedes the other, and we move that one forward until they line up.  in this case that
+            // which if the two $'s precedes the other, and we move that one forward until they line up.  in this case
+            // that
             // means:
             //
-            //      0         10        20        30        40        50        60        70        80        90        100
+            //      0         10        20        30        40        50        60        70        80        90 100
             //      --------------------------------------------------------------------------------*----------------------
-            //                |                                                                     /                      
-            //                |                                                                /----                       
-            //  T1            |                                                           /----                            
-            //                |                                                      /----                                 
-            //                |                                                 /----                                      
+            //                |                                                                     /
+            //                |                                                                /----
+            //  T1            |                                                           /----
+            //                |                                                      /----
+            //                |                                                 /----
             //      ------------------------------------------------------------$------------------------------------------
             //                .                    |                            \                                          
             //                .                    |                               \                                       
@@ -1081,8 +1073,9 @@ module ts {
             //      ----------------------------------------------------------------------*--------------------------------
             //
             // In other words (in this case), we're recognizing that the second edit happened after where the first edit
-            // ended with a delta of 20 characters (60 - 40).  Thus, if we go back in time to where the first edit started
-            // that's the same as if we started at char 80 instead of 60.  
+            // ended with a delta of 20 characters (60 - 40).  Thus, if we go back in time to where the first edit
+            // started
+            // that's the same as if we started at char 80 instead of 60.
             //
             // As it so happens, the same logic applies if the second edit precedes the first edit.  In that case rahter
             // than pusing the first edit forward to match the second, we'll push the second edit forward to match the
@@ -1092,7 +1085,7 @@ module ts {
             // semantics: { { start: 10, length: 70 }, newLength: 60 }
             //
             // The math then works out as follows.
-            // If we have { oldStart1, oldEnd1, newEnd1 } and { oldStart2, oldEnd2, newEnd2 } then we can compute the 
+            // If we have { oldStart1, oldEnd1, newEnd1 } and { oldStart2, oldEnd2, newEnd2 } then we can compute the
             // final result like so:
             //
             // {
@@ -1114,7 +1107,7 @@ module ts {
             newEndN = Math.max(newEnd2, newEnd2 + (newEnd1 - oldEnd2));
         }
 
-        return createTextChangeRange(createTextSpanFromBounds(oldStartN, oldEndN), /*newLength: */newEndN - oldStartN);
+        return createTextChangeRange(createTextSpanFromBounds(oldStartN, oldEndN), /*newLength: */ newEndN - oldStartN);
     }
 
     // @internal
@@ -1125,16 +1118,9 @@ module ts {
         var diagnosticsModified = false;
         var modificationCount = 0;
 
-        return {
-            add,
-            getGlobalDiagnostics,
-            getDiagnostics,
-            getModificationCount
-        };
+        return {add, getGlobalDiagnostics, getDiagnostics, getModificationCount};
 
-        function getModificationCount() {
-            return modificationCount;
-        }
+        function getModificationCount() { return modificationCount; }
 
         function add(diagnostic: Diagnostic): void {
             var diagnostics: Diagnostic[];
@@ -1144,8 +1130,7 @@ module ts {
                     diagnostics = [];
                     fileDiagnostics[diagnostic.file.fileName] = diagnostics;
                 }
-            }
-            else {
+            } else {
                 diagnostics = nonFileDiagnostics;
             }
 
@@ -1159,16 +1144,14 @@ module ts {
             return nonFileDiagnostics;
         }
 
-        function getDiagnostics(fileName?: string): Diagnostic[] {
+        function getDiagnostics(fileName ?: string): Diagnostic[] {
             sortAndDeduplicate();
             if (fileName) {
                 return fileDiagnostics[fileName] || [];
             }
 
             var allDiagnostics: Diagnostic[] = [];
-            function pushDiagnostic(d: Diagnostic) {
-                allDiagnostics.push(d);
-            }
+            function pushDiagnostic(d: Diagnostic) { allDiagnostics.push(d); }
 
             forEach(nonFileDiagnostics, pushDiagnostic);
 
