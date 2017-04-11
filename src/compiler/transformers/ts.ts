@@ -3072,14 +3072,13 @@ namespace ts {
 
             // Elide the declaration if the import clause was elided.
             const importClause = visitNode(node.importClause, visitImportClause, isImportClause);
-            return importClause
-                ? updateImportDeclaration(
-                    node,
-                    /*decorators*/ undefined,
-                    /*modifiers*/ undefined,
-                    importClause,
-                    node.moduleSpecifier)
-                : undefined;
+            return importClause ? updateImportDeclaration(
+                node,
+                /*decorators*/ undefined,
+                /*modifiers*/ undefined,
+                importClause,
+                node.moduleSpecifier) :
+                createNotEmittedStatement(node);
         }
 
         /**
