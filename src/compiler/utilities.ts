@@ -4598,7 +4598,8 @@ namespace ts {
             if (parentPath === directory) {
                 return undefined;
             }
-
+            // Local modification in google3 to avoid an expensive CITC lookup.
+            if (/^\/google\/src\/cloud\/?[^\/]*\/?$/.test(parentPath)) return undefined;
             directory = parentPath;
         }
     }
