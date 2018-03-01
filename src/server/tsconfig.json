@@ -19,6 +19,7 @@
         "protocol.ts",
         "scriptInfo.ts",
         "typingsCache.ts",
+        "g3ServerHostProxy.ts",
         "project.ts",
         "editorServices.ts",
         "packageJsonCache.ts",
