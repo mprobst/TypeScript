@@ -1,3 +1,5 @@
+/// <reference path="./g3ServerHostProxy.ts"/>
+
 namespace ts.server {
 
     export enum ProjectKind {
@@ -259,7 +261,19 @@ namespace ts.server {
             this.languageServiceEnabled = !projectService.syntaxOnly;
 
             this.setInternalCompilerOptionsForEmittingJsFiles();
-            const host = this.projectService.host;
+
+            // Create a proxy server host that uses the files list to respond to
+            // fileExists and directoryExists so as to avoid going to the
+            // file system every time.
+            let proxyHost = this.projectService.host;
+            if (projectKind === ProjectKind.Configured && hasExplicitListOfFiles) {
+                proxyHost = getG3ServerHostProxy(
+                    projectName,
+                    this.projectService.host,
+                    this.projectService.logger);
+            }
+
+            const host = proxyHost;
             if (this.projectService.logger.loggingEnabled()) {
                 this.trace = s => this.writeLog(s);
             }
@@ -269,6 +283,14 @@ namespace ts.server {
 
             if (host.realpath) {
                 this.realpath = path => host.realpath!(path);
+            }
+
+            if (host.fileExists) {
+                this.fileExists = host.fileExists;
+            }
+
+            if (host.directoryExists) {
+                this.directoryExists = host.directoryExists;
             }
 
             // Use the current directory as resolution root only if the project created using current directory string
