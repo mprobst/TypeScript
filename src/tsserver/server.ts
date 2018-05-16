@@ -108,6 +108,7 @@ namespace ts.server {
         writeSync(fd: number, data: any, position?: number, enconding?: string): number;
         statSync(path: string): Stats;
         stat(path: string, callback?: (err: NodeJS.ErrnoException, stats: Stats) => any): void;
+        realpathSync(path: string): string;
     } = require("fs");
 
 
@@ -887,7 +888,16 @@ namespace ts.server {
     // Override sys.write because fs.writeSync is not reliable on Node 4
     sys.write = (s: string) => writeMessage(sys.bufferFrom!(s, "utf8"));
     sys.watchFile = (fileName, callback) => {
-        const watchedFile = pollingWatchedFileSet.addFile(fileName, callback);
+        // G3 LOCALMOD: Follow symlink before setting up a watch.
+        // Needed to watch the destination of the tsconfig.json symlink in g3.
+        let realFileName;
+        try {
+            realFileName = fs.realpathSync(fileName);
+        }
+        catch {
+            realFileName = fileName;
+        }
+        const watchedFile = pollingWatchedFileSet.addFile(realFileName, callback);
         return {
             close: () => pollingWatchedFileSet.removeFile(watchedFile)
         };
