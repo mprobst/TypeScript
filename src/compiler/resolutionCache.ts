@@ -548,6 +548,10 @@ namespace ts {
         }
 
         function setDirectoryWatcher(dir: string, dirPath: Path, nonRecursive?: boolean) {
+            // Google3 local mod - don't watch google virtual file system
+            if (/^\/google\//.test(dirPath)) {
+                return;
+            }
             const dirWatcher = directoryWatchesOfFailedLookups.get(dirPath);
             if (dirWatcher) {
                 Debug.assert(!!nonRecursive === !!dirWatcher.nonRecursive);
