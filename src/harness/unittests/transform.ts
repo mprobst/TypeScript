@@ -337,6 +337,25 @@ export {Value};
                         }
                     }).outputText;
         });
+
+        // https://github.com/Microsoft/TypeScript/issues/17594
+        testBaseline("transformAddCommentToProperties", () => {
+            return transpileModule(`
+class Clazz {
+    static staticProp: number = 1;
+    instanceProp: number = 2;
+    constructor(readonly field = 1) {}
+}
+`, {
+                        transformers: {
+                            before: [addSyntheticComment(n => isPropertyDeclaration(n) || isParameterPropertyDeclaration(n))],
+                        },
+                        compilerOptions: {
+                            target: ScriptTarget.ES2015,
+                            newLine: NewLineKind.CarriageReturnLineFeed,
+                        }
+                    }).outputText;
+        });
     });
 }
 

@@ -1234,6 +1234,7 @@ namespace ts {
                 const statement = createStatement(transformInitializedProperty(property, receiver));
                 setSourceMapRange(statement, moveRangePastModifiers(property));
                 setCommentRange(statement, property);
+                setOriginalNode(statement, property);
                 statements.push(statement);
             }
         }
@@ -1251,6 +1252,7 @@ namespace ts {
                 startOnNewLine(expression);
                 setSourceMapRange(expression, moveRangePastModifiers(property));
                 setCommentRange(expression, property);
+                setOriginalNode(expression, property);
                 expressions.push(expression);
             }
 
