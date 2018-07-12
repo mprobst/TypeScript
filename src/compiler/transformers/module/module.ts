@@ -1140,7 +1140,7 @@ namespace ts {
                 }
 
                 if (expressions) {
-                    statements = append(statements, setTextRange(createStatement(inlineExpressions(expressions)), node));
+                    statements = append(statements, setOriginalNode(setTextRange(createStatement(inlineExpressions(expressions)), node), node));
                 }
             }
             else {
