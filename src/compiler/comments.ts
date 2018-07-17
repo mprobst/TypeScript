@@ -72,11 +72,13 @@ namespace ts {
                     const savedContainerEnd = containerEnd;
                     const savedDeclarationListContainerEnd = declarationListContainerEnd;
 
-                    if (!skipLeadingComments) {
+                    if (!skipLeadingComments || (emitFlags & EmitFlags.NoLeadingComments) !== 0) {
+                        // Advance the container position of comments get emitted or if they've been disabled explicitly using NoLeadingComments.
                         containerPos = pos;
                     }
 
-                    if (!skipTrailingComments) {
+                    if (!skipTrailingComments || (emitFlags & EmitFlags.NoTrailingComments) !== 0) {
+                        // As above.
                         containerEnd = end;
 
                         // To avoid invalid comment emit in a down-level binding pattern, we

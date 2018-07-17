@@ -341,14 +341,18 @@ export {Value};
         // https://github.com/Microsoft/TypeScript/issues/17594
         testBaseline("transformAddCommentToProperties", () => {
             return transpileModule(`
+// class comment.
 class Clazz {
+    // original comment.
     static staticProp: number = 1;
+    // original comment.
     instanceProp: number = 2;
+    // original comment.
     constructor(readonly field = 1) {}
 }
 `, {
                         transformers: {
-                            before: [addSyntheticComment(n => isPropertyDeclaration(n) || isParameterPropertyDeclaration(n))],
+                            before: [addSyntheticComment(n => isPropertyDeclaration(n) || isParameterPropertyDeclaration(n) || isClassDeclaration(n))],
                         },
                         compilerOptions: {
                             target: ScriptTarget.ES2015,
