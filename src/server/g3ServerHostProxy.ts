@@ -102,7 +102,10 @@ namespace ts.server {
           }
           logger.info('Dir NOT Found: ' + path);
           return false;
-      }
+      };
+      // Disable realpath calls - they cause a log of lstat and stat calls, where in a blaze project
+      // setup all files should be unique anyway.
+      proxyHost.realpath = ts.identity;
       return proxyHost;
   }
 }

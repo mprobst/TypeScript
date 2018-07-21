@@ -1407,12 +1407,14 @@ namespace ts {
             }
 
             function realpath(path: string): string {
-                try {
-                    return _fs.realpathSync(path);
-                }
-                catch {
-                    return path;
-                }
+                // G3 LOCALMOD: never resolve paths to their canonical real path.
+                // google3 heavily uses symlinks (blaze-bin, into objfs, etc), but all paths given
+                // out by blaze are always canonical, there cannot be two paths in the same
+                // compilation operation that accidentally map to the same file.
+                // Meanwhile, realpath is expensive: when loading a 3500 .d.ts file project (a
+                // minimal Angular in google3 example), TypeScript spends 50% of its time, 7 seconds
+                // on resolving real paths.
+                return path;
             }
 
             function getModifiedTime(path: string) {
