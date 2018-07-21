@@ -708,6 +708,12 @@ namespace ts {
         const { rootNames, options, configFileParsingDiagnostics, projectReferences } = createProgramOptions;
         let { oldProgram } = createProgramOptions;
 
+        if (!oldProgram) {
+            // When creating a new program (e.g. the old program has structurally changed), make
+            // sure to prefetch any new files instead of reading them sequentially.
+            g3PrefetchFiles(rootNames);
+        }
+
         let program: Program;
         let processingDefaultLibFiles: SourceFile[] | undefined;
         let processingOtherFiles: SourceFile[] | undefined;
