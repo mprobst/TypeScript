@@ -887,16 +887,18 @@ namespace ts.server {
     // Override sys.write because fs.writeSync is not reliable on Node 4
     sys.write = (s: string) => writeMessage(sys.bufferFrom!(s, "utf8"));
     sys.watchFile = (fileName, callback) => {
-        // G3 LOCALMOD: Follow symlink before setting up a watch.
+        // G3 LOCALMOD: Follow tsconfig symlink before setting up a watch.
         // Needed to watch the destination of the tsconfig.json symlink in g3.
-        let realFileName;
-        try {
-            realFileName = fs.realpathSync(fileName);
+        // Only done for tsconfig.json itself, as realpath is expensive, and all files watched
+        // should be either already in blaze-bin (where change events will be emitted) or in the
+        // regular source tree.
+        if (fileName.match(/\/tsconfig.json$/)) {
+            try {
+                fileName = fs.realpathSync(fileName);
+            }
+            catch { /* ignore - might not be a symlink. */ }
         }
-        catch {
-            realFileName = fileName;
-        }
-        const watchedFile = pollingWatchedFileSet.addFile(realFileName, callback);
+        const watchedFile = pollingWatchedFileSet.addFile(fileName, callback);
         return {
             close: () => pollingWatchedFileSet.removeFile(watchedFile)
         };
