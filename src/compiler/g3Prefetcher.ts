@@ -33,14 +33,20 @@ namespace ts {
             ...fileNames.filter(fn => fn.match(/\.d\.ts$/))
                 .map(fn => fn.replace(/\.d\.ts$/, '.metadata.json')));
 
-        // Spawn objfsutil prefetch.
-        const objfsutil = spawn('objfsutil', ['prefetch', ...toFetch],
-            // Make stdin a writable pipe, use stderr for all output.
-            {stdio: ['pipe', process.stderr, process.stderr]});
+        try {
+            // Spawn objfsutil prefetch.
+            const objfsutil = spawn('objfsutil', ['prefetch', ...toFetch],
+                // Make stdin a writable pipe, use stderr for all output.
+                {stdio: ['pipe', process.stderr, process.stderr]});
 
-        // Ignore errors, the process spawn common fails on Forge where objfsutil doesn't exist.
-        objfsutil.on('error', ts.noop);
-        objfsutil.on('close', ts.noop);
+            // Ignore errors, e.g. the process spawn fails on Forge where objfsutil doesn't exist.
+            objfsutil.on('error', ts.noop);
+            objfsutil.on('close', ts.noop);
+        } catch (e) {
+            // Spawning the command can fail if the arguments line is too long. Just ignore the
+            // error for now, until we can apply the fix outlined below.
+            return;
+        }
 
         // TODO(martinprobst): the list of files should be passed via stdin with the code below, but
         // that fails due to: https://github.com/nodejs/node/issues/21941
