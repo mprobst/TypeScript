@@ -501,6 +501,17 @@ namespace ts.server {
 
             const host = sys;
 
+            // G3 LOCAL MOD. Session constructs ProjectService, which eagerly reads files on project
+            // setup. In that process, ProjectService resolves files to their realpath. With google3
+            // paths containing several symlinks via blaze-bin and objfs, this causes ~40 lstats and
+            // stats. At 20-50 us each but for ~4000 files in a small Angular project, this causes
+            // several seconds of additional wait time. Given that all file paths in blaze projects
+            // are already canonical, this is purely overhead, so we disable it below. NB: we cannot
+            // disable realpath for all of TypeScript. E.g. when watching directories, TS avoids
+            // recursing through symlinks using realpath, which we definitely want (e.g. to avoid
+            // watching through blaze-google3/).
+            host.realpath = ts.identity;
+
             const typingsInstaller = disableAutomaticTypingAcquisition
                 ? undefined
                 : new NodeTypingsInstaller(telemetryEnabled, logger, host, getGlobalTypingsCacheLocation(), typingSafeListLocation, typesMapLocation, npmLocation, validateDefaultNpmLocation, event);
