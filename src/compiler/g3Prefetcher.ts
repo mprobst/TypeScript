@@ -21,7 +21,7 @@ namespace ts {
      * project in google3.
      */
     export function g3PrefetchFiles(fileNames: ReadonlyArray<string>) {
-        if (process.browser || typeof require === 'undefined') {
+        if (typeof process === 'undefined' || process.browser || typeof require === 'undefined') {
             return;  // might not be running in Node.
         }
         const {spawn} = require('child_process');
