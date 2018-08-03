@@ -26,40 +26,42 @@ namespace ts {
         }
         const {spawn} = require('child_process');
 
+        const toFetch = [...fileNames];
         // For any .d.ts file, include corresponding .metadata.json files read by the Angular IDE
         // service. This will attempt to read files that do not exist, but that's OK.
-        const toFetch = [...fileNames];
         toFetch.push(
             ...fileNames.filter(fn => fn.match(/\.d\.ts$/))
                 .map(fn => fn.replace(/\.d\.ts$/, '.metadata.json')));
 
-        try {
-            // Spawn objfsutil prefetch.
-            const objfsutil = spawn('objfsutil', ['prefetch', ...toFetch],
-                // Make stdin a writable pipe, use stderr for all output.
-                {stdio: ['pipe', process.stderr, process.stderr]});
+        // Spawn objfsutil prefetch.
+        const objfsutil = spawn('objfsutil', ['prefetch'],
+            // Make stdin a writable pipe, use stderr for all output so that we don't break
+            // process communication.
+            {stdio: ['pipe', process.stderr, process.stderr]});
 
-            // Ignore errors, e.g. the process spawn fails on Forge where objfsutil doesn't exist.
-            objfsutil.on('error', ts.noop);
-            objfsutil.on('close', ts.noop);
-        } catch (e) {
-            // Spawning the command can fail if the arguments line is too long. Just ignore the
-            // error for now, until we can apply the fix outlined below.
-            return;
-        }
+        objfsutil.on('error', (err: {code: string}) => {
+            if (err.code === 'ENOENT') {
+                // Ignore a missing objfsutil binary - on Forge objfsutil doesn't exist.
+                // If we didn't handle the error events, the Node process would die with an
+                // "unhandled error event" message.
+                return;
+            }
+            // For other error situations, fail.
+            console.error('spawning objfsutil failed:', err);
+            process.exitCode = 1;
+        });
+        objfsutil.on('close', ts.noop);
 
-        // TODO(martinprobst): the list of files should be passed via stdin with the code below, but
-        // that fails due to: https://github.com/nodejs/node/issues/21941
+        objfsutil.stdin.setDefaultEncoding('utf-8');
+        // stdin might be gone because the process failed to spawn - ignore.
+        objfsutil.stdin.on('error', ts.noop);
 
-        // objfsutil.stdin.setDefaultEncoding('utf-8');
-        // objfsutil.stdin.on('error', ts.noop);
-
-        // We don't handle NodeJS stream style drain events. This is safe: the possible error case
-        // is NodeJS running out of memory trying to buffer all input to the stream, which is
-        // unlikely to occur for the single digit megabyte of file name lists this code is writing
-        // here.
-        // objfsutil.stdin.write(toFetch.join('\n'), () => {
-        //     objfsutil.stdin.end();
-        // })
+        // We don't handle NodeJS stream style drain events. This is safe: the possible error
+        // case is NodeJS running out of memory trying to buffer all input to the stream, which
+        // is unlikely to occur for the single digit megabyte of file name lists this code is
+        // writing here.
+        objfsutil.stdin.write(toFetch.join('\n'), () => {
+            objfsutil.stdin.end();
+        });
     }
 }
