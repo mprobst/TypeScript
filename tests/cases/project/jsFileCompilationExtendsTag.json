@@ -1,0 +1,7 @@
+{
+  "scenario": "Verify ",
+  "projectRoot": "tests/cases/projects/jsFileCompilation",
+  "baselineCheck": true,
+  "declaration": true,
+  "project": "ExtendsTag"
+}
