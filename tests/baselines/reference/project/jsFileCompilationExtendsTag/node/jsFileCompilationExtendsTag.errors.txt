@@ -1,0 +1,25 @@
+ExtendsTag/tsconfig.json(3,5): error TS6082: Only 'amd' and 'system' modules are supported alongside --out.
+ExtendsTag/tsconfig.json(4,5): error TS5053: Option 'allowJs' cannot be specified with option 'declaration'.
+
+
+==== ExtendsTag/tsconfig.json (2 errors) ====
+    {
+      "compilerOptions": {
+        "out": "test.js",
+        ~~~~~
+!!! error TS6082: Only 'amd' and 'system' modules are supported alongside --out.
+        "allowJs": true
+        ~~~~~~~~~
+!!! error TS5053: Option 'allowJs' cannot be specified with option 'declaration'.
+      },
+      "files": [ "extends.js" ]
+    }
+    
+==== ExtendsTag/extends.js (0 errors) ====
+    /**
+     * @extends {SomeBase}
+     */
+    class MyClass {
+    
+    }
+    

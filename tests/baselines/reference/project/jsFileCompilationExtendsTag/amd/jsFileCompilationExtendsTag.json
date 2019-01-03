@@ -1,0 +1,15 @@
+{
+    "scenario": "Verify ",
+    "projectRoot": "tests/cases/projects/jsFileCompilation",
+    "baselineCheck": true,
+    "declaration": true,
+    "project": "ExtendsTag",
+    "resolvedInputFiles": [
+        "lib.es5.d.ts",
+        "ExtendsTag/extends.js"
+    ],
+    "emittedFiles": [
+        "test.js",
+        "test.d.ts"
+    ]
+}
