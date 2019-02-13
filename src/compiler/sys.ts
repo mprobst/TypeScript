@@ -912,6 +912,10 @@ namespace ts {
                 });
 
                 return (directoryName, callback, recursive) => {
+                    if (startsWith(directoryName, '/google/src')) {
+                        // google3 local mod: don't watch network file systems.
+                        throw new Error(`cannot watch network file system ${directoryName}`);
+                    }
                     if (recursive) {
                         return watchDirectoryRecursively(directoryName, callback);
                     }
