@@ -47,7 +47,7 @@ namespace ts.server {
       });
       // Add the tsconfig.json as a valid project file.
       fileMap[tsconfigPath] = true;
-      g3PrefetchFiles(host, fileNames);
+      g3PrefetchFiles(fileNames);
       // For each file add to the filesMap and add their directory
       // (and few directories above them) to the directoryMap.
       fileNames.forEach(f => {

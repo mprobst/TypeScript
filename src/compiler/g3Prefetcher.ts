@@ -20,7 +20,7 @@ namespace ts {
      * initial language service startup from >300 seconds to ~5 seconds on the example Angular
      * project in google3.
      */
-    export function g3PrefetchFiles(host: {trace?(msg: string): void}|undefined, fileNames: ReadonlyArray<string>) {
+    export function g3PrefetchFiles(fileNames: ReadonlyArray<string>) {
         if (typeof process === 'undefined' || process.browser || typeof require === 'undefined') {
             return;  // might not be running in Node.
         }
@@ -34,8 +34,6 @@ namespace ts {
                 .map(fn => fn.replace(/\.d\.ts$/, '.metadata.json')));
 
         // Spawn objfsutil prefetch.
-        const trace = host && host.trace ? host.trace : () => {};
-        trace(`objfsutil prefetch'ing ${toFetch.length} files.`);
         const objfsutil = spawn('objfsutil', ['prefetch'],
             // Make stdin a writable pipe, use stderr for all output so that we don't break
             // process communication.
@@ -46,11 +44,10 @@ namespace ts {
                 // Ignore a missing objfsutil binary - on Forge objfsutil doesn't exist.
                 // If we didn't handle the error events, the Node process would die with an
                 // "unhandled error event" message.
-                trace(`ENOENT on objfsutil, running on forge? ${err}`);
                 return;
             }
             // For other error situations, fail.
-            trace(`spawning objfsutil failed: ${err}`);
+            console.error('spawning objfsutil failed:', err);
             process.exitCode = 1;
         });
         objfsutil.on('close', ts.noop);
