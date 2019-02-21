@@ -715,7 +715,7 @@ namespace ts {
         if (!oldProgram) {
             // When creating a new program (e.g. the old program has structurally changed), make
             // sure to prefetch any new files instead of reading them sequentially.
-            g3PrefetchFiles(createProgramOptions.host, rootNames);
+            g3PrefetchFiles(rootNames);
         }
 
         let processingDefaultLibFiles: SourceFile[] | undefined;
