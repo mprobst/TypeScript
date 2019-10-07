@@ -8471,6 +8471,9 @@ declare namespace ts.server {
     const nullTypingsInstaller: ITypingsInstaller;
 }
 declare namespace ts.server {
+    function getG3ServerHostProxy(tsconfigPath: string, host: ServerHost, logger: Logger): ServerHost;
+}
+declare namespace ts.server {
     enum ProjectKind {
         Inferred = 0,
         Configured = 1,
