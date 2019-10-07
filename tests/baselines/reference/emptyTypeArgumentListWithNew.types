@@ -1,8 +1,0 @@
-=== tests/cases/compiler/emptyTypeArgumentListWithNew.ts ===
-class foo<T> { }
->foo : foo<T>
-
-new foo<>();
->new foo<>() : any
->foo : typeof foo
-
