@@ -319,6 +319,7 @@ namespace ts {
     export function getSourceFileOfNode(node: Node | undefined): SourceFile | undefined;
     export function getSourceFileOfNode(node: Node): SourceFile {
         while (node && node.kind !== SyntaxKind.SourceFile) {
+            node = getOriginalNode(node);
             node = node.parent;
         }
         return <SourceFile>node;
